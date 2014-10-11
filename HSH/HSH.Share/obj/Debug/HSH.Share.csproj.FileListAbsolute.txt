@@ -1,0 +1,4 @@
+E:\SourceGit\HSHProject\HSH\HSH.Share\bin\Debug\HSH.Share.dll
+E:\SourceGit\HSHProject\HSH\HSH.Share\bin\Debug\HSH.Share.pdb
+E:\SourceGit\HSHProject\HSH\HSH.Share\obj\Debug\HSH.Share.dll
+E:\SourceGit\HSHProject\HSH\HSH.Share\obj\Debug\HSH.Share.pdb

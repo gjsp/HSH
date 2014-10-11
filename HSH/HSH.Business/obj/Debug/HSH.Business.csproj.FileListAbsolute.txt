@@ -1,0 +1,4 @@
+E:\SourceGit\HSHProject\HSH\HSH.Business\bin\Debug\HSH.Business.dll
+E:\SourceGit\HSHProject\HSH\HSH.Business\bin\Debug\HSH.Business.pdb
+E:\SourceGit\HSHProject\HSH\HSH.Business\obj\Debug\HSH.Business.dll
+E:\SourceGit\HSHProject\HSH\HSH.Business\obj\Debug\HSH.Business.pdb

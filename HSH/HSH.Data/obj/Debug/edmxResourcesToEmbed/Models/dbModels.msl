@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HSHModelStoreContainer" CdmEntityContainer="HSHEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="HSHModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="HSHModel.AspNetRoles">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="HSHModel.AspNetUserClaims">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="HSHModel.AspNetUserLogins">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="HSHModel.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserDetail" ColumnName="UserDetail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Collaterals">
+      <EntityTypeMapping TypeName="HSHModel.Collaterals">
+        <MappingFragment StoreEntitySet="Collaterals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CashPerKg" ColumnName="CashPerKg" />
+          <ScalarProperty Name="GoldPerKg" ColumnName="GoldPerKg" />
+          <ScalarProperty Name="GoldPercent" ColumnName="GoldPercent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyAsset">
+      <EntityTypeMapping TypeName="HSHModel.CompanyAsset">
+        <MappingFragment StoreEntitySet="CompanyAsset">
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+          <ScalarProperty Name="AssetRef" ColumnName="AssetRef" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DrugAllergies">
+      <EntityTypeMapping TypeName="HSHModel.DrugAllergies">
+        <MappingFragment StoreEntitySet="DrugAllergies">
+          <ScalarProperty Name="DrugAllergyId" ColumnName="DrugAllergyId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+          <ScalarProperty Name="Treatment" ColumnName="Treatment" />
+          <ScalarProperty Name="DrugInformation" ColumnName="DrugInformation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Drugs">
+      <EntityTypeMapping TypeName="HSHModel.Drugs">
+        <MappingFragment StoreEntitySet="Drugs">
+          <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+          <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicalHistories">
+      <EntityTypeMapping TypeName="HSHModel.MedicalHistories">
+        <MappingFragment StoreEntitySet="MedicalHistories">
+          <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="DiseaseName" ColumnName="DiseaseName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DiseaseDetails" ColumnName="DiseaseDetails" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicalHistoryDetails">
+      <EntityTypeMapping TypeName="HSHModel.MedicalHistoryDetails">
+        <MappingFragment StoreEntitySet="MedicalHistoryDetails">
+          <ScalarProperty Name="DiseaseDtlId" ColumnName="DiseaseDtlId" />
+          <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+          <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+          <ScalarProperty Name="Pressure" ColumnName="Pressure" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="TreatmentDetails" ColumnName="TreatmentDetails" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Member">
+      <EntityTypeMapping TypeName="HSHModel.Member">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="MemberRef" ColumnName="MemberRef" />
+          <ScalarProperty Name="MemberClass" ColumnName="MemberClass" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+          <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+          <ScalarProperty Name="MemberGroup" ColumnName="MemberGroup" />
+          <ScalarProperty Name="MemberLevel" ColumnName="MemberLevel" />
+          <ScalarProperty Name="MemberTitle" ColumnName="MemberTitle" />
+          <ScalarProperty Name="MarketingName" ColumnName="MarketingName" />
+          <ScalarProperty Name="PauseBuy" ColumnName="PauseBuy" />
+          <ScalarProperty Name="PauseSell" ColumnName="PauseSell" />
+          <ScalarProperty Name="TradeUnlimit" ColumnName="TradeUnlimit" />
+          <ScalarProperty Name="TradeMaximum" ColumnName="TradeMaximum" />
+          <ScalarProperty Name="TradeRangePlaced" ColumnName="TradeRangePlaced" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="PassportId" ColumnName="PassportId" />
+          <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
+          <ScalarProperty Name="DateOfExpire" ColumnName="DateOfExpire" />
+          <ScalarProperty Name="Political" ColumnName="Political" />
+          <ScalarProperty Name="HomeNo" ColumnName="HomeNo" />
+          <ScalarProperty Name="HomeSoi" ColumnName="HomeSoi" />
+          <ScalarProperty Name="HomeStreet" ColumnName="HomeStreet" />
+          <ScalarProperty Name="HomeSubDistrict" ColumnName="HomeSubDistrict" />
+          <ScalarProperty Name="HomeDistrict" ColumnName="HomeDistrict" />
+          <ScalarProperty Name="HomeProvince" ColumnName="HomeProvince" />
+          <ScalarProperty Name="HomePostcode" ColumnName="HomePostcode" />
+          <ScalarProperty Name="HomeAddress" ColumnName="HomeAddress" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="GovernmentCard" ColumnName="GovernmentCard" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Nation" ColumnName="Nation" />
+          <ScalarProperty Name="Ethnicity" ColumnName="Ethnicity" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="Education" ColumnName="Education" />
+          <ScalarProperty Name="IncomeMonth" ColumnName="IncomeMonth" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="BankAccountName" ColumnName="BankAccountName" />
+          <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+          <ScalarProperty Name="BankAccountType" ColumnName="BankAccountType" />
+          <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+          <ScalarProperty Name="BankPayType" ColumnName="BankPayType" />
+          <ScalarProperty Name="WorkType" ColumnName="WorkType" />
+          <ScalarProperty Name="WorkPlace" ColumnName="WorkPlace" />
+          <ScalarProperty Name="WorkBusinessType" ColumnName="WorkBusinessType" />
+          <ScalarProperty Name="WorkTelephone" ColumnName="WorkTelephone" />
+          <ScalarProperty Name="WorkFax" ColumnName="WorkFax" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="MateName" ColumnName="MateName" />
+          <ScalarProperty Name="MateCareer" ColumnName="MateCareer" />
+          <ScalarProperty Name="MatePolitical" ColumnName="MatePolitical" />
+          <ScalarProperty Name="MateTelephone" ColumnName="MateTelephone" />
+          <ScalarProperty Name="MateWorkplace" ColumnName="MateWorkplace" />
+          <ScalarProperty Name="MateBusinessType" ColumnName="MateBusinessType" />
+          <ScalarProperty Name="EmergencyPersonName" ColumnName="EmergencyPersonName" />
+          <ScalarProperty Name="EmergencyRelationship" ColumnName="EmergencyRelationship" />
+          <ScalarProperty Name="EmergencyAddress" ColumnName="EmergencyAddress" />
+          <ScalarProperty Name="EmergencyTelephone" ColumnName="EmergencyTelephone" />
+          <ScalarProperty Name="CorporateType" ColumnName="CorporateType" />
+          <ScalarProperty Name="CorporateName" ColumnName="CorporateName" />
+          <ScalarProperty Name="CorporateBusinessType" ColumnName="CorporateBusinessType" />
+          <ScalarProperty Name="CorporateTradeRegNo" ColumnName="CorporateTradeRegNo" />
+          <ScalarProperty Name="CorporateTaxNo" ColumnName="CorporateTaxNo" />
+          <ScalarProperty Name="CorporateHomeNo" ColumnName="CorporateHomeNo" />
+          <ScalarProperty Name="CorporateHomeSoi" ColumnName="CorporateHomeSoi" />
+          <ScalarProperty Name="CorporateHomeStreet" ColumnName="CorporateHomeStreet" />
+          <ScalarProperty Name="CorporateHomeSubDistrict" ColumnName="CorporateHomeSubDistrict" />
+          <ScalarProperty Name="CorporateHomeDistrict" ColumnName="CorporateHomeDistrict" />
+          <ScalarProperty Name="CorporateHomeProvince" ColumnName="CorporateHomeProvince" />
+          <ScalarProperty Name="CorporateHomePostcode" ColumnName="CorporateHomePostcode" />
+          <ScalarProperty Name="CorporateTelephone" ColumnName="CorporateTelephone" />
+          <ScalarProperty Name="CorporateFax" ColumnName="CorporateFax" />
+          <ScalarProperty Name="CorporatePresidentSigned" ColumnName="CorporatePresidentSigned" />
+          <ScalarProperty Name="CorporateContactName" ColumnName="CorporateContactName" />
+          <ScalarProperty Name="CorporateContactPassportId" ColumnName="CorporateContactPassportId" />
+          <ScalarProperty Name="CorporateContactTelephone" ColumnName="CorporateContactTelephone" />
+          <ScalarProperty Name="CorporateContactEmail" ColumnName="CorporateContactEmail" />
+          <ScalarProperty Name="CorporateShareHolder1" ColumnName="CorporateShareHolder1" />
+          <ScalarProperty Name="CorporateShareHolderRate1" ColumnName="CorporateShareHolderRate1" />
+          <ScalarProperty Name="CorporateShareHolder2" ColumnName="CorporateShareHolder2" />
+          <ScalarProperty Name="CorporateShareHolderRate2" ColumnName="CorporateShareHolderRate2" />
+          <ScalarProperty Name="CorporateShareHolder3" ColumnName="CorporateShareHolder3" />
+          <ScalarProperty Name="CorporateShareHolderRate3" ColumnName="CorporateShareHolderRate3" />
+          <ScalarProperty Name="CorporateShareHolder4" ColumnName="CorporateShareHolder4" />
+          <ScalarProperty Name="CorporateShareHolderRate4" ColumnName="CorporateShareHolderRate4" />
+          <ScalarProperty Name="CorporateShareHolder5" ColumnName="CorporateShareHolder5" />
+          <ScalarProperty Name="CorporateShareHolderRate5" ColumnName="CorporateShareHolderRate5" />
+          <ScalarProperty Name="CorporateHasAuthorizer" ColumnName="CorporateHasAuthorizer" />
+          <ScalarProperty Name="CorporateNation" ColumnName="CorporateNation" />
+          <ScalarProperty Name="CorporateIncome" ColumnName="CorporateIncome" />
+          <ScalarProperty Name="AuthorizerName" ColumnName="AuthorizerName" />
+          <ScalarProperty Name="AuthorizerId" ColumnName="AuthorizerId" />
+          <ScalarProperty Name="AuthorizerAddress" ColumnName="AuthorizerAddress" />
+          <ScalarProperty Name="AuthorizerTel" ColumnName="AuthorizerTel" />
+          <ScalarProperty Name="AuthorizerEmail" ColumnName="AuthorizerEmail" />
+          <ScalarProperty Name="AttorneyName" ColumnName="AttorneyName" />
+          <ScalarProperty Name="AttorneyId" ColumnName="AttorneyId" />
+          <ScalarProperty Name="AttorneyAddress" ColumnName="AttorneyAddress" />
+          <ScalarProperty Name="AttorneyTel" ColumnName="AttorneyTel" />
+          <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="PayBank" ColumnName="PayBank" />
+          <ScalarProperty Name="PayBankBanch" ColumnName="PayBankBanch" />
+          <ScalarProperty Name="PayAccountType" ColumnName="PayAccountType" />
+          <ScalarProperty Name="PayAccountNo" ColumnName="PayAccountNo" />
+          <ScalarProperty Name="PayAccountName" ColumnName="PayAccountName" />
+          <ScalarProperty Name="PayBankApprove" ColumnName="PayBankApprove" />
+          <ScalarProperty Name="PayApproveId" ColumnName="PayApproveId" />
+          <ScalarProperty Name="PayApproveBy" ColumnName="PayApproveBy" />
+          <ScalarProperty Name="PayApporveDate" ColumnName="PayApporveDate" />
+          <ScalarProperty Name="ApproveRegisterId" ColumnName="ApproveRegisterId" />
+          <ScalarProperty Name="ApproveRegisterDate" ColumnName="ApproveRegisterDate" />
+          <ScalarProperty Name="ApproveCollateralId" ColumnName="ApproveCollateralId" />
+          <ScalarProperty Name="ApproveCollateralDate" ColumnName="ApproveCollateralDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberAsset">
+      <EntityTypeMapping TypeName="HSHModel.MemberAsset">
+        <MappingFragment StoreEntitySet="MemberAsset">
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetCash" ColumnName="AssetCash" />
+          <ScalarProperty Name="AssetGold" ColumnName="AssetGold" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="PayTypeDetail" ColumnName="PayTypeDetail" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="GoldBrand" ColumnName="GoldBrand" />
+          <ScalarProperty Name="GoldSerialNo" ColumnName="GoldSerialNo" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="ApproveId" ColumnName="ApproveId" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pay">
+      <EntityTypeMapping TypeName="HSHModel.Pay">
+        <MappingFragment StoreEntitySet="Pay">
+          <ScalarProperty Name="PayId" ColumnName="PayId" />
+          <ScalarProperty Name="PayRef" ColumnName="PayRef" />
+          <ScalarProperty Name="TransferType" ColumnName="TransferType" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="PayBank" ColumnName="PayBank" />
+          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="MemberBy" ColumnName="MemberBy" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paytype">
+      <EntityTypeMapping TypeName="HSHModel.Paytype">
+        <MappingFragment StoreEntitySet="Paytype">
+          <ScalarProperty Name="PaytypeId" ColumnName="PaytypeId" />
+          <ScalarProperty Name="PaytypeName" ColumnName="PaytypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="HSHModel.Profiles">
+        <MappingFragment StoreEntitySet="Profiles">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="IDCard" ColumnName="IDCard" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="PhoneHome" ColumnName="PhoneHome" />
+          <ScalarProperty Name="PhoneWork" ColumnName="PhoneWork" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Blood" ColumnName="Blood" />
+          <ScalarProperty Name="Rh" ColumnName="Rh" />
+          <ScalarProperty Name="ContactFirstName" ColumnName="ContactFirstName" />
+          <ScalarProperty Name="ContactLastName" ColumnName="ContactLastName" />
+          <ScalarProperty Name="ContactIDCard" ColumnName="ContactIDCard" />
+          <ScalarProperty Name="ContactRelation" ColumnName="ContactRelation" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Risk">
+      <EntityTypeMapping TypeName="HSHModel.Risk">
+        <MappingFragment StoreEntitySet="Risk">
+          <ScalarProperty Name="RiskId" ColumnName="RiskId" />
+          <ScalarProperty Name="RiskRef" ColumnName="RiskRef" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Approve" ColumnName="Approve" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpotPrice">
+      <EntityTypeMapping TypeName="HSHModel.SpotPrice">
+        <MappingFragment StoreEntitySet="SpotPrice">
+          <ScalarProperty Name="SpotId" ColumnName="SpotId" />
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+          <ScalarProperty Name="Ask" ColumnName="Ask" />
+          <ScalarProperty Name="BidThb" ColumnName="BidThb" />
+          <ScalarProperty Name="AskThb" ColumnName="AskThb" />
+          <ScalarProperty Name="SpotDate" ColumnName="SpotDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="SpotLine" ColumnName="SpotLine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StockOnline">
+      <EntityTypeMapping TypeName="HSHModel.StockOnline">
+        <MappingFragment StoreEntitySet="StockOnline">
+          <ScalarProperty Name="StockId" ColumnName="StockId" />
+          <ScalarProperty Name="SystemHalt" ColumnName="SystemHalt" />
+          <ScalarProperty Name="Premium" ColumnName="Premium" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="MaxKg" ColumnName="MaxKg" />
+          <ScalarProperty Name="MaxKg1" ColumnName="MaxKg1" />
+          <ScalarProperty Name="MaxKg2" ColumnName="MaxKg2" />
+          <ScalarProperty Name="MaxKg3" ColumnName="MaxKg3" />
+          <ScalarProperty Name="MaxKg4" ColumnName="MaxKg4" />
+          <ScalarProperty Name="Spread" ColumnName="Spread" />
+          <ScalarProperty Name="Spread1" ColumnName="Spread1" />
+          <ScalarProperty Name="Spread2" ColumnName="Spread2" />
+          <ScalarProperty Name="Spread3" ColumnName="Spread3" />
+          <ScalarProperty Name="Spread4" ColumnName="Spread4" />
+          <ScalarProperty Name="Duedate1" ColumnName="Duedate1" />
+          <ScalarProperty Name="Duedate2" ColumnName="Duedate2" />
+          <ScalarProperty Name="Duedate3" ColumnName="Duedate3" />
+          <ScalarProperty Name="Duedate4" ColumnName="Duedate4" />
+          <ScalarProperty Name="CreditLimit1" ColumnName="CreditLimit1" />
+          <ScalarProperty Name="CreditLimit2" ColumnName="CreditLimit2" />
+          <ScalarProperty Name="CreditLimit3" ColumnName="CreditLimit3" />
+          <ScalarProperty Name="CreditLimit4" ColumnName="CreditLimit4" />
+          <ScalarProperty Name="MarginType1" ColumnName="MarginType1" />
+          <ScalarProperty Name="MarginType2" ColumnName="MarginType2" />
+          <ScalarProperty Name="MarginType3" ColumnName="MarginType3" />
+          <ScalarProperty Name="MarginType4" ColumnName="MarginType4" />
+          <ScalarProperty Name="TradeQuantityLimit" ColumnName="TradeQuantityLimit" />
+          <ScalarProperty Name="RangePlaceOrder" ColumnName="RangePlaceOrder" />
+          <ScalarProperty Name="AskThbSelf" ColumnName="AskThbSelf" />
+          <ScalarProperty Name="SpotCalculate" ColumnName="SpotCalculate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="HSHModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ticket">
+      <EntityTypeMapping TypeName="HSHModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="TicketRef" ColumnName="TicketRef" />
+          <ScalarProperty Name="TicketType" ColumnName="TicketType" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="TradeRef" ColumnName="TradeRef" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Purity" ColumnName="Purity" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+          <ScalarProperty Name="UseDeposit" ColumnName="UseDeposit" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="PayId" ColumnName="PayId" />
+          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+          <ScalarProperty Name="ApprovePayId" ColumnName="ApprovePayId" />
+          <ScalarProperty Name="ApprovePayDate" ColumnName="ApprovePayDate" />
+          <ScalarProperty Name="ApproveId" ColumnName="ApproveId" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketReceive">
+      <EntityTypeMapping TypeName="HSHModel.TicketReceive">
+        <MappingFragment StoreEntitySet="TicketReceive">
+          <ScalarProperty Name="ReceiveId" ColumnName="ReceiveId" />
+          <ScalarProperty Name="ReceiveRef" ColumnName="ReceiveRef" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="ReceiveType" ColumnName="ReceiveType" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ApprovePayId" ColumnName="ApprovePayId" />
+          <ScalarProperty Name="ApprovePayDate" ColumnName="ApprovePayDate" />
+          <ScalarProperty Name="ApproveId" ColumnName="ApproveId" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketSettle">
+      <EntityTypeMapping TypeName="HSHModel.TicketSettle">
+        <MappingFragment StoreEntitySet="TicketSettle">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TicketType" ColumnName="TicketType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketSettleSummary">
+      <EntityTypeMapping TypeName="HSHModel.TicketSettleSummary">
+        <MappingFragment StoreEntitySet="TicketSettleSummary">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyBuy" ColumnName="CompanyBuy" />
+          <ScalarProperty Name="CompanySell" ColumnName="CompanySell" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketStatus">
+      <EntityTypeMapping TypeName="HSHModel.TicketStatus">
+        <MappingFragment StoreEntitySet="TicketStatus">
+          <ScalarProperty Name="TicketStatusId" ColumnName="TicketStatusId" />
+          <ScalarProperty Name="TicketStatusName" ColumnName="TicketStatusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trade">
+      <EntityTypeMapping TypeName="HSHModel.Trade">
+        <MappingFragment StoreEntitySet="Trade">
+          <ScalarProperty Name="TradeId" ColumnName="TradeId" />
+          <ScalarProperty Name="TradeRef" ColumnName="TradeRef" />
+          <ScalarProperty Name="TradeType" ColumnName="TradeType" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Leave" ColumnName="Leave" />
+          <ScalarProperty Name="Purity" ColumnName="Purity" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="AcceptType" ColumnName="AcceptType" />
+          <ScalarProperty Name="RejectType" ColumnName="RejectType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+          <ScalarProperty Name="UseDeposit" ColumnName="UseDeposit" />
+          <ScalarProperty Name="TradeLot" ColumnName="TradeLot" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TradeLot">
+      <EntityTypeMapping TypeName="HSHModel.TradeLot">
+        <MappingFragment StoreEntitySet="TradeLot">
+          <ScalarProperty Name="TradeLotId" ColumnName="TradeLotId" />
+          <ScalarProperty Name="TradeLotRef" ColumnName="TradeLotRef" />
+          <ScalarProperty Name="TradeType" ColumnName="TradeType" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trans">
+      <EntityTypeMapping TypeName="HSHModel.Trans">
+        <MappingFragment StoreEntitySet="Trans">
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+          <ScalarProperty Name="TransRef" ColumnName="TransRef" />
+          <ScalarProperty Name="TransType" ColumnName="TransType" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transfer">
+      <EntityTypeMapping TypeName="HSHModel.Transfer">
+        <MappingFragment StoreEntitySet="Transfer">
+          <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+          <ScalarProperty Name="TransferRef" ColumnName="TransferRef" />
+          <ScalarProperty Name="TransferType" ColumnName="TransferType" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserBackend">
+      <EntityTypeMapping TypeName="HSHModel.UserBackend">
+        <MappingFragment StoreEntitySet="UserBackend">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserOnline">
+      <EntityTypeMapping TypeName="HSHModel.UserOnline">
+        <MappingFragment StoreEntitySet="UserOnline">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Helt" ColumnName="Helt" />
+          <ScalarProperty Name="FirstTime" ColumnName="FirstTime" />
+          <ScalarProperty Name="Online" ColumnName="Online" />
+          <ScalarProperty Name="OnlineTime" ColumnName="OnlineTime" />
+          <ScalarProperty Name="OnlineId" ColumnName="OnlineId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewOfCreditLine">
+      <EntityTypeMapping TypeName="HSHModel.ViewOfCreditLine">
+        <MappingFragment StoreEntitySet="ViewOfCreditLine">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepositGold" ColumnName="DepositGold" />
+          <ScalarProperty Name="AssetCash" ColumnName="AssetCash" />
+          <ScalarProperty Name="AssetGold" ColumnName="AssetGold" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MemberRef" ColumnName="MemberRef" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="CashPerKg" ColumnName="CashPerKg" />
+          <ScalarProperty Name="GoldPerKg" ColumnName="GoldPerKg" />
+          <ScalarProperty Name="GoldPercent" ColumnName="GoldPercent" />
+          <ScalarProperty Name="BuyQuantity" ColumnName="BuyQuantity" />
+          <ScalarProperty Name="SellQuantity" ColumnName="SellQuantity" />
+          <ScalarProperty Name="BuyQuantityLeave" ColumnName="BuyQuantityLeave" />
+          <ScalarProperty Name="SellQuantityLeave" ColumnName="SellQuantityLeave" />
+          <ScalarProperty Name="SellQuantityGoldDep" ColumnName="SellQuantityGoldDep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewOfSumaryTicketReceive">
+      <EntityTypeMapping TypeName="HSHModel.ViewOfSumaryTicketReceive">
+        <MappingFragment StoreEntitySet="ViewOfSumaryTicketReceive">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewOfSummaryTransfer">
+      <EntityTypeMapping TypeName="HSHModel.ViewOfSummaryTransfer">
+        <MappingFragment StoreEntitySet="ViewOfSummaryTransfer">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="HSHModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

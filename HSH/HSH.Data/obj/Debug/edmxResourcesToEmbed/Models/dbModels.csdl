@@ -1,0 +1,1096 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HSHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="CompanyAsset" Relationship="Self.FK_CompanyAsset_UserApproved" FromRole="AspNetUsers" ToRole="CompanyAsset" />
+    <NavigationProperty Name="CompanyAsset1" Relationship="Self.FK_CompanyAsset_UserCreated" FromRole="AspNetUsers" ToRole="CompanyAsset" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Member_ApproveRegister" FromRole="AspNetUsers" ToRole="Member" />
+    <NavigationProperty Name="Member1" Relationship="Self.FK_Member_UserCreated" FromRole="AspNetUsers" ToRole="Member" />
+    <NavigationProperty Name="MemberAsset" Relationship="Self.FK_MemberAsset_UserApprove" FromRole="AspNetUsers" ToRole="MemberAsset" />
+    <NavigationProperty Name="MemberAsset1" Relationship="Self.FK_MemberAsset_UserCreated" FromRole="AspNetUsers" ToRole="MemberAsset" />
+    <NavigationProperty Name="TicketReceive" Relationship="Self.FK_Receive_UserApproved" FromRole="AspNetUsers" ToRole="TicketReceive" />
+    <NavigationProperty Name="TicketReceive1" Relationship="Self.FK_Receive_UserApprovePay" FromRole="AspNetUsers" ToRole="TicketReceive" />
+    <NavigationProperty Name="TicketReceive2" Relationship="Self.FK_Receive_UserCreated" FromRole="AspNetUsers" ToRole="TicketReceive" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FK_Ticket_UserApprovePay" FromRole="AspNetUsers" ToRole="Ticket" />
+    <NavigationProperty Name="Ticket1" Relationship="Self.FK_Ticket_UserApproveTicket" FromRole="AspNetUsers" ToRole="Ticket" />
+    <NavigationProperty Name="Ticket2" Relationship="Self.FK_TicketUserCreated" FromRole="AspNetUsers" ToRole="Ticket" />
+    <NavigationProperty Name="Transfer" Relationship="Self.FK_Transfer_UserApproved" FromRole="AspNetUsers" ToRole="Transfer" />
+    <NavigationProperty Name="Transfer1" Relationship="Self.FK_Transfer_UserCreated" FromRole="AspNetUsers" ToRole="Transfer" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Collaterals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CashPerKg" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPerKg" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPercent" Type="Double" />
+  </EntityType>
+  <EntityType Name="CompanyAsset">
+    <Key>
+      <PropertyRef Name="AssetId" />
+    </Key>
+    <Property Name="AssetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AssetType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Direction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_CompanyAsset_UserApproved" FromRole="CompanyAsset" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_CompanyAsset_UserCreated" FromRole="CompanyAsset" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="DrugAllergies">
+    <Key>
+      <PropertyRef Name="DrugAllergyId" />
+    </Key>
+    <Property Name="DrugAllergyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DrugName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Treatment" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="DrugInformation" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Drugs">
+    <Key>
+      <PropertyRef Name="DrugId" />
+    </Key>
+    <Property Name="DrugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DrugName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MedicalHistories">
+    <Key>
+      <PropertyRef Name="DiseaseId" />
+    </Key>
+    <Property Name="DiseaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiseaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="DiseaseDetails" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="MedicalHistoryDetails">
+    <Key>
+      <PropertyRef Name="DiseaseDtlId" />
+    </Key>
+    <Property Name="DiseaseDtlId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DiseaseId" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="DoctorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HospitalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pressure" Type="Double" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Height" Type="Double" />
+    <Property Name="Temperature" Type="Double" />
+    <Property Name="TreatmentDetails" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="MemberId" Type="Guid" Nullable="false" />
+    <Property Name="MemberRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberGroup" Type="Int32" />
+    <Property Name="MemberLevel" Type="Int32" />
+    <Property Name="MemberTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MarketingName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PauseBuy" Type="Boolean" />
+    <Property Name="PauseSell" Type="Boolean" />
+    <Property Name="TradeUnlimit" Type="Boolean" />
+    <Property Name="TradeMaximum" Type="Int32" />
+    <Property Name="TradeRangePlaced" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="PassportId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfIssue" Type="DateTime" Precision="3" />
+    <Property Name="DateOfExpire" Type="DateTime" Precision="3" />
+    <Property Name="Political" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomeSoi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomeStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomeSubDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomeDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomeProvince" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomePostcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HomeAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PresentAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PassportNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GovernmentCard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ethnicity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IncomeMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankPayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkPlace" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="WorkBusinessType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkTelephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkFax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MateCareer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MatePolitical" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MateTelephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MateWorkplace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MateBusinessType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmergencyPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmergencyRelationship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmergencyAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="EmergencyTelephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateBusinessType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateTradeRegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateTaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHomeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHomeSoi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHomeStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHomeSubDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHomeDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHomeProvince" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHomePostcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateTelephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateFax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporatePresidentSigned" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateContactPassportId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateContactTelephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolder1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolderRate1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolder2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolderRate2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolder3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolderRate3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolder4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolderRate4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolder5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateShareHolderRate5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateHasAuthorizer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateNation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorporateIncome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizerAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizerTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttorneyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttorneyId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttorneyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttorneyTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayBank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayBankBanch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayBankApprove" Type="DateTime" Precision="3" />
+    <Property Name="PayApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PayApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayApporveDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveRegisterId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveRegisterDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveCollateralId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveCollateralDate" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Member_ApproveRegister" FromRole="Member" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Member_UserCreated" FromRole="Member" ToRole="AspNetUsers" />
+    <NavigationProperty Name="MemberAsset" Relationship="Self.FK_MemberAsset_Member" FromRole="Member" ToRole="MemberAsset" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketMember" FromRole="Member" ToRole="Ticket" />
+    <NavigationProperty Name="Trade" Relationship="Self.FK_Trade_Member" FromRole="Member" ToRole="Trade" />
+    <NavigationProperty Name="Transfer" Relationship="Self.FK_Transfer_Member" FromRole="Member" ToRole="Transfer" />
+  </EntityType>
+  <EntityType Name="MemberAsset">
+    <Key>
+      <PropertyRef Name="AssetId" />
+    </Key>
+    <Property Name="AssetId" Type="Guid" Nullable="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="AssetType" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="AssetCash" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AssetGold" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Direction" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayTypeDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="GoldBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GoldSerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_MemberAsset_UserApprove" FromRole="MemberAsset" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_MemberAsset_UserCreated" FromRole="MemberAsset" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_MemberAsset_Member" FromRole="MemberAsset" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Pay">
+    <Key>
+      <PropertyRef Name="PayId" />
+    </Key>
+    <Property Name="PayId" Type="Guid" Nullable="false" />
+    <Property Name="PayRef" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TransferType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayBank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayDate" Type="DateTime" Precision="3" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="Balance" Type="Double" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="MemberBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Paytype">
+    <Key>
+      <PropertyRef Name="PaytypeId" />
+    </Key>
+    <Property Name="PaytypeId" Type="Int32" Nullable="false" />
+    <Property Name="PaytypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Profiles">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PostCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneHome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneWork" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Height" Type="Double" />
+    <Property Name="Blood" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Rh" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="ContactFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactIDCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Risk">
+    <Key>
+      <PropertyRef Name="RiskId" />
+    </Key>
+    <Property Name="RiskId" Type="Guid" Nullable="false" />
+    <Property Name="RiskRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="Approve" Type="Boolean" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="SpotPrice">
+    <Key>
+      <PropertyRef Name="SpotId" />
+    </Key>
+    <Property Name="SpotId" Type="Int32" Nullable="false" />
+    <Property Name="Bid" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Ask" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BidThb" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AskThb" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SpotDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="SpotLine" Type="Int32" />
+  </EntityType>
+  <EntityType Name="StockOnline">
+    <Key>
+      <PropertyRef Name="StockId" />
+    </Key>
+    <Property Name="StockId" Type="Int32" Nullable="false" />
+    <Property Name="SystemHalt" Type="Boolean" />
+    <Property Name="Premium" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MaxKg" Type="Double" />
+    <Property Name="MaxKg1" Type="Double" />
+    <Property Name="MaxKg2" Type="Double" />
+    <Property Name="MaxKg3" Type="Double" />
+    <Property Name="MaxKg4" Type="Double" />
+    <Property Name="Spread" Type="Double" />
+    <Property Name="Spread1" Type="Double" />
+    <Property Name="Spread2" Type="Double" />
+    <Property Name="Spread3" Type="Double" />
+    <Property Name="Spread4" Type="Double" />
+    <Property Name="Duedate1" Type="Double" />
+    <Property Name="Duedate2" Type="Double" />
+    <Property Name="Duedate3" Type="Double" />
+    <Property Name="Duedate4" Type="Double" />
+    <Property Name="CreditLimit1" Type="Double" />
+    <Property Name="CreditLimit2" Type="Double" />
+    <Property Name="CreditLimit3" Type="Double" />
+    <Property Name="CreditLimit4" Type="Double" />
+    <Property Name="MarginType1" Type="Double" />
+    <Property Name="MarginType2" Type="Double" />
+    <Property Name="MarginType3" Type="Double" />
+    <Property Name="MarginType4" Type="Double" />
+    <Property Name="TradeQuantityLimit" Type="Double" />
+    <Property Name="RangePlaceOrder" Type="Double" />
+    <Property Name="AskThbSelf" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="SpotCalculate" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="Guid" Nullable="false" />
+    <Property Name="TicketRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TicketType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="TradeRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Purity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="PayStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UseDeposit" Type="Boolean" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PayDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovePayId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovePayDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Ticket_UserApprovePay" FromRole="Ticket" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Ticket_UserApproveTicket" FromRole="Ticket" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers2" Relationship="Self.FK_TicketUserCreated" FromRole="Ticket" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_TicketMember" FromRole="Ticket" ToRole="Member" />
+    <NavigationProperty Name="TicketReceive" Relationship="Self.FK_Receive_Ticket" FromRole="Ticket" ToRole="TicketReceive" />
+  </EntityType>
+  <EntityType Name="TicketReceive">
+    <Key>
+      <PropertyRef Name="ReceiveId" />
+    </Key>
+    <Property Name="ReceiveId" Type="Guid" Nullable="false" />
+    <Property Name="ReceiveRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TicketId" Type="Guid" />
+    <Property Name="ReceiveType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovePayId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovePayDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Receive_UserApproved" FromRole="TicketReceive" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Receive_UserApprovePay" FromRole="TicketReceive" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers2" Relationship="Self.FK_Receive_UserCreated" FromRole="TicketReceive" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FK_Receive_Ticket" FromRole="TicketReceive" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="TicketSettle">
+    <Key>
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="TicketType" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TicketSettleSummary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="CompanyBuy" Type="Double" />
+    <Property Name="CompanySell" Type="Double" />
+  </EntityType>
+  <EntityType Name="TicketStatus">
+    <Key>
+      <PropertyRef Name="TicketStatusId" />
+    </Key>
+    <Property Name="TicketStatusId" Type="Int32" Nullable="false" />
+    <Property Name="TicketStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Trade">
+    <Key>
+      <PropertyRef Name="TradeId" />
+    </Key>
+    <Property Name="TradeId" Type="Guid" Nullable="false" />
+    <Property Name="TradeRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TradeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="Leave" Type="Boolean" />
+    <Property Name="Purity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AcceptType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RejectType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="SaleId" Type="Guid" />
+    <Property Name="UseDeposit" Type="Boolean" />
+    <Property Name="TradeLot" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Guid" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Trade_Member" FromRole="Trade" ToRole="Member" />
+    <NavigationProperty Name="UserOnline" Relationship="Self.FK_Trade_Sale" FromRole="Trade" ToRole="UserOnline" />
+  </EntityType>
+  <EntityType Name="TradeLot">
+    <Key>
+      <PropertyRef Name="TradeLotId" />
+    </Key>
+    <Property Name="TradeLotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TradeLotRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TradeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Amount" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Guid" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserOnline" Relationship="Self.FK_TradeLot_UserOnline" FromRole="TradeLot" ToRole="UserOnline" />
+  </EntityType>
+  <EntityType Name="Trans">
+    <Key>
+      <PropertyRef Name="TransId" />
+    </Key>
+    <Property Name="TransId" Type="Guid" Nullable="false" />
+    <Property Name="TransRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TransType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Transfer">
+    <Key>
+      <PropertyRef Name="TransferId" />
+    </Key>
+    <Property Name="TransferId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TransferRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TransferType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="Direction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Transfer_UserApproved" FromRole="Transfer" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Transfer_UserCreated" FromRole="Transfer" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Transfer_Member" FromRole="Transfer" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="UserBackend">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserOnline">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserLevel" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Helt" Type="Boolean" />
+    <Property Name="FirstTime" Type="Boolean" />
+    <Property Name="Online" Type="Boolean" />
+    <Property Name="OnlineTime" Type="DateTime" Precision="3" />
+    <Property Name="OnlineId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Guid" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Guid" />
+    <NavigationProperty Name="Trade" Relationship="Self.FK_Trade_Sale" FromRole="UserOnline" ToRole="Trade" />
+    <NavigationProperty Name="TradeLot" Relationship="Self.FK_TradeLot_UserOnline" FromRole="UserOnline" ToRole="TradeLot" />
+  </EntityType>
+  <EntityType Name="ViewOfCreditLine">
+    <Key>
+      <PropertyRef Name="DepositGold" />
+      <PropertyRef Name="AssetCash" />
+      <PropertyRef Name="AssetGold" />
+      <PropertyRef Name="MemberId" />
+      <PropertyRef Name="BuyQuantity" />
+      <PropertyRef Name="SellQuantity" />
+      <PropertyRef Name="BuyQuantityLeave" />
+      <PropertyRef Name="SellQuantityLeave" />
+      <PropertyRef Name="SellQuantityGoldDep" />
+    </Key>
+    <Property Name="Id" Type="Int64" />
+    <Property Name="DepositGold" Type="Double" Nullable="false" />
+    <Property Name="AssetCash" Type="Decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="AssetGold" Type="Decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MemberId" Type="Guid" Nullable="false" />
+    <Property Name="CashPerKg" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPerKg" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPercent" Type="Double" />
+    <Property Name="BuyQuantity" Type="Double" Nullable="false" />
+    <Property Name="SellQuantity" Type="Double" Nullable="false" />
+    <Property Name="BuyQuantityLeave" Type="Double" Nullable="false" />
+    <Property Name="SellQuantityLeave" Type="Double" Nullable="false" />
+    <Property Name="SellQuantityGoldDep" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ViewOfSumaryTicketReceive">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="TicketId" Type="Guid" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+  </EntityType>
+  <EntityType Name="ViewOfSummaryTransfer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="MemberId" Type="Guid" />
+    <Property Name="Quantity" Type="Double" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyAsset_UserApproved">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="CompanyAsset" Type="Self.CompanyAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyAsset">
+        <PropertyRef Name="ApproveBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyAsset_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="CompanyAsset" Type="Self.CompanyAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyAsset">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_ApproveRegister">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="ApproveRegisterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberAsset_UserApprove">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberAsset">
+        <PropertyRef Name="ApproveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberAsset_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberAsset">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_UserApproved">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="ApproveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_UserApprovePay">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="ApprovePayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_UserApprovePay">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="ApprovePayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_UserApproveTicket">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="ApproveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketUserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transfer_UserApproved">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transfer">
+        <PropertyRef Name="ApproveBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transfer_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transfer">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberAsset_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="MemberAsset">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketMember">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trade_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Trade">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transfer_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Transfer">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketId" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="TicketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trade_Sale">
+    <End Role="UserOnline" Type="Self.UserOnline" Multiplicity="0..1" />
+    <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserOnline">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Trade">
+        <PropertyRef Name="SaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TradeLot_UserOnline">
+    <End Role="UserOnline" Type="Self.UserOnline" Multiplicity="0..1" />
+    <End Role="TradeLot" Type="Self.TradeLot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserOnline">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TradeLot">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="HSHEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+    <EntitySet Name="Collaterals" EntityType="Self.Collaterals" />
+    <EntitySet Name="CompanyAsset" EntityType="Self.CompanyAsset" />
+    <EntitySet Name="DrugAllergies" EntityType="Self.DrugAllergies" />
+    <EntitySet Name="Drugs" EntityType="Self.Drugs" />
+    <EntitySet Name="MedicalHistories" EntityType="Self.MedicalHistories" />
+    <EntitySet Name="MedicalHistoryDetails" EntityType="Self.MedicalHistoryDetails" />
+    <EntitySet Name="Member" EntityType="Self.Member" />
+    <EntitySet Name="MemberAsset" EntityType="Self.MemberAsset" />
+    <EntitySet Name="Pay" EntityType="Self.Pay" />
+    <EntitySet Name="Paytype" EntityType="Self.Paytype" />
+    <EntitySet Name="Profiles" EntityType="Self.Profiles" />
+    <EntitySet Name="Risk" EntityType="Self.Risk" />
+    <EntitySet Name="SpotPrice" EntityType="Self.SpotPrice" />
+    <EntitySet Name="StockOnline" EntityType="Self.StockOnline" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" />
+    <EntitySet Name="TicketReceive" EntityType="Self.TicketReceive" />
+    <EntitySet Name="TicketSettle" EntityType="Self.TicketSettle" />
+    <EntitySet Name="TicketSettleSummary" EntityType="Self.TicketSettleSummary" />
+    <EntitySet Name="TicketStatus" EntityType="Self.TicketStatus" />
+    <EntitySet Name="Trade" EntityType="Self.Trade" />
+    <EntitySet Name="TradeLot" EntityType="Self.TradeLot" />
+    <EntitySet Name="Trans" EntityType="Self.Trans" />
+    <EntitySet Name="Transfer" EntityType="Self.Transfer" />
+    <EntitySet Name="UserBackend" EntityType="Self.UserBackend" />
+    <EntitySet Name="UserOnline" EntityType="Self.UserOnline" />
+    <EntitySet Name="ViewOfCreditLine" EntityType="Self.ViewOfCreditLine" />
+    <EntitySet Name="ViewOfSumaryTicketReceive" EntityType="Self.ViewOfSumaryTicketReceive" />
+    <EntitySet Name="ViewOfSummaryTransfer" EntityType="Self.ViewOfSummaryTransfer" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyAsset_UserApproved" Association="Self.FK_CompanyAsset_UserApproved">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CompanyAsset" EntitySet="CompanyAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyAsset_UserCreated" Association="Self.FK_CompanyAsset_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CompanyAsset" EntitySet="CompanyAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_ApproveRegister" Association="Self.FK_Member_ApproveRegister">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_UserCreated" Association="Self.FK_Member_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberAsset_UserApprove" Association="Self.FK_MemberAsset_UserApprove">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="MemberAsset" EntitySet="MemberAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberAsset_UserCreated" Association="Self.FK_MemberAsset_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="MemberAsset" EntitySet="MemberAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_UserApproved" Association="Self.FK_Receive_UserApproved">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_UserApprovePay" Association="Self.FK_Receive_UserApprovePay">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_UserCreated" Association="Self.FK_Receive_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_UserApprovePay" Association="Self.FK_Ticket_UserApprovePay">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_UserApproveTicket" Association="Self.FK_Ticket_UserApproveTicket">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketUserCreated" Association="Self.FK_TicketUserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transfer_UserApproved" Association="Self.FK_Transfer_UserApproved">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Transfer" EntitySet="Transfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transfer_UserCreated" Association="Self.FK_Transfer_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Transfer" EntitySet="Transfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberAsset_Member" Association="Self.FK_MemberAsset_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="MemberAsset" EntitySet="MemberAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketMember" Association="Self.FK_TicketMember">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trade_Member" Association="Self.FK_Trade_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Trade" EntitySet="Trade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transfer_Member" Association="Self.FK_Transfer_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Transfer" EntitySet="Transfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_Ticket" Association="Self.FK_Receive_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trade_Sale" Association="Self.FK_Trade_Sale">
+      <End Role="UserOnline" EntitySet="UserOnline" />
+      <End Role="Trade" EntitySet="Trade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TradeLot_UserOnline" Association="Self.FK_TradeLot_UserOnline">
+      <End Role="UserOnline" EntitySet="UserOnline" />
+      <End Role="TradeLot" EntitySet="TradeLot" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

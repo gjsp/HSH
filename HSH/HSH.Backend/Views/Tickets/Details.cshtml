@@ -1,0 +1,195 @@
+﻿@model HSH.Data.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TicketRef)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TicketType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TradeRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TradeRef)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UseDeposit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UseDeposit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovePayDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovePayDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApproveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApproveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers1.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers1.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers2.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers2.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.MemberRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.MemberRef)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TicketId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,160 @@
+﻿@model IEnumerable<HSH.Data.Models.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketRef)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TradeRef)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UseDeposit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovePayDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApproveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers1.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers2.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Member.MemberRef)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketRef)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TradeRef)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Purity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UseDeposit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovePayDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApproveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers1.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers2.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Member.MemberRef)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TicketId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TicketId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TicketId })
+        </td>
+    </tr>
+}
+
+</table>

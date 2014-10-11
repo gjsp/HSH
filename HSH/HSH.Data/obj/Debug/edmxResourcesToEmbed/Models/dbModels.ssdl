@@ -1,0 +1,1122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HSHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="UserType" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLogin" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserDetail" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Collaterals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CashPerKg" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPerKg" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPercent" Type="float" />
+  </EntityType>
+  <EntityType Name="CompanyAsset">
+    <Key>
+      <PropertyRef Name="AssetId" />
+    </Key>
+    <Property Name="AssetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetRef" Type="varchar" MaxLength="50" />
+    <Property Name="AssetType" Type="varchar" MaxLength="50" />
+    <Property Name="Direction" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Note" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="DrugAllergies">
+    <Key>
+      <PropertyRef Name="DrugAllergyId" />
+    </Key>
+    <Property Name="DrugAllergyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DrugName" Type="nvarchar" MaxLength="150" />
+    <Property Name="Treatment" Type="nvarchar" MaxLength="550" />
+    <Property Name="DrugInformation" Type="nvarchar" MaxLength="550" />
+  </EntityType>
+  <EntityType Name="Drugs">
+    <Key>
+      <PropertyRef Name="DrugId" />
+    </Key>
+    <Property Name="DrugId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DrugName" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="MedicalHistories">
+    <Key>
+      <PropertyRef Name="DiseaseId" />
+    </Key>
+    <Property Name="DiseaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiseaseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="DiseaseDetails" Type="nvarchar" MaxLength="550" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="MedicalHistoryDetails">
+    <Key>
+      <PropertyRef Name="DiseaseDtlId" />
+    </Key>
+    <Property Name="DiseaseDtlId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DiseaseId" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="DoctorName" Type="nvarchar" MaxLength="50" />
+    <Property Name="HospitalName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pressure" Type="float" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Height" Type="float" />
+    <Property Name="Temperature" Type="float" />
+    <Property Name="TreatmentDetails" Type="nvarchar" MaxLength="550" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="MemberId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberRef" Type="varchar" MaxLength="50" />
+    <Property Name="MemberClass" Type="varchar" MaxLength="50" />
+    <Property Name="MemberType" Type="varchar" MaxLength="50" />
+    <Property Name="MemberName" Type="varchar" MaxLength="50" />
+    <Property Name="MemberGroup" Type="int" />
+    <Property Name="MemberLevel" Type="int" />
+    <Property Name="MemberTitle" Type="varchar" MaxLength="50" />
+    <Property Name="MarketingName" Type="varchar" MaxLength="50" />
+    <Property Name="PauseBuy" Type="bit" />
+    <Property Name="PauseSell" Type="bit" />
+    <Property Name="TradeUnlimit" Type="bit" />
+    <Property Name="TradeMaximum" Type="int" />
+    <Property Name="TradeRangePlaced" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="PassportId" Type="varchar" MaxLength="50" />
+    <Property Name="DateOfIssue" Type="datetime" />
+    <Property Name="DateOfExpire" Type="datetime" />
+    <Property Name="Political" Type="varchar" MaxLength="50" />
+    <Property Name="HomeNo" Type="varchar" MaxLength="50" />
+    <Property Name="HomeSoi" Type="varchar" MaxLength="50" />
+    <Property Name="HomeStreet" Type="varchar" MaxLength="50" />
+    <Property Name="HomeSubDistrict" Type="varchar" MaxLength="50" />
+    <Property Name="HomeDistrict" Type="varchar" MaxLength="50" />
+    <Property Name="HomeProvince" Type="varchar" MaxLength="50" />
+    <Property Name="HomePostcode" Type="varchar" MaxLength="50" />
+    <Property Name="HomeAddress" Type="varchar" MaxLength="500" />
+    <Property Name="PresentAddress" Type="varchar" MaxLength="500" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" />
+    <Property Name="Telephone" Type="varchar" MaxLength="50" />
+    <Property Name="Fax" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="PassportNo" Type="varchar" MaxLength="50" />
+    <Property Name="GovernmentCard" Type="varchar" MaxLength="50" />
+    <Property Name="Sex" Type="varchar" MaxLength="50" />
+    <Property Name="Nation" Type="varchar" MaxLength="50" />
+    <Property Name="Ethnicity" Type="varchar" MaxLength="50" />
+    <Property Name="Religion" Type="varchar" MaxLength="50" />
+    <Property Name="Education" Type="varchar" MaxLength="50" />
+    <Property Name="IncomeMonth" Type="varchar" MaxLength="50" />
+    <Property Name="BankName" Type="varchar" MaxLength="50" />
+    <Property Name="BankAccountName" Type="varchar" MaxLength="50" />
+    <Property Name="BankAccountNo" Type="varchar" MaxLength="50" />
+    <Property Name="BankAccountType" Type="varchar" MaxLength="50" />
+    <Property Name="BankBranch" Type="varchar" MaxLength="50" />
+    <Property Name="BankPayType" Type="varchar" MaxLength="50" />
+    <Property Name="WorkType" Type="varchar" MaxLength="50" />
+    <Property Name="WorkPlace" Type="varchar" MaxLength="500" />
+    <Property Name="WorkBusinessType" Type="varchar" MaxLength="50" />
+    <Property Name="WorkTelephone" Type="varchar" MaxLength="50" />
+    <Property Name="WorkFax" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="MateName" Type="varchar" MaxLength="50" />
+    <Property Name="MateCareer" Type="varchar" MaxLength="50" />
+    <Property Name="MatePolitical" Type="varchar" MaxLength="50" />
+    <Property Name="MateTelephone" Type="varchar" MaxLength="50" />
+    <Property Name="MateWorkplace" Type="varchar" MaxLength="50" />
+    <Property Name="MateBusinessType" Type="varchar" MaxLength="50" />
+    <Property Name="EmergencyPersonName" Type="varchar" MaxLength="50" />
+    <Property Name="EmergencyRelationship" Type="varchar" MaxLength="50" />
+    <Property Name="EmergencyAddress" Type="varchar" MaxLength="500" />
+    <Property Name="EmergencyTelephone" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateType" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateName" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateBusinessType" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateTradeRegNo" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateTaxNo" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHomeNo" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHomeSoi" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHomeStreet" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHomeSubDistrict" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHomeDistrict" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHomeProvince" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHomePostcode" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateTelephone" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateFax" Type="varchar" MaxLength="50" />
+    <Property Name="CorporatePresidentSigned" Type="varchar" MaxLength="500" />
+    <Property Name="CorporateContactName" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateContactPassportId" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateContactTelephone" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateContactEmail" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolder1" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolderRate1" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolder2" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolderRate2" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolder3" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolderRate3" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolder4" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolderRate4" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolder5" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateShareHolderRate5" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateHasAuthorizer" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateNation" Type="varchar" MaxLength="50" />
+    <Property Name="CorporateIncome" Type="varchar" MaxLength="50" />
+    <Property Name="AuthorizerName" Type="varchar" MaxLength="50" />
+    <Property Name="AuthorizerId" Type="varchar" MaxLength="50" />
+    <Property Name="AuthorizerAddress" Type="varchar" MaxLength="50" />
+    <Property Name="AuthorizerTel" Type="varchar" MaxLength="50" />
+    <Property Name="AuthorizerEmail" Type="varchar" MaxLength="50" />
+    <Property Name="AttorneyName" Type="varchar" MaxLength="50" />
+    <Property Name="AttorneyId" Type="varchar" MaxLength="50" />
+    <Property Name="AttorneyAddress" Type="varchar" MaxLength="50" />
+    <Property Name="AttorneyTel" Type="varchar" MaxLength="50" />
+    <Property Name="AttorneyEmail" Type="varchar" MaxLength="50" />
+    <Property Name="PayType" Type="varchar" MaxLength="50" />
+    <Property Name="PayBank" Type="varchar" MaxLength="50" />
+    <Property Name="PayBankBanch" Type="varchar" MaxLength="50" />
+    <Property Name="PayAccountType" Type="varchar" MaxLength="50" />
+    <Property Name="PayAccountNo" Type="varchar" MaxLength="50" />
+    <Property Name="PayAccountName" Type="varchar" MaxLength="50" />
+    <Property Name="PayBankApprove" Type="datetime" />
+    <Property Name="PayApproveId" Type="nvarchar" MaxLength="128" />
+    <Property Name="PayApproveBy" Type="varchar" MaxLength="50" />
+    <Property Name="PayApporveDate" Type="datetime" />
+    <Property Name="ApproveRegisterId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveRegisterDate" Type="datetime" />
+    <Property Name="ApproveCollateralId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveCollateralDate" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="MemberAsset">
+    <Key>
+      <PropertyRef Name="AssetId" />
+    </Key>
+    <Property Name="AssetId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="AssetType" Type="varchar" MaxLength="4" />
+    <Property Name="AssetCash" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AssetGold" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="Direction" Type="varchar" MaxLength="5" />
+    <Property Name="PayType" Type="varchar" MaxLength="50" />
+    <Property Name="PayTypeDetail" Type="varchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="GoldBrand" Type="varchar" MaxLength="50" />
+    <Property Name="GoldSerialNo" Type="varchar" MaxLength="50" />
+    <Property Name="Branch" Type="varchar" MaxLength="50" />
+    <Property Name="ApproveId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Pay">
+    <Key>
+      <PropertyRef Name="PayId" />
+    </Key>
+    <Property Name="PayId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PayRef" Type="nvarchar" MaxLength="50" />
+    <Property Name="TransferType" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayType" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayBank" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayDate" Type="datetime" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Balance" Type="float" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="MemberBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ApproveBy" Type="varchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Paytype">
+    <Key>
+      <PropertyRef Name="PaytypeId" />
+    </Key>
+    <Property Name="PaytypeId" Type="int" Nullable="false" />
+    <Property Name="PaytypeName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Profiles">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDCard" Type="nvarchar" MaxLength="50" />
+    <Property Name="Passport" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="PhoneHome" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneWork" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="10" />
+    <Property Name="Age" Type="int" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Height" Type="float" />
+    <Property Name="Blood" Type="nvarchar" MaxLength="2" />
+    <Property Name="Rh" Type="nvarchar" MaxLength="1" />
+    <Property Name="ContactFirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactLastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactIDCard" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactRelation" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Risk">
+    <Key>
+      <PropertyRef Name="RiskId" />
+    </Key>
+    <Property Name="RiskId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RiskRef" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="Approve" Type="bit" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SpotPrice">
+    <Key>
+      <PropertyRef Name="SpotId" />
+    </Key>
+    <Property Name="SpotId" Type="int" Nullable="false" />
+    <Property Name="Bid" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ask" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BidThb" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AskThb" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SpotDate" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="SpotLine" Type="int" />
+  </EntityType>
+  <EntityType Name="StockOnline">
+    <Key>
+      <PropertyRef Name="StockId" />
+    </Key>
+    <Property Name="StockId" Type="int" Nullable="false" />
+    <Property Name="SystemHalt" Type="bit" />
+    <Property Name="Premium" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Discount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MaxKg" Type="float" />
+    <Property Name="MaxKg1" Type="float" />
+    <Property Name="MaxKg2" Type="float" />
+    <Property Name="MaxKg3" Type="float" />
+    <Property Name="MaxKg4" Type="float" />
+    <Property Name="Spread" Type="float" />
+    <Property Name="Spread1" Type="float" />
+    <Property Name="Spread2" Type="float" />
+    <Property Name="Spread3" Type="float" />
+    <Property Name="Spread4" Type="float" />
+    <Property Name="Duedate1" Type="float" />
+    <Property Name="Duedate2" Type="float" />
+    <Property Name="Duedate3" Type="float" />
+    <Property Name="Duedate4" Type="float" />
+    <Property Name="CreditLimit1" Type="float" />
+    <Property Name="CreditLimit2" Type="float" />
+    <Property Name="CreditLimit3" Type="float" />
+    <Property Name="CreditLimit4" Type="float" />
+    <Property Name="MarginType1" Type="float" />
+    <Property Name="MarginType2" Type="float" />
+    <Property Name="MarginType3" Type="float" />
+    <Property Name="MarginType4" Type="float" />
+    <Property Name="TradeQuantityLimit" Type="float" />
+    <Property Name="RangePlaceOrder" Type="float" />
+    <Property Name="AskThbSelf" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="SpotCalculate" Type="varchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="TicketId" />
+    </Key>
+    <Property Name="TicketId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TicketRef" Type="varchar" MaxLength="50" />
+    <Property Name="TicketType" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="TradeRef" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Purity" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="PayStatus" Type="varchar" MaxLength="50" />
+    <Property Name="UseDeposit" Type="bit" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="PayType" Type="varchar" MaxLength="50" />
+    <Property Name="PayId" Type="nvarchar" MaxLength="128" />
+    <Property Name="PayDate" Type="datetime" />
+    <Property Name="ApprovePayId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApprovePayDate" Type="datetime" />
+    <Property Name="ApproveId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TicketReceive">
+    <Key>
+      <PropertyRef Name="ReceiveId" />
+    </Key>
+    <Property Name="ReceiveId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ReceiveRef" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TicketId" Type="uniqueidentifier" />
+    <Property Name="ReceiveType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ApprovePayId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApprovePayDate" Type="datetime" />
+    <Property Name="ApproveId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TicketSettle">
+    <Key>
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="TicketType" Type="varchar" MaxLength="4" />
+  </EntityType>
+  <EntityType Name="TicketSettleSummary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyBuy" Type="float" />
+    <Property Name="CompanySell" Type="float" />
+  </EntityType>
+  <EntityType Name="TicketStatus">
+    <Key>
+      <PropertyRef Name="TicketStatusId" />
+    </Key>
+    <Property Name="TicketStatusId" Type="int" Nullable="false" />
+    <Property Name="TicketStatusName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Trade">
+    <Key>
+      <PropertyRef Name="TradeId" />
+    </Key>
+    <Property Name="TradeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TradeRef" Type="varchar" MaxLength="50" />
+    <Property Name="TradeType" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Leave" Type="bit" />
+    <Property Name="Purity" Type="varchar" MaxLength="50" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AcceptType" Type="varchar" MaxLength="50" />
+    <Property Name="RejectType" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="SaleId" Type="uniqueidentifier" />
+    <Property Name="UseDeposit" Type="bit" />
+    <Property Name="TradeLot" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="TradeLot">
+    <Key>
+      <PropertyRef Name="TradeLotId" />
+    </Key>
+    <Property Name="TradeLotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TradeLotRef" Type="varchar" MaxLength="50" />
+    <Property Name="TradeType" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Amount" Type="float" StoreGeneratedPattern="Computed" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="uniqueidentifier" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Trans">
+    <Key>
+      <PropertyRef Name="TransId" />
+    </Key>
+    <Property Name="TransId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TransRef" Type="varchar" MaxLength="50" />
+    <Property Name="TransType" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Note" Type="varchar" MaxLength="500" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Transfer">
+    <Key>
+      <PropertyRef Name="TransferId" />
+    </Key>
+    <Property Name="TransferId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransferRef" Type="varchar" MaxLength="50" />
+    <Property Name="TransferType" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="Direction" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Note" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserBackend">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+    <Property Name="UserType" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="LastLogin" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserOnline">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+    <Property Name="UserLevel" Type="int" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Helt" Type="bit" />
+    <Property Name="FirstTime" Type="bit" />
+    <Property Name="Online" Type="bit" />
+    <Property Name="OnlineTime" Type="datetime" />
+    <Property Name="OnlineId" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="uniqueidentifier" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="uniqueidentifier" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HSH.dbo.ViewOfCreditLine' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ViewOfCreditLine">
+    <Key>
+      <PropertyRef Name="DepositGold" />
+      <PropertyRef Name="AssetCash" />
+      <PropertyRef Name="AssetGold" />
+      <PropertyRef Name="MemberId" />
+      <PropertyRef Name="BuyQuantity" />
+      <PropertyRef Name="SellQuantity" />
+      <PropertyRef Name="BuyQuantityLeave" />
+      <PropertyRef Name="SellQuantityLeave" />
+      <PropertyRef Name="SellQuantityGoldDep" />
+    </Key>
+    <Property Name="Id" Type="bigint" />
+    <Property Name="DepositGold" Type="float" Nullable="false" />
+    <Property Name="AssetCash" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="AssetGold" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="MemberRef" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CashPerKg" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPerKg" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GoldPercent" Type="float" />
+    <Property Name="BuyQuantity" Type="float" Nullable="false" />
+    <Property Name="SellQuantity" Type="float" Nullable="false" />
+    <Property Name="BuyQuantityLeave" Type="float" Nullable="false" />
+    <Property Name="SellQuantityLeave" Type="float" Nullable="false" />
+    <Property Name="SellQuantityGoldDep" Type="float" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HSH.dbo.ViewOfSumaryTicketReceive' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ViewOfSumaryTicketReceive">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="TicketId" Type="uniqueidentifier" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Amount" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ViewOfSummaryTransfer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="MemberId" Type="uniqueidentifier" />
+    <Property Name="Quantity" Type="float" />
+  </EntityType>
+  <Association Name="FK_CompanyAsset_UserApproved">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="CompanyAsset" Type="Self.CompanyAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyAsset">
+        <PropertyRef Name="ApproveBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyAsset_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="CompanyAsset" Type="Self.CompanyAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyAsset">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_ApproveRegister">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="ApproveRegisterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberAsset_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="MemberAsset">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberAsset_UserApprove">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberAsset">
+        <PropertyRef Name="ApproveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberAsset_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberAsset">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketId" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="TicketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_UserApproved">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="ApproveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_UserApprovePay">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="ApprovePayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receive_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketReceive">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_UserApprovePay">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="ApprovePayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_UserApproveTicket">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="ApproveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketMember">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketUserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trade_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Trade">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trade_Sale">
+    <End Role="UserOnline" Type="Self.UserOnline" Multiplicity="0..1" />
+    <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserOnline">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Trade">
+        <PropertyRef Name="SaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TradeLot_UserOnline">
+    <End Role="UserOnline" Type="Self.UserOnline" Multiplicity="0..1" />
+    <End Role="TradeLot" Type="Self.TradeLot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserOnline">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TradeLot">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transfer_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Transfer">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transfer_UserApproved">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transfer">
+        <PropertyRef Name="ApproveBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transfer_UserCreated">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transfer">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HSHModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Collaterals" EntityType="Self.Collaterals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyAsset" EntityType="Self.CompanyAsset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DrugAllergies" EntityType="Self.DrugAllergies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedicalHistories" EntityType="Self.MedicalHistories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedicalHistoryDetails" EntityType="Self.MedicalHistoryDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MemberAsset" EntityType="Self.MemberAsset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pay" EntityType="Self.Pay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paytype" EntityType="Self.Paytype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Risk" EntityType="Self.Risk" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpotPrice" EntityType="Self.SpotPrice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StockOnline" EntityType="Self.StockOnline" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketReceive" EntityType="Self.TicketReceive" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketSettle" EntityType="Self.TicketSettle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketSettleSummary" EntityType="Self.TicketSettleSummary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketStatus" EntityType="Self.TicketStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trade" EntityType="Self.Trade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TradeLot" EntityType="Self.TradeLot" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trans" EntityType="Self.Trans" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transfer" EntityType="Self.Transfer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserBackend" EntityType="Self.UserBackend" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ViewOfCreditLine" EntityType="Self.ViewOfCreditLine" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewOfCreditLine].[Id] AS [Id], 
+    [ViewOfCreditLine].[DepositGold] AS [DepositGold], 
+    [ViewOfCreditLine].[AssetCash] AS [AssetCash], 
+    [ViewOfCreditLine].[AssetGold] AS [AssetGold], 
+    [ViewOfCreditLine].[FirstName] AS [FirstName], 
+    [ViewOfCreditLine].[MemberRef] AS [MemberRef], 
+    [ViewOfCreditLine].[MemberId] AS [MemberId], 
+    [ViewOfCreditLine].[CashPerKg] AS [CashPerKg], 
+    [ViewOfCreditLine].[GoldPerKg] AS [GoldPerKg], 
+    [ViewOfCreditLine].[GoldPercent] AS [GoldPercent], 
+    [ViewOfCreditLine].[BuyQuantity] AS [BuyQuantity], 
+    [ViewOfCreditLine].[SellQuantity] AS [SellQuantity], 
+    [ViewOfCreditLine].[BuyQuantityLeave] AS [BuyQuantityLeave], 
+    [ViewOfCreditLine].[SellQuantityLeave] AS [SellQuantityLeave], 
+    [ViewOfCreditLine].[SellQuantityGoldDep] AS [SellQuantityGoldDep]
+    FROM [dbo].[ViewOfCreditLine] AS [ViewOfCreditLine]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewOfSumaryTicketReceive" EntityType="Self.ViewOfSumaryTicketReceive" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewOfSumaryTicketReceive].[ID] AS [ID], 
+    [ViewOfSumaryTicketReceive].[TicketId] AS [TicketId], 
+    [ViewOfSumaryTicketReceive].[Quantity] AS [Quantity], 
+    [ViewOfSumaryTicketReceive].[Amount] AS [Amount]
+    FROM [dbo].[ViewOfSumaryTicketReceive] AS [ViewOfSumaryTicketReceive]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewOfSummaryTransfer" EntityType="Self.ViewOfSummaryTransfer" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewOfSummaryTransfer].[ID] AS [ID], 
+    [ViewOfSummaryTransfer].[MemberId] AS [MemberId], 
+    [ViewOfSummaryTransfer].[Quantity] AS [Quantity]
+    FROM [dbo].[ViewOfSummaryTransfer] AS [ViewOfSummaryTransfer]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CompanyAsset_UserApproved" Association="Self.FK_CompanyAsset_UserApproved">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CompanyAsset" EntitySet="CompanyAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyAsset_UserCreated" Association="Self.FK_CompanyAsset_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CompanyAsset" EntitySet="CompanyAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_ApproveRegister" Association="Self.FK_Member_ApproveRegister">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_UserCreated" Association="Self.FK_Member_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberAsset_Member" Association="Self.FK_MemberAsset_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="MemberAsset" EntitySet="MemberAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberAsset_UserApprove" Association="Self.FK_MemberAsset_UserApprove">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="MemberAsset" EntitySet="MemberAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberAsset_UserCreated" Association="Self.FK_MemberAsset_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="MemberAsset" EntitySet="MemberAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_Ticket" Association="Self.FK_Receive_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_UserApproved" Association="Self.FK_Receive_UserApproved">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_UserApprovePay" Association="Self.FK_Receive_UserApprovePay">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receive_UserCreated" Association="Self.FK_Receive_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TicketReceive" EntitySet="TicketReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_UserApprovePay" Association="Self.FK_Ticket_UserApprovePay">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_UserApproveTicket" Association="Self.FK_Ticket_UserApproveTicket">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketMember" Association="Self.FK_TicketMember">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketUserCreated" Association="Self.FK_TicketUserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trade_Member" Association="Self.FK_Trade_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Trade" EntitySet="Trade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trade_Sale" Association="Self.FK_Trade_Sale">
+      <End Role="UserOnline" EntitySet="UserOnline" />
+      <End Role="Trade" EntitySet="Trade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TradeLot_UserOnline" Association="Self.FK_TradeLot_UserOnline">
+      <End Role="UserOnline" EntitySet="UserOnline" />
+      <End Role="TradeLot" EntitySet="TradeLot" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transfer_Member" Association="Self.FK_Transfer_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Transfer" EntitySet="Transfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transfer_UserApproved" Association="Self.FK_Transfer_UserApproved">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Transfer" EntitySet="Transfer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transfer_UserCreated" Association="Self.FK_Transfer_UserCreated">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Transfer" EntitySet="Transfer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
