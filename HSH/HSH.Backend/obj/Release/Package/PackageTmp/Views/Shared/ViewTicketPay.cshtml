@@ -1,0 +1,79 @@
+﻿
+@model HSH.Data.Models.TicketPayDetailViewModels
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Order Detail</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.TicketRef)  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.TicketRef)</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.TradeRef) :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.TradeRef)</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MemberRef)  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.MemberRef)</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MemberName) :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.MemberName)</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.TicketType)  :</div>
+            <div class="col-md-3">
+            @if (Model.TicketType == HSH.Data.Helper.EnumHelper.TicketType.Buy.ToString())
+            {
+                <span class="label label-info">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketType.Buy) </span>
+            }
+            else
+            {
+                <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketType.Sell) </span>
+            }
+            </div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.Price) :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.Price.ToString())</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.Quantity) :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.Quantity.ToString())</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.Amount) :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.Amount.ToString())</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.QtyPaid) :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.QtyPaid.ToString())</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.AmountPaid) :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.AmountPaid.ToString())</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.QtyUnpaid) :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.QtyUnpaid.ToString())</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.AmtUnpaid) :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.AmtUnpaid.ToString())</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 text-right">สถานะส่งทอง :</div>
+            <div class="col-md-3">
+
+                @if (Model.UseDeposit != null)
+                {
+                    if (Model.UseDeposit.Value == false)
+                    {
+                        <span class="label label-info">ส่งมอบทอง</span>
+                    }
+                    else
+                    {
+                        <span class="label label-default">ขายทองฝาก</span>
+                    }
+                }
+
+            </div>
+            <div class="col-md-3 text-right"></div>
+            <div class="col-md-3">
+               
+            </div>
+        </div>
+
+    </div>
+</div>

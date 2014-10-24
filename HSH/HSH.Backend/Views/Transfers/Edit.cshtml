@@ -1,0 +1,251 @@
+﻿@model HSH.Data.Models.TransferGoldViewModels
+
+@{
+    ViewBag.Title = "ฝากถอนทองซื้อขาย";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("Edit", "Transfers", FormMethod.Post, new { @class = "form-horizontal", id = "frmEdit" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("PortFolio", Model.MemberPortFolio)
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(model => model.MemberId)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Direction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Direction, (SelectList)ViewBag.Direction, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Direction, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Direction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Direction, (SelectList)ViewBag.DirectionList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Direction, "", new { @class = "text-danger" })
+            </div>
+         
+            @Html.LabelFor(model => model.GoldBrand, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.GoldBrand, (SelectList)ViewBag.GoldBrandList, new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.GoldBrand, new { htmlAttributes = new { @class = "form-control"} })*@
+                @Html.ValidationMessageFor(model => model.GoldBrand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.SerialNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Branch, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Branch, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="bsDialog();" value="Create" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered table-responsive">
+        <tr class="info">
+            <th class="text-center">รหัส</th>
+            <th class="text-center">วันที่</th>
+            <th class="text-center">โดย</th>
+            <th class="text-center">ประเภท</th>
+            <th class="text-center">จำนวนทอง (Kg)</th>
+        </tr>
+
+        @foreach (var item in Model.TransferList)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.TransferRef)
+                </td>
+                <td class="text-center">
+                    @HSH.Data.Helper.StringHelper.ToStringDateTimeFormat(item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserCreated.UserName)
+                </td>
+                <td class="text-center">
+                    @if (item.Direction == HSH.Data.Helper.EnumHelper.DirectionAssetType.Deposit.ToString())
+                    {
+                        <span class="label label-primary">@HSH.Data.Helper.EnumHelper.DirectionAssetType.Deposit</span>
+                    }
+                    else
+                    {
+                        <span class="label label-warning">@HSH.Data.Helper.EnumHelper.DirectionAssetType.Withdraw</span>
+                    }
+                </td>
+                <td class="text-right">
+                    @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Quantity.ToString())
+                </td>
+            </tr>
+        }
+        @if (Model.TransferList.Count() == 0)
+        {
+            <tr>
+                <td colspan="6" class="text-center text-danger"> @HSH.Data.Helper.StringHelper.stringNotFound.ToString() </td>
+            </tr>
+        }
+        else
+        {
+            <tr class="active">
+                <th colspan="4" class="text-center">Summary Deposit</th>
+                <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.TransferList.Where(a => a.Direction == HSH.Data.Helper.EnumHelper.DirectionAssetType.Deposit.ToString()).Sum(a => a.Quantity).Value.ToString())</th>
+            </tr>
+            <tr class="active">
+                <th colspan="4" class="text-center">Summary Withdraw</th>
+                <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.TransferList.Where(a => a.Direction == HSH.Data.Helper.EnumHelper.DirectionAssetType.Withdraw.ToString()).Sum(a => a.Quantity).Value.ToString())</th>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript" type="text/javascript">
+
+        $(function () {
+
+            $("#Quantity").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+
+        });
+        var bsDialog = function (e) {
+
+            var assetValue = "1";
+            //var assetBalance = '@(ViewBag.AssetValue)';
+            //var withDrawAble = '@(ViewBag.WithdrawAble)';
+            var direction = $("#Direction").val();
+            var memberId = $("#MemberId").val();
+            var brand = $("#GoldBrand").val().trim();
+            var serialNo = $("#SerialNo").val().trim();
+
+            //validate
+            if (serialNo == "" ) {
+                $("#frmEdit").submit();
+            }
+            else {
+                if (direction == "Withdraw") {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "@Url.Content("~/Transfers/checkWithdrawAble")",
+                        data: { id: memberId, qty: assetValue },
+                        async: true,
+                        success: function (data) {
+                           
+                            if (data.Message != "") {
+                                var dialogWarning = new BootstrapDialog({
+                                    message: data.Message,
+                                    buttons: [{
+                                        label: 'Close',
+                                        action: function (dialogWarning) {
+                                            dialogWarning.close();
+                                            $("#Quantity").focus();
+                                        }
+                                    }]
+                                });
+                                dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                                dialogWarning.open();
+                                return;
+                            }
+                            else {
+                                var msg = "Do you want to save?";
+                                BootstrapDialog.show({
+                                    title: 'Comfirmation',
+                                    message: msg,
+                                    cssClass: 'comfirm-dialog',
+                                    buttons: [{
+                                        label: 'Cancel',
+                                        action: function (dialog) {
+                                            dialog.close();
+                                        }
+                                    }, {
+                                        label: 'OK',
+                                        cssClass: 'btn-primary',
+                                        action: function (dialog) {
+                                            $("#frmEdit").submit();
+                                        }
+                                    }]
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+                    var msg = "Do you want to save?";
+                    BootstrapDialog.show({
+                        title: 'Comfirmation',
+                        message: msg,
+                        cssClass: 'comfirm-dialog',
+                        buttons: [{
+                            label: 'Cancel',
+                            action: function (dialog) {
+                                dialog.close();
+                            }
+                        }, {
+                            label: 'OK',
+                            cssClass: 'btn-primary',
+                            action: function (dialog) {
+                                $("#frmEdit").submit();
+                            }
+                        }]
+                    });
+                }
+            }
+        }
+
+
+    </script>
+}
+
+
+
+
+
+
+
+

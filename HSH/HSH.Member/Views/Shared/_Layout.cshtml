@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <!-- Respond.js proxy on external server -->
+        <link href="http://externalcdn.com/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+
+        <!-- Respond.js redirect location on local server -->
+        <link href="/path/to/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+
+        <!-- Respond.js proxy script on local server -->
+        <script src="/path/to/respond.proxy.js"></script>
+
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="assets/css/tg.css" type="text/css" />
+
+        <!-- Javascript -->
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+        <script type='text/javascript' src="assets/js/css3-mediaqueries.js"></script>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+          <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+        <![endif]-->
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></script>*@
+
+
+
+    @*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js" charset="utf-8"></script>*@
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 8]>
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+
+
+</head>
+<body class="body-background">
+
+    <div class="header-content">
+        <div class="container body-content">
+            <div class="col-md-6">
+                <img src="~/Content/Images/logo_hsh.png" />
+            </div>
+            <div class="col-md-6">
+                <p class="text_title" style="padding-top:10px">99.99 Online Trading System</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <div class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*@Html.ActionLink("HUA SENG HENG GOLD", "Index", "SpotPrices", new { area = "" }, new { @class = "navbar-brand" })*@
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+
+                        @if (HSH.Member.Helper.SessionHelper.CurrentUserInfo.Role == HSH.Data.Helper.EnumHelper.RoleOnline.Member.ToString())
+                        {
+                            <li>@Html.ActionLink("Profile", "Index", "MemberDetails")</li>
+                            <li>@Html.ActionLink("Trade", "Create", "Trades")</li>
+                        }
+                        else if (HSH.Member.Helper.SessionHelper.CurrentUserInfo.Role == HSH.Data.Helper.EnumHelper.RoleOnline.Sale.ToString())
+                        {
+                            <li>@Html.ActionLink("Trade", "TradeSale", "Trades")</li>
+                        }
+                        else if (HSH.Member.Helper.SessionHelper.CurrentUserInfo.Role == HSH.Data.Helper.EnumHelper.RoleOnline.Trader.ToString())
+                        {
+                            <li>@Html.ActionLink("Settle Trade", "Index", "Settles")</li>
+                            <li>@Html.ActionLink("Big Lot Order", "Index", "TradeLots")</li>
+                            <li>@Html.ActionLink("Create Big Lot", "Create", "TradeLots")</li>
+                        }
+
+                        <li>@Html.ActionLink("Log out", "UserLogin", "Home")</li>
+
+                        <li style="margin-left:10px"><a>@HSH.Member.Helper.SessionHelper.CurrentUserInfo.UserName</a></li>
+                    </ul>
+                    @*@Html.Partial("_LoginPartial")*@
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron" style="background-color:white;padding-top:10px">
+            @RenderBody()
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - KIT IT Create All Right Reserved.</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿@model HSH.Data.Models.StockSummaryGoldViewModels
+@{
+    ViewBag.Title = "Stock Gold";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Physical Stock</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.PhyGoldBegin)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.PhyGoldBegin)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.PhyGoldIn)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.PhyGoldIn)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.PhyGoldOut)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.PhyGoldOut)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.PhyGoldSum)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.PhyGoldSum)</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Company Stock</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ComGoldBegin)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ComGoldBegin)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ComGoldIn)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ComGoldIn)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ComGoldOut)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ComGoldOut)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ComGoldSum)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ComGoldSum)</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Collateral Stock</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ColGoldBegin)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ColGoldBegin)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ColGoldIn)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ColGoldIn)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ColGoldOut)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ColGoldOut)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.ColGoldSum)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.ColGoldSum)</div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Member Stock</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.MemGoldBegin)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.MemGoldBegin)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.MemGoldIn)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.MemGoldIn)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.MemGoldOut)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.MemGoldOut)</div>
+            <div class="col-md-2 text-right">@Html.DisplayNameFor(model => model.MemGoldSum)  :</div>
+            <div class="col-md-1">@Html.DisplayFor(model => model.MemGoldSum)</div>
+        </div>
+    </div>
+</div>

@@ -20,5 +20,7 @@ namespace HSH.Data.Models
         public string Password { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }
+        public string UserPageRole { get; set; }
+        public string UserPageIndex { get; set; }
     }
 }

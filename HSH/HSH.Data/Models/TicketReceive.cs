@@ -31,10 +31,21 @@ namespace HSH.Data.Models
         public Nullable<System.DateTime> ApprovePayDate { get; set; }
         public string ApproveId { get; set; }
         public Nullable<System.DateTime> ApproveDate { get; set; }
+        public string PayChequeNo { get; set; }
+        public string PayBankName { get; set; }
+        public string PayAccountNo { get; set; }
+        public string PayAccountName { get; set; }
+        public string PayAccountType { get; set; }
+        public string PayBankBranch { get; set; }
+        public string PayTransRef { get; set; }
+        public string PayTime { get; set; }
+        public Nullable<System.DateTime> PayDuedate { get; set; }
+        public Nullable<System.DateTime> PayDate { get; set; }
+        public Nullable<int> CompanyBankId { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
-        public virtual AspNetUsers AspNetUsers2 { get; set; }
         public virtual Ticket Ticket { get; set; }
+        public virtual AspNetUsers UserApprove { get; set; }
+        public virtual AspNetUsers UserApprovePay { get; set; }
+        public virtual AspNetUsers UserCreated { get; set; }
     }
 }

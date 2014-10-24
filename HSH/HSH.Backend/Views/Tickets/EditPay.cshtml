@@ -1,0 +1,144 @@
+﻿@model HSH.Data.Models.TicketPayViewModels
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "การจ่ายเงิน";
+    if (HSH.Backend.Helper.SessionHelper.CurrentUserInfo != null)
+    {
+        ViewBag.Title = HSH.Backend.Helper.SessionHelper.CurrentUserInfo.UserPageRole + " " + ViewBag.Title;
+    }
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("EditPay", "Tickets", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditPay", name = "frmEditPay" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("TicketDetail", Model.TicketDetail)
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(model => model.TicketId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PayType, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Status, (SelectList)ViewBag.Status, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.PayType, (SelectList)ViewBag.PayTypeList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PayType, "", new { @class = "text-danger" })
+            </div>
+
+
+        </div>
+
+        <div id="divPayCheque">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PayChequeNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayChequeNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayChequeNo, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.PayChequeBank, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(model => model.PayChequeBank, (SelectList)ViewBag.BankList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PayChequeBank, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PayChequeBranch, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayChequeBranch, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayChequeBranch, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @*<input type="submit" value="Submit" class="btn btn-default" style="width:100px" />*@
+                <input type="button" value="Submit" onclick="bsDialog(this);" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "IndexPay")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $("#divPayCheque").hide();
+            $('#PayType').change(function () {
+
+                if (this.value == "Cheque") {
+                    $("#PayChequeBranch").text("");
+                    $("#PayChequeNo").text("");
+                    $("#PayChequeBank").attr('selectedIndex', 0);
+                    $("#divPayCheque").show();
+                } else {
+                    $("#divPayCheque").hide();
+                }
+            });
+
+            $("#Amount").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                // 110 = .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+        });
+        var bsDialog = function (e) {
+
+            var type = $("#PayType").val();
+            if (type == "") {
+                $("#frmEditPay").submit();
+            } else {
+                var msg = "Do you want to save?";
+                BootstrapDialog.show({
+                    title: 'Comfirmation',
+                    message: msg,
+                    cssClass: 'comfirm-dialog',
+                    buttons: [{
+                        label: 'Cancel',
+                        action: function (dialog) {
+                            dialog.close();
+                        }
+                    }, {
+                        label: 'OK',
+                        cssClass: 'btn-primary',
+                        action: function (dialog) {
+                            $("#frmEditPay").submit();
+                        }
+                    }]
+                });
+            }
+        }
+
+    </script>
+
+
+}
+
+
+

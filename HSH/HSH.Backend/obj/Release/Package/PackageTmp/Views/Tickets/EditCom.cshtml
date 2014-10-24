@@ -1,0 +1,131 @@
+﻿@model HSH.Data.Models.TicketAppViewModels
+@{
+    ViewBag.Title = "ยืนยันอนุมัติการจ่ายเงิน";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("EditCom", "Tickets", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditCom", name = "frmEditCom" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("ViewTicketReceive", Model.TicketDetail)
+
+    if (Model.TicketDetail.TicketType == HSH.Data.Helper.EnumHelper.TicketType.Sell.ToString())
+    {
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.TicketId)
+            <div class="form-group">
+                <div class="text-center">
+                    <input type="submit" value="Approve" class="btn btn-default" style="width:200px" />
+                </div>
+            </div>
+
+        </div>
+    }
+}
+
+<div>
+    @Html.ActionLink("Back to List", "IndexCom")
+</div>
+<br />
+@if (Model.ReceiveList != null && Model.TicketDetail.TicketType == HSH.Data.Helper.EnumHelper.TicketType.Buy.ToString())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered table-responsive">
+            <tr class="info">
+                <th class="text-center">Created Date</th>
+                <th class="text-center">Created By</th>
+                <th class="text-center">RefNo</th>
+                <th class="text-center">Pay Type</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Amount</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Approval</th>
+            </tr>
+            @foreach (var item in Model.ReceiveList)
+            {
+            <tr>
+                <td class="text-center">
+                    @HSH.Data.Helper.StringHelper.ToStringDateTimeFormat(item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserCreated.UserName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.ReceiveRef)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.ReceiveType)
+                </td>
+                <td class="text-right">
+                    @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Quantity.ToString())
+                </td>
+                <td class="text-right">
+                    @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Amount.ToString())
+                </td>
+                <td class="text-center">
+                    @if (item.Status == HSH.Data.Helper.EnumHelper.TicketBuyStatus.Deposit.ToString())
+                    {
+                        <span class="label label-primary">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketBuyStatus.Deposit)</span>
+                    }
+                    else
+                    {
+                        <span class="label label-default">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketBuyStatus.WaitGold)</span>
+                    }
+                </td>
+                <td class="text-center">
+                    @if (item.Status == HSH.Data.Helper.EnumHelper.TicketBuyStatus.WaitGold.ToString())
+                    {
+                        if (item.ApproveId == null)
+                        {
+                            @Html.ActionLink("Approve", "EditComRec", new { id = item.ReceiveId })
+                        }
+                        else
+                        {
+                            <span class="label label-success">Success</span>
+                        }
+                    }
+                    else if (item.Status == HSH.Data.Helper.EnumHelper.TicketBuyStatus.Deposit.ToString())
+                    {
+                        if (item.ApproveId == null)
+                        {
+                            if(item.ApprovePayId != null)
+                            {
+                                @Html.ActionLink("Approve", "EditComRec", new { id = item.ReceiveId });
+                            }
+                        }
+                        else
+                        {
+                            <span class="label label-success">Success</span>
+                        }
+                    }
+
+                </td>
+            </tr>
+            }
+            @if (Model.ReceiveList.Count() == 0)
+            {
+            <tr>
+                <td colspan="8" class="text-center text-danger"> @HSH.Data.Helper.StringHelper.stringNotFound.ToString() </td>
+            </tr>
+            }
+            else
+            {
+            <tr class="active">
+                <th colspan="4" class="text-center">Summary</th>
+                <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.ReceiveList.Where(t => t.Active == true).Sum(t => t.Quantity).Value.ToString())</th>
+                <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.ReceiveList.Where(t => t.Active == true).Sum(t => t.Amount).Value.ToString())</th>
+                <th></th>
+                <th></th>
+            </tr>
+            }
+
+        </table>
+    </div>
+}
+
+
+
+

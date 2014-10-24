@@ -11,13 +11,16 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using HSH.Backend.Models;
+using HSH.Data.Models;
 
 namespace HSH.Backend.Controllers
 {
+    
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private HSHEntities db = new HSHEntities();
 
         public AccountController()
         {
@@ -44,6 +47,12 @@ namespace HSH.Backend.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            //ViewBag.ReturnUrl = returnUrl;
+            //return View();
+            if (HSH.Backend.Helper.SessionHelper.CurrentUserInfo != null)
+            {
+                return RedirectToLocal(returnUrl);
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -53,14 +62,14 @@ namespace HSH.Backend.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
+                var user = db.AspNetUsers.Where(q => q.UserName == model.UserName ).SingleOrDefault() ;// await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    Helper.SessionHelper.CurrentUserInfo = user;
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -78,6 +87,16 @@ namespace HSH.Backend.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "== Select ==", Value = "", Selected = true });
+            items.Add(new SelectListItem { Text = "Admin", Value = "Admin" });
+            items.Add(new SelectListItem { Text = "Cashier", Value = "Cashier" });
+            items.Add(new SelectListItem { Text = "Finance", Value = "Cashier" });
+            items.Add(new SelectListItem { Text = "Operation", Value = "Operation" });
+            items.Add(new SelectListItem { Text = "Risk", Value = "Risk" });
+            items.Add(new SelectListItem { Text = "Trader", Value = "Trader" });
+            ViewBag.UserTypeList = new SelectList(items, "Value", "Text");
+
             return View();
         }
 
@@ -90,18 +109,11 @@ namespace HSH.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser() { UserName = model.UserName, UserType = model.UserType, CreateDate = DateTime.Now, LastLogin = DateTime.Now };
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -430,16 +442,23 @@ namespace HSH.Backend.Controllers
             return View(model);
         }
 
-        //
+
+        public ActionResult LogOff()
+        {
+            return View();
+        }
+      
+
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        public ActionResult LogOff(string url)
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            HttpContext.Session.Abandon();
+            return RedirectToAction("Login", "Account");
         }
-
+      
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

@@ -1,0 +1,411 @@
+﻿@model HSH.Data.Models.MarketPriceViewModels
+@{
+    ViewBag.Title = "Trader";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("Index", "ManageSpotPrices", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmSpotAdmin" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Spot Price Real Time</h3>
+        </div>
+        <br />
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <span>Gold Spot 99.99%</span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <span id="spBidSpot" class="text-bid"></span>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span id="spAskSpot" class="text-ask"></span>
+                </div>
+                <span class="col-md-2">ดอลลาร์/ออนซ์</span>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <span>อัตราแลกเปลี่ยน</span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <span id="spBidThb" class="text-bid"></span>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span id="spAskThb" class="text-ask"></span>
+                </div>
+                <span class="col-md-2">บาท</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <span>Gold 99.99%</span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <span id="spBid99Kg" class="text-bid"></span>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span id="spAsk99Kg" class="text-ask"></span>
+                </div>
+                <span class="col-md-2">กิโลกรัม</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <span>Gold 99.99% Level 1</span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <span id="spBid99Bg1" class="text-bid"></span>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span id="spAsk99Bg1" class="text-ask"></span>
+                </div>
+                <span class="col-md-2">บาท</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <span>Gold 99.99% Level 2</span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <span id="spBid99Bg2" class="text-bid"></span>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span id="spAsk99Bg2" class="text-ask"></span>
+                </div>
+                <span class="col-md-2">บาท</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <span>Gold 99.99% Level 3</span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <span id="spBid99Bg3" class="text-bid"></span>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span id="spAsk99Bg3" class="text-ask"></span>
+                </div>
+                <span class="col-md-2">บาท</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <span>Gold 99.99% Level 4</span>
+                </div>
+                <div class="col-md-2 text-right">
+                    <span id="spBid99Bg4" class="text-bid"></span>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span id="spAsk99Bg4" class="text-ask"></span>
+                </div>
+                <span class="col-md-2">บาท</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Edit Price</h3>
+        </div>
+        <br />
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SpotCalculate, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.SpotCalculate, (SelectList)ViewBag.UsePriceAsk, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2 text-right">
+                    @Html.LabelFor(model => model.ThbCalculateValue, htmlAttributes: new { @class = "control-label" })
+                    @*
+                        cancel เลือกระหว่าง feed กับ กำหนดเอง
+                        @Html.CheckBoxFor(model => model.UseThbSelf)
+                    *@
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.ThbCalculateValue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ThbCalculateValue, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Spread1, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Spread1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Spread1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Premium, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Premium, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Premium, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Spread2, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Spread2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Spread2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-8">
+                </div>
+                @Html.LabelFor(model => model.Spread3, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Spread3, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Spread3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-8">
+                </div>
+                @Html.LabelFor(model => model.Spread4, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Spread4, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Spread4, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class=" col-md-12" style="text-align:center">
+                    <button id="btnSubmit" onclick="bsDialogConfirm(this);" type="button" class="btn btn-primary" style="width:100px;font-size:large">Save</button>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script language="javascript" type="text/javascript">
+
+        $(function () {
+
+            $("#ThbCalculateValue").keydown(function (e) {
+                // alert(e.keyCode);
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190, 110]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    if (e.keyCode == 13) { bsDialogConfirm($("#btnSubmit")); }
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+
+            });
+
+            $("#Discount").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190, 110]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    if (e.keyCode == 13) { bsDialogConfirm($("#btnSubmit")); }
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#Premium").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190, 110]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    if (e.keyCode == 13) { bsDialogConfirm($("#btnSubmit")); }
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#Spread1").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    if (e.keyCode == 13) { bsDialogConfirm($("#btnSubmit")); }
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#Spread2").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    if (e.keyCode == 13) { bsDialogConfirm($("#btnSubmit")); }
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#Spread3").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    if (e.keyCode == 13) { bsDialogConfirm($("#btnSubmit")); }
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#Spread4").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    if (e.keyCode == 13) { bsDialogConfirm($("#btnSubmit")); }
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+        });
+
+        $(document).ready(function () {
+            var getPrice = function () {
+                //alert();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/ManageSpotPrices/GetMarketPriceAdmin")",
+                    dataType: "json",
+                    data: {},
+                    async: false,
+                    success: function (e) {
+                        $("#spBidSpot").text(e.bidSpot);
+                        $("#spAskSpot").text(e.askSpot);
+
+                        $("#spBidSpot99").text(e.bidSpot99);
+                        $("#spAskSpot99").text(e.askSpot99);
+
+                        $("#spBidThb").text(e.bidThb);
+                        $("#spAskThb").text(e.askThb);
+
+                        $("#spBid99Kg").text(e.bid99Kg);
+                        $("#spAsk99Kg").text(e.ask99Kg);
+
+                        $("#spBid99Bg1").text(e.bid99Bg1);
+                        $("#spAsk99Bg1").text(e.ask99Bg1);
+
+                        $("#spBid99Bg2").text(e.bid99Bg2);
+                        $("#spAsk99Bg2").text(e.ask99Bg2);
+
+                        $("#spBid99Bg3").text(e.bid99Bg3);
+                        $("#spAsk99Bg3").text(e.ask99Bg3);
+
+                        $("#spBid99Bg4").text(e.bid99Bg4);
+                        $("#spAsk99Bg4").text(e.ask99Bg4);
+
+                        setTimeout(function () {
+                            getPrice();
+                        }, 2000);
+
+                    }
+                });
+            };
+            getPrice();
+        });
+
+
+        var bsDialogConfirm = function (e) {
+
+            var spotCalculate = $("#SpotCalculate").val();
+            var thbCalculateValue = $("#ThbCalculateValue").val();
+            var discount = $("#Discount").val();
+            var premium = $("#Premium").val();
+
+            var msg = "คุณต้องการบันทึก ราคาในการคำนวน : <b><span style='color:red'>" + spotCalculate + "</span></b><br/> อัตราแลกเปลี่ยน : <b><span style='color:red'>" + thbCalculateValue + "</span></b><br/>Discount : <b><span style='color:red'>" + discount + "</span></b> Premium : <b><span style='color:red'>" + premium + "</span></b> ?";
+            BootstrapDialog.show({
+                title: 'Comfirmation',
+                message: msg,
+                cssClass: 'comfirm-dialog',
+                buttons: [{
+                    label: 'Cancel',
+                    action: function (dialog) {
+                        dialog.close();
+                    }
+                }, {
+                    label: 'OK',
+                    cssClass: 'btn btn-info',
+                    width: 120,
+                    autospin: true,
+                    action: function (dialog) {
+                        $('#frmSpotAdmin').submit();
+                        dialog.enableButtons(false);
+                        dialog.setClosable(false);
+
+                        setTimeout(function () {
+                            dialog.close();
+                        }, 1000);
+                    }
+                }]
+            });
+
+        }
+    </script>
+}

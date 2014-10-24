@@ -1,0 +1,82 @@
+﻿@model IEnumerable<HSH.Data.Models.Ticket>
+
+@if (Model != null)
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered table-responsive">
+            <tr class="info">
+                <th class="text-center">เลขที่บัญชีซื้อขายทองคำ</th>
+                <th class="text-center">ชื่อสมาชิก</th>
+                <th class="text-center">รหัสใบเทรด</th>
+                <th class="text-center">รหัสออเดอร์</th>
+                <th class="text-center">วันที่</th>
+                <th class="text-center">ประเภท</th>
+                <th class="text-center">จำนวน</th>
+                <th class="text-center">ราคา</th>
+                <th class="text-center">จำนวนเงิน</th>
+                <th class="text-center">สถานะ</th>
+                <th class="text-center"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Member.MemberRef)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Member.FirstName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TradeRef)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TicketRef)
+                    </td>
+                    <td class="text-center">
+                        @HSH.Data.Helper.StringHelper.ToStringDateTimeFormat(item.CreateDate)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TicketType)
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Quantity.ToString())
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Price.ToString())
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Amount.ToString())
+                    </td>
+                    <td class="text-center">
+                        @if (item.PayStatus == null)
+                        {
+                            <span class="label label-info">None</span>
+                        }
+                        else if (item.PayStatus == HSH.Data.Helper.EnumHelper.PayStatus.Paid.ToString())
+                        {
+                            <span class="label label-success">@HSH.Data.Helper.EnumHelper.PayStatus.Paid.ToString()</span>
+                        }
+                        else
+                        {
+                            <span class="label label-primary">@HSH.Data.Helper.EnumHelper.PayStatus.Partial.ToString()</span>
+                        }
+                    </td>
+                    <td class="text-center" style="width:120px">                        
+                        @Html.ActionLink("Payment", "EditPayPart", new { id = item.TicketId }) | 
+                        @Html.ActionLink("Split", "EditPaySplit", new { id = item.TicketId })
+                        @*@Html.ActionLink("OldPayment", "EditPay", new { id = item.TicketId })*@
+                    </td>
+                </tr>
+            }
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="11" class="text-center text-danger"> @HSH.Data.Helper.StringHelper.stringNotFound.ToString() </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+
+

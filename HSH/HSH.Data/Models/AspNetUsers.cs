@@ -16,14 +16,10 @@ namespace HSH.Data.Models
     {
         public AspNetUsers()
         {
-            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
-            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
             this.CompanyAsset = new HashSet<CompanyAsset>();
             this.CompanyAsset1 = new HashSet<CompanyAsset>();
             this.Member = new HashSet<Member>();
             this.Member1 = new HashSet<Member>();
-            this.MemberAsset = new HashSet<MemberAsset>();
-            this.MemberAsset1 = new HashSet<MemberAsset>();
             this.TicketReceive = new HashSet<TicketReceive>();
             this.TicketReceive1 = new HashSet<TicketReceive>();
             this.TicketReceive2 = new HashSet<TicketReceive>();
@@ -32,7 +28,11 @@ namespace HSH.Data.Models
             this.Ticket2 = new HashSet<Ticket>();
             this.Transfer = new HashSet<Transfer>();
             this.Transfer1 = new HashSet<Transfer>();
-            this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.TicketPay = new HashSet<TicketPay>();
+            this.TicketPay1 = new HashSet<TicketPay>();
+            this.TicketPay2 = new HashSet<TicketPay>();
+            this.MemberAsset = new HashSet<MemberAsset>();
+            this.MemberAsset1 = new HashSet<MemberAsset>();
         }
     
         public string Id { get; set; }
@@ -51,15 +51,14 @@ namespace HSH.Data.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserDetail { get; set; }
+        public string UserPageRole { get; set; }
+        public string UserPageIndex { get; set; }
+        public string UserTypeRole { get; set; }
     
-        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<CompanyAsset> CompanyAsset { get; set; }
         public virtual ICollection<CompanyAsset> CompanyAsset1 { get; set; }
         public virtual ICollection<Member> Member { get; set; }
         public virtual ICollection<Member> Member1 { get; set; }
-        public virtual ICollection<MemberAsset> MemberAsset { get; set; }
-        public virtual ICollection<MemberAsset> MemberAsset1 { get; set; }
         public virtual ICollection<TicketReceive> TicketReceive { get; set; }
         public virtual ICollection<TicketReceive> TicketReceive1 { get; set; }
         public virtual ICollection<TicketReceive> TicketReceive2 { get; set; }
@@ -68,6 +67,10 @@ namespace HSH.Data.Models
         public virtual ICollection<Ticket> Ticket2 { get; set; }
         public virtual ICollection<Transfer> Transfer { get; set; }
         public virtual ICollection<Transfer> Transfer1 { get; set; }
-        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<TicketPay> TicketPay { get; set; }
+        public virtual ICollection<TicketPay> TicketPay1 { get; set; }
+        public virtual ICollection<TicketPay> TicketPay2 { get; set; }
+        public virtual ICollection<MemberAsset> MemberAsset { get; set; }
+        public virtual ICollection<MemberAsset> MemberAsset1 { get; set; }
     }
 }

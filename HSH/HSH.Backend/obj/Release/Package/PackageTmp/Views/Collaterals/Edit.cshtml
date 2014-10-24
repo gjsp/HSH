@@ -1,0 +1,170 @@
+﻿@model HSH.Data.Models.CollateralViewModels
+
+@{
+    ViewBag.Title = "กำหนดค่าหลักประกัน";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+@using (Html.BeginForm("Edit", "Collaterals", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmCol", name = "frmCol" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.Id)*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CashPerKg, htmlAttributes: new { @class = "control-label col-md-3" })
+            @*<span class="control-label col-md-3">
+                จำนวนเงินที่ซื้อขายได้ต่อ 1 kg
+            </span>*@
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CashPerKg, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CashPerKg, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GoldPerKg, htmlAttributes: new { @class = "control-label col-md-3" })
+            @*<span class="control-label col-md-3">
+                จำนวนเงินของทองคำต่อ 1 kg
+            </span>*@
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.GoldPerKg, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GoldPerKg, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GoldPercent, htmlAttributes: new { @class = "control-label col-md-3" })
+            @*<span class="control-label col-md-3">
+                ตัวคูณ %
+            </span>*@
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.GoldPercent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GoldPercent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <input type="button" onclick="bsDialog();" value="Save" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript" type="text/javascript">
+
+        $(function () {
+
+            function setFormatCurrency(num) {
+                if (num.length > 3) {
+                    num = num.replace(/[^\d\.\-\ ]/g, '');
+                    var numVal = parseInt(num);
+                    num = numVal.toString().split("").reverse().reduce(function (acc, num, i, orig) {
+                        return num + (i && !(i % 3) ? "," : "") + acc;
+                    }, "");
+                }
+                return num;
+            }
+
+            $("#CashPerKg").keyup(function (e) {
+                var num = setFormatCurrency(this.value);
+                this.value = num;
+            });
+
+            $("#GoldPerKg").keyup(function (e) {
+                var num = setFormatCurrency(this.value);
+                this.value = num;
+            });
+
+            $("#CashPerKg").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#GoldPerKg").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#GoldPercent").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+        });
+            var bsDialog = function () {
+                var CashPerKg = $("#CashPerKg").val();
+                var GoldPerKg = $("#GoldPerKg").val();
+                var GoldPercent = $("#GoldPercent").val();
+
+                var msg = "";
+                msg = "Do you want to Save </br> จำนวนเงินที่ซื้อขายได้ต่อ 1 kg <B>" + CashPerKg + "</B> THB</br> จำนวนเงินของทองคำต่อ 1 kg <B>" + GoldPerKg + "</B> THB</br> ตัวคูณ % <B>" + GoldPercent + "</B>  ?";
+                //validate
+                if (CashPerKg == "" || GoldPerKg == "" || GoldPercent == "" || CashPerKg.length > 7 || GoldPerKg.length > 9 || parseFloat(GoldPercent) > 100) {
+                    $("#frmCol").submit();
+                } else {
+                    BootstrapDialog.show({
+                        title: 'Comfirmation',
+                        message: msg,
+                        cssClass: 'comfirm-dialog',
+                        buttons: [{
+                            label: 'Cancel',
+                            action: function (dialog) {
+                                dialog.close();
+                            }
+                        }, {
+                            label: 'OK',
+                            cssClass: 'btn-primary',
+                            action: function (dialog) {
+                                $("#frmCol").submit();
+                            }
+                        }]
+                    });
+                }
+
+            }
+
+    </script>
+}

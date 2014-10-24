@@ -1,0 +1,40 @@
+body
+
+.text_username
+{
+	font-family: Cordia, Tahoma, Arial, Verdana, Helvetica, sans-serif;
+	font-size: 22px;
+	color: #E9C22A;
+	font-style: normal;
+	text-decoration: none;
+	padding-top:4px;
+	padding-left:8px;
+}
+.text_title
+{
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 45px;
+	color: #1A4062;
+	font-style: normal;
+	text-decoration: none;
+}
+.inputlogin
+{
+    padding-left:5px;
+    padding-right:5px;
+	font-family: Tahoma, MS Sans Serif;
+	font-size:20px;
+	color:#000000;
+	border: 1px solid #587c8a;
+	background-color:#FFFFFF;
+	height:35px;
+	width:257px;
+}
+.tb_yellow
+{
+	border: 2px solid #E79933;
+}
+.tb_blue
+{
+	border: 2px solid #153F62;
+}

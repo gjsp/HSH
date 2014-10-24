@@ -1,0 +1,101 @@
+﻿@model IEnumerable<HSH.Data.Models.MemberCallForceViewModels>
+
+@if (Model != null)
+{
+    <div id="_PartialViewCallForce" class="table-responsive">
+        <table class="table table-striped table-hover table-bordered table-responsive">
+            <tr class="info">
+                <th class="text-center">เลขที่บัญชีซื้อขายทองคำ</th>
+                <th class="text-center">ชื่อสมาชิก</th>
+                <th class="text-center">นามสกุล</th>
+                <th class="text-center">ประเภทสมาชิก</th>
+                <th class="text-center">เงินหลักประกัน</th>
+                <th class="text-center">ทองหลักประกัน</th>
+                <th class="text-center">ทองฝาก</th>
+                <th class="text-center">Call/Force</th>
+                <th class="text-center">Buy-Pause Status</th>
+                <th class="text-center">Sell-Pause Status</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @if (!string.IsNullOrEmpty(item.MemberDetail.MemberRef))
+                        {
+                            @Html.ActionLink(item.MemberDetail.MemberRef, "ViewPortFolio", "Members", new { id = item.MemberDetail.MemberId }, new { title = "View portfolio" })
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.MemberDetail.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MemberDetail.LastName)</td>
+                    <td class="text-center">
+                        @if (item.MemberDetail.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Company.ToString())
+                        {
+                            <span class="label label-primary">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Company) </span>
+                        }
+                        else if (item.MemberDetail.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Foreign.ToString())
+                        {
+                            <span class="label label-warning">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Foreign) </span>
+                        }
+                        else if (item.MemberDetail.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Normal.ToString())
+                        {
+                            <span class="label label-default">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Normal) </span>
+                        }
+                        else if (item.MemberDetail.MemberType == HSH.Data.Helper.EnumHelper.MemberType.VIP.ToString())
+                        {
+                            <span class="label label-success">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.VIP) </span>
+                        }
+                        else if (item.MemberDetail.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Walkin.ToString())
+                        {
+                            <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Walkin) </span>
+                        }
+                    </td>
+                    <td class="text-right">@item.PortFolio.AssetCash.ToString(HSH.Data.Helper.StringHelper.formatnumber0Digit)</td>
+                    <td class="text-right">@item.PortFolio.AssetGold.ToString(HSH.Data.Helper.StringHelper.formatnumber0Digit)</td>
+                    <td class="text-right">@item.PortFolio.DepositGold.ToString(HSH.Data.Helper.StringHelper.formatnumber0Digit)</td>
+                    <td class="text-center">
+                        @if (item.CallForce == HSH.Data.Helper.EnumHelper.CallForce.Call.ToString())
+                        {
+                            <span class="label label-warning">@HSH.Data.Helper.EnumHelper.CallForce.Call.ToString()</span>
+                        }
+                        else if (item.CallForce == HSH.Data.Helper.EnumHelper.CallForce.Force.ToString())
+                        {
+                            <span class="label label-danger">@HSH.Data.Helper.EnumHelper.CallForce.Force.ToString()</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default">Normal</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if (item.ForceBuy == true)
+                        {
+                            if (item.MemberDetail.PauseBuy == true)
+                            {
+                                @Html.ActionLink("Pause", "Edit", new { id = item.MemberId, PauseType = HSH.Data.Helper.EnumHelper.TicketType.Buy.ToString(), Pause = "Pause" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("UnPause", "Edit", new { id = item.MemberId, PauseType = HSH.Data.Helper.EnumHelper.TicketType.Buy.ToString(), Pause = "UnPause" })
+                            }
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if (item.ForceSell == true)
+                        {
+                            if (item.MemberDetail.PauseSell == true)
+                            {
+                                @Html.ActionLink("Pause", "Edit", new { id = item.MemberId, PauseType = HSH.Data.Helper.EnumHelper.TicketType.Sell.ToString(), Pause = "Pause" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("UnPause", "Edit", new { id = item.MemberId, PauseType = HSH.Data.Helper.EnumHelper.TicketType.Sell.ToString(), Pause = "UnPause" })
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}

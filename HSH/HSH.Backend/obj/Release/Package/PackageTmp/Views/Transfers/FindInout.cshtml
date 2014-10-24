@@ -1,0 +1,61 @@
+﻿@model HSH.Data.Models.InoutAssetViewModels
+
+@if (Model.InoutAssetList != null)
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered table-responsive">
+            <tr class="info">
+                <th class="text-center">รหัส</th>
+                <th class="text-center">วันที่</th>
+                <th class="text-center">โดย</th>
+                <th class="text-center">ประเภท</th>
+                <th class="text-center">จำนวนทอง (Kg)</th>
+            </tr>
+
+            @foreach (var item in Model.InoutAssetList)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.InoutRef)
+                    </td>
+                    <td class="text-center">
+                        @HSH.Data.Helper.StringHelper.ToStringDateTimeFormat(item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateBy)
+                    </td>
+                    <td class="text-center">
+                        @if (item.Direction == HSH.Data.Helper.EnumHelper.DirectionAssetType.In.ToString())
+                        {
+                            <span class="label label-primary">@HSH.Data.Helper.EnumHelper.DirectionAssetType.In</span>
+                        }
+                        else
+                        {
+                            <span class="label label-warning">@HSH.Data.Helper.EnumHelper.DirectionAssetType.Out</span>
+                        }
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Quantity.ToString())
+                    </td>
+                </tr>
+            }
+            @if (Model.InoutAssetList.Count() == 0)
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-danger"> @HSH.Data.Helper.StringHelper.stringNotFound.ToString() </td>
+                </tr>
+            }
+            else
+            {
+                <tr class="active">
+                    <th colspan="4" class="text-center">รวมทองเข้า</th>
+                    <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.InoutAssetList.Where(a => a.Direction == HSH.Data.Helper.EnumHelper.DirectionAssetType.In.ToString()).Sum(a => a.Quantity).Value.ToString())</th>
+                </tr>
+                <tr class="active">
+                    <th colspan="4" class="text-center">รวมทองออก</th>
+                    <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.InoutAssetList.Where(a => a.Direction == HSH.Data.Helper.EnumHelper.DirectionAssetType.Out.ToString()).Sum(a => a.Quantity).Value.ToString())</th>
+                </tr>
+            }
+        </table>
+    </div>
+}

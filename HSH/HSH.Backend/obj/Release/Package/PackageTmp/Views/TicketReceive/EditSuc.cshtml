@@ -1,0 +1,26 @@
+﻿@model HSH.Data.Models.Ticket
+@{
+    ViewBag.Title = "รายละเอียด รายการรับชำระเงินที่เรียบร้อยแล้ว";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("EditSuc", "TicketReceive", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditSuc" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("TicketDetail", Model)
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "IndexSuc")
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+﻿@model HSH.Data.Models.MemberAssetViewModels
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ยืนยันการอนุมัติหลักประกัน";
+    if (HSH.Backend.Helper.SessionHelper.CurrentUserInfo != null)
+    {
+        ViewBag.Title = HSH.Backend.Helper.SessionHelper.CurrentUserInfo.UserPageRole + " " + ViewBag.Title;
+    }
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("ApproveCollateral", "Members", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("PortFolio", Model.MemberPortFolio)
+
+    <div class="form-horizontal">
+     
+        @Html.HiddenFor(model => model.AssetId)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Status, new List<SelectListItem> {
+                            new SelectListItem { Value = "", Text = "--Please Select--" },
+                            new SelectListItem { Value = HSH.Data.Helper.EnumHelper.MemberAssetStatus.DisApproved.ToString(), Text = "DisApprove" },
+                            new SelectListItem { Value = HSH.Data.Helper.EnumHelper.MemberAssetStatus.Approved.ToString(), Text = "Approve" }
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" style="width:120px" />
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", Session[HSH.Data.Helper.StringHelper.stringCurrentPageIndex].ToString())
+</div>
+
+@section Scripts{
+@Scripts.Render("~/bundles/jqueryval")
+    
+}

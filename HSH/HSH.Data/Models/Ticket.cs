@@ -17,6 +17,7 @@ namespace HSH.Data.Models
         public Ticket()
         {
             this.TicketReceive = new HashSet<TicketReceive>();
+            this.TicketPay = new HashSet<TicketPay>();
         }
     
         public System.Guid TicketId { get; set; }
@@ -43,10 +44,11 @@ namespace HSH.Data.Models
         public string ApproveId { get; set; }
         public Nullable<System.DateTime> ApproveDate { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
-        public virtual AspNetUsers AspNetUsers2 { get; set; }
         public virtual Member Member { get; set; }
         public virtual ICollection<TicketReceive> TicketReceive { get; set; }
+        public virtual AspNetUsers UserApprovePay { get; set; }
+        public virtual AspNetUsers UserApprove { get; set; }
+        public virtual AspNetUsers UserCreated { get; set; }
+        public virtual ICollection<TicketPay> TicketPay { get; set; }
     }
 }

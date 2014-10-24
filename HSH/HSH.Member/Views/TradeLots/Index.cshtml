@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Big Lot Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+
+
+<div id="divOrder" class="table-responsive">
+    
+</div>
+
+
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script language="javascript" type="text/javascript">
+
+
+        $(function () {
+            var getTradeLotOrder = function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/TradeLots/GetTradeLotOrder")",
+                    dataType: "json",
+                    async: false,
+                    success: function (e) {
+                        $("#divOrder").html(e.result);
+                        setTimeout(function () {
+                            getTradeLotOrder();
+                        }, 4000);
+                    }
+                });
+            };
+            getTradeLotOrder();
+        });
+
+    </script>
+}

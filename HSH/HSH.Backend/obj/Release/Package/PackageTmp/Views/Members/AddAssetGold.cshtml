@@ -1,0 +1,157 @@
+﻿@model HSH.Data.Models.MemberAssetGoldViewModels
+
+@{
+    ViewBag.Title = "ฝาก ทองหลักประกัน";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("AddAssetGold", "Members", FormMethod.Post, new { @class = "form-horizontal", id = "frmAssetGold" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("PortFolio", Model.MemberPortFolio)
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(model => model.MemberId)
+
+        <div class="form-group">
+           @Html.LabelFor(model => model.Direction, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.Direction, (SelectList)ViewBag.Direction, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Direction, "", new { @class = "text-danger" })
+        </div>
+            @*@Html.LabelFor(model => model.AssetGold, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.AssetGold, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AssetGold, "", new { @class = "text-danger" })
+            </div>*@
+            @Html.LabelFor(model => model.GoldBrand, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.GoldBrand, (SelectList)ViewBag.GoldBrandList, new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.GoldBrand, new { htmlAttributes = new { @class = "form-control"} })*@
+                @Html.ValidationMessageFor(model => model.GoldBrand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">            
+           
+            @Html.LabelFor(model => model.SerialNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerialNo,"", new { @class = "text-danger" })
+            </div>            
+            @Html.LabelFor(model => model.Branch, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Branch, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="bsDialog();" value="Create" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+     @Html.ActionLink("Back to List", "IndexAssetGold", new { id = Model.MemberId })|
+    @Html.ActionLink("Withdraw", "AddAssetGoldOut", new { id = Model.MemberId })
+</div>
+<br />
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript" type="text/javascript">
+
+        $(function () {
+
+            $("#AssetGold").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+        });
+        var bsDialog = function () {
+           
+            var assetBalance = '@(ViewBag.AssetValue)';
+            var withDrawAble = '@(ViewBag.WithdrawAble)';
+            var direction = $("#Direction").val();
+            var assetValue = $("#AssetGold").val();
+            var brand = $("#GoldBrand").val().trim();
+            var serialNo = $("#SerialNo").val().trim();
+            var msgWarning = "";
+            //validate
+            if (serialNo == "") {
+                $("#frmAssetGold").submit();
+            } else {
+                //check limit withdraw
+                
+                if (direction == "Out") {
+                    if (withDrawAble == "False") {
+                        msgWarning = "ไม่สามารถถอนได้ เนื่องจากมีการซื้อขายค้างไว้";
+                    } else if (parseInt(assetValue) > parseInt(assetBalance)) {
+                        msgWarning = "ไม่สามารถถอนได้ เนื่องจากถอนเกินจำนวนที่ฝากไว้";
+                    }
+                    if (msgWarning != "") {
+                        var dialogWarning = new BootstrapDialog({
+                            message: msgWarning,
+                            buttons: [{
+                                label: 'OK',
+                                action: function (dialogWarning) {
+                                    dialogWarning.close();
+                                }
+                            }]
+                        });
+                        dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                        dialogWarning.open();
+                        return false
+                    }
+                }
+
+                //Submit Able
+                direction = direction == "Out" ? "ถอน" : "ฝาก";
+                var branch = $("#Branch").val();
+                //var payTypeDetail = $("#PayTypeDetail").val();
+                var msg = "คุณต้องการที่จะ <b>" + direction + "ทองคำ</b> จำนวน <b>1</b> Kg <br>" + "ยี่ห้อ <b>" + brand + "</b> ซีเรียลนัมเบอร์ <b>" + serialNo + "</b> ?";
+                BootstrapDialog.show({
+                    title: 'Comfirmation',
+                    message: msg,
+                    cssClass: 'comfirm-dialog',
+                    buttons: [{
+                        label: 'Cancel',
+                        action: function (dialog) {
+                            dialog.close();
+                        }
+                    }, {
+                        label: 'OK',
+                        cssClass: 'btn-primary',
+                        action: function (dialog) {
+                            $("#frmAssetGold").submit();
+                        }
+                    }]
+                });
+            }
+        }
+        
+    </script>
+}
+
+
+
+

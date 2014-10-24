@@ -1,0 +1,1159 @@
+﻿@model IEnumerable<HSH.Data.Models.Trade>
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Trade</h3>
+<hr />
+@using (Html.BeginForm("Create", "Trades", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmTrade", name = "frmTrade" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <div class="panel panel-danger" style="text-align:center">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Bid Price</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h1>
+                            <span id="divBid"></span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary" style="text-align:center">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ask Price</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h1>
+                            <span id="divAsk"></span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="margin-left:15px">
+        <label class="radio-inline">
+            <input type="radio" name="rdo" value="1" checked> ขายทองฝาก
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="rdo" value="0"> ส่งมอบทอง
+        </label>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Feed Price Order</h3>
+        </div>
+        <br />
+        <div class="form-horizontal">
+            <div class="form-group" style="margin-left:5px">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="ddlBidQuantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button id="btnBid" onclick="confirmTradeMember(this);" type="button" class="btn btn-danger" style="width:100px;font-size:large">ลูกค้าขาย</button>
+                </div>
+
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="ddlAskQuantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button id="btnAsk" onclick="confirmTradeMember(this);" type="button" class="btn btn-primary" style="width:100px;font-size:large">ลูกค้าซื้อ</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Place Order</h3>
+        </div>
+        <br />
+        <div class="form-horizontal">
+            <div class="form-group" style="margin-left:5px">
+
+                <div class="col-md-2">
+                    <input type="text" id="txtBidLeave" class="form-control" placeholder="Price" />
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="ddlBidQuantityLeave">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button id="btnBidLeave" onclick="confirmTradeMember(this);" type="button" class="btn btn-danger" style="width:100px;font-size:large">ลูกค้าขาย</button>
+                </div>
+
+
+                <div class="col-md-2">
+                    <input type="text" id="txtAskLeave" class="form-control" placeholder="Price" />
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="ddlAskQuantityLeave">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button id="btnAskLeave" onclick="confirmTradeMember(this);" type="button" class="btn btn-primary" style="width:100px;font-size:large">ลูกค้าซื้อ</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#Order" data-toggle="tab">Transaction Order</a></li>
+        <li class=""><a href="#Place" data-toggle="tab">Place Order</a></li>
+        <li class=""><a href="#Accept" data-toggle="tab">Accept Order</a></li>
+        <li class=""><a href="#Reject" data-toggle="tab">Reject Order</a></li>
+
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="Order">
+            <div class="table-responsive">
+                <table id="jqTable" class="table table-striped table-hover table-bordered table-responsive"></table>
+                <div id="jqTablePager"></div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="Place">
+            <div class="table-responsive">
+                <table id="jqTablePlace" class="table table-striped table-hover table-bordered table-responsive"></table>
+                <div id="jqTablePagerPlace"></div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="Accept">
+            <div class="table-responsive">
+                <table id="jqTableAccept" class="table table-striped table-hover table-bordered table-responsive"></table>
+                <div id="jqTablePagerAccept"></div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="Reject">
+            <div class="table-responsive">
+                <table id="jqTableReject" class="table table-striped table-hover table-bordered table-responsive"></table>
+                <div id="jqTablePagerReject"></div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!-- The jQuery UI theme that will be used by the grid -->
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <!-- The jQuery UI theme extension jqGrid needs -->
+    <link rel="stylesheet" type="text/css" href="http://www.trirand.net/aspnetmvc/Content/themes/ui.jqgrid.css" />
+    <!-- jQuery runtime minified -->
+    <!-- The localization file we need, English in this case -->
+    <script type="text/javascript" src="http://www.trirand.net/aspnetmvc/Scripts/trirand/i18n/grid.locale-en.js"></script>
+    <!-- The jqGrid client-side javascript -->
+    <script type="text/javascript" src="http://www.trirand.net/aspnetmvc/Scripts/trirand/jquery.jqGrid.min.js"></script>
+
+    <!-- Refereces to the javascript client-side code of the jqDatePicker and jqAutoComplete controls to be used for editing -->
+    <script type="text/javascript" src="http://www.trirand.net/aspnetmvc/Scripts/trirand/jquery.jqDatePicker.min.js"></script>
+    <script type="text/javascript" src="http://www.trirand.net/aspnetmvc/Scripts/trirand/jquery.jqAutoComplete.min.js"></script>
+
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">*@
+    <link href="~/Scripts/TimeCircles/inc/TimeCircles.css" rel="stylesheet" />
+    <script src="~/Scripts/TimeCircles/inc/TimeCircles.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        // the url to
+        @*var urlRoot = '@Url.Action("", "")';
+        var jqDataUrl = urlRoot + "Trades/GetTradeOrderJson";*@
+
+
+        $(document).ready(function () {
+
+            var LoadGrid = function () {
+                var grid = $("#jqTable");
+                grid.jqGrid({
+                    // Ajax related configurations
+                    // url: jqDataUrl,
+                    url: "@Url.Content("~/Trades/GetTradeOrder")",
+                    data: {},
+                    datatype: "json",
+                    type: "GET",
+                    colNames: ["TradeRef", "TradeType", "Quantity", "Price", "Amount", "Place order", "Status", "CreatedDate", "Deposit"],
+                    colModel: [
+                    { name: "TradeRef", index: "TradeRef", width: 160, align: "center", sortable: false },
+                    { name: "TradeType", index: "TradeType", width: 100, align: "center", sortable: false },
+                    { name: "Quantity", index: "Quantity", width: 100, align: "right", sortable: false },
+                    { name: "Price", index: "Price", width: 100, align: "right", sortable: false },
+                    { name: "Amount", index: "Amount", width: 100, align: "right", sortable: false },
+                    { name: "Leave", index: "Leave", width: 120, align: "center", sortable: false },
+                    { name: "Status", index: "Status", width: 120, align: "center", sortable: false },
+                    { name: "CreateDate", index: "CreateDate", width: 160, align: "center", sortable: false },
+                    { name: "UseDeposit", index: "UseDeposit", width: 140, align: "center", sortable: false }
+                    //,{
+                    //    name: "",index:"Actions", width: 70, align: "center", formatter: function (cellValue, options, rowdata) {
+
+                    //        //return rowdata[6];// grid.getCell(options.rowId, 'TradeRef');
+                    //        if (rowdata[6] == "Pending") {
+                    //            return "<a href='#' onclick='alert('" + options.rowId + "');' ><span class='glyphicon glyphicon-trash'></span></a>";
+                    //        }
+                    //        else {
+                    //            return "";// "<a href='#" + options.rowId + "' onclick='rejectTrade('" + options.rowId + "');return false;' ><span class='glyphicon glyphicon-trash'></span></a>";
+                    //        }
+                    //    }
+                    //}
+                    @*,{
+                        name: 'actions', index: 'actions', formatter: 'actions',width:70,align:"center",
+                        formatoptions: {
+                            keys: true,
+                            editbutton: false,
+                            delbutton: true,
+                            delOptions: {
+                                onclickSubmit: function (rp_ge, rowid) {
+                                    $.ajax({
+                                        type: "POST",
+                                        dataType: "json",
+                                        url: "@Url.Content("~/Trades/RejectTrade/")",
+                                        data:{tradeRef:rowid},
+                                        async: false,
+                                    success: function (e) {
+                                        //alert('success');
+                                    }
+                                    });
+                                    //rp_ge.processing = true;
+                                    //return false;
+                                }
+                                //,
+                                //processing: true
+                            },
+                        }
+                    }*@
+                    ],
+                    // Grid total width and height
+                    width: 1025,
+                    height: '100%',
+                    // Paging
+                    toppager: false,
+                    pager: $("#jqTablePager"),
+                    rowNum: 1000,     // disable page size dropdown
+                    pgbuttons: false,     // disable page control like next, back button
+                    pginput: false,
+                    pgtext: null,
+                    rowList: [],//[5, 10, 20],
+                    viewrecords: true, // Specify if "total number of records" is displayed
+
+                    // Default sorting
+                    sortname: "",
+                    sortorder: "desc",
+                    loadtext: "Loading...",
+                    caption: "",
+                    loadComplete: reLoad = function (data) {
+
+                        setTimeout(function () {
+                            grid.setGridParam({ sortorder: "desc" }).trigger("reloadGrid");
+
+                            //var oRecord = 0
+                            //if (hdfRecord.value.toString() != "") {
+                            //    oRecord = hdfRecord.value;
+                            //    alert("x");
+                            //}
+                            //if (oRecord != e.records) {
+                            //
+                            //    hdfRecord.value = e.records;
+                            //    alert("z");
+                            //}
+                            //alert(hdfRecord.value);
+                        }, 4000);
+                    },
+                    afterInsertRow: function (rowid, rowdata, rowelem) {
+                        //set class for color row
+                        if (rowdata.Status == 'Accept') {
+                            //grid.jqGrid('setRowData', rowid, '', { color: 'red' });
+                            grid.jqGrid('setRowData', rowid, '', 'success'); //add class
+                        } else {
+                            //grid.jqGrid('setRowData', rowid,0,"xxxx");
+                            //$('#' + rowId ).attr("disabled", false);
+                        }
+                    },
+                    //loadComplete: function (data) {
+                    //    //var ids = grid.jqGrid('getDataIDs');
+                    //    //for (var i = 1; i <= ids.length; i++) {
+                    //        //var rowId = ids[i];
+                    //        // var rowData = jQuery('#list').jqGrid ('getRowData', rowId);
+
+
+                    //        //var cont = grid.getCell(rowId, 'Status');
+                    //        //alert(ids[i]);
+                    //        //jQuery('#jDeleteButton_' + rowId, jQuery(this)).hide();
+
+                    //        //if (grid.getCell(rowId, 'Status') == "Reject") {
+                    //        //    //alert(grid.getCell(rowId, 'Status'));
+                    //        //    //grid.jqGrid('setCell', rowId, 'Actions', "&nbsp;");
+                    //        //    jQuery('#jDeleteButton_' + rowId, jQuery(this)).hide();
+                    //        //    //jQuery('#jDeleteButton_' + rowId).hide();
+                    //        //    grid.jqGrid('setCell', rowId, 'jDeleteButton_' + rowId, "&nbsp;");
+                    //        //}
+                    //    //}
+                    //},
+                }).navGrid("#jqTablePager",
+                    { refresh: false, add: false, edit: false, del: false, search: false },
+                        {}, // settings for edit
+                        {}, // settings for add
+                        {}, // settings for delete
+                        { sopt: ["cn"] } // Search options. Some options can be set on column level
+                 );
+            };
+            LoadGrid();
+
+
+            //Place Order
+            var LoadGridPlace = function () {
+                var grid = $("#jqTablePlace");
+                grid.jqGrid({
+                    url: "@Url.Content("~/Trades/GetTradePlace")",
+                    data: { orderType: "PlaceOrder" },
+                    datatype: "json",
+                    type: "GET",
+                    colNames: ["TradeRef", "TradeType", "Quantity", "Price", "Amount", "Place order", "Status", "CreatedDate", "Deposit"],
+                    colModel: [
+                    { name: "TradeRef", index: "TradeRef", width: 160, align: "center", sortable: false },
+                    { name: "TradeType", index: "TradeType", width: 100, align: "center", sortable: false },
+                    { name: "Quantity", index: "Quantity", width: 100, align: "right", sortable: false },
+                    { name: "Price", index: "Price", width: 100, align: "right", sortable: false },
+                    { name: "Amount", index: "Amount", width: 100, align: "right", sortable: false },
+                    { name: "Leave", index: "Leave", width: 120, align: "center", sortable: false },
+                    { name: "Status", index: "Status", width: 120, align: "center", sortable: false },
+                    { name: "CreateDate", index: "CreateDate", width: 160, align: "center", sortable: false },
+                    { name: "UseDeposit", index: "UseDeposit", width: 140, align: "center", sortable: false }
+                    ],
+                    // Grid total width and height
+                    width: 1025,
+                    height: '100%',
+                    // Paging
+                    toppager: false,
+                    pager: $("#jqTablePagerPlace"),
+                    rowNum: 1000,     // disable page size dropdown
+                    pgbuttons: false,     // disable page control like next, back button
+                    pginput: false,
+                    pgtext: null,
+                    rowList: [],//[5, 10, 20],
+                    viewrecords: true, // Specify if "total number of records" is displayed
+
+                    // Default sorting
+                    sortname: "",
+                    sortorder: "desc",
+                    loadtext: "Loading...",
+                    caption: "",
+                    loadComplete: reLoad = function (data) {
+
+                        setTimeout(function () {
+                            grid.setGridParam({ sortorder: "desc" }).trigger("reloadGrid");
+
+                        }, 4000);
+                    },
+                    afterInsertRow: function (rowid, rowdata, rowelem) {
+                        //set class for color row
+                        if (rowdata.Status == 'Accept') {
+                            grid.jqGrid('setRowData', rowid, '', 'success'); //add class
+                        } else {
+                        }
+                    },
+
+                }).navGrid("#jqTablePagerPlace",
+                    { refresh: false, add: false, edit: false, del: false, search: false },
+                        {}, // settings for edit
+                        {}, // settings for add
+                        {}, // settings for delete
+                        { sopt: ["cn"] } // Search options. Some options can be set on column level
+                 );
+            };
+            LoadGridPlace();
+
+            
+            //Accept
+            var LoadGridAccept = function () {
+                var grid = $("#jqTableAccept");
+                grid.jqGrid({
+                    datatype: "json",
+                    type: "GET",
+                    url: "@Url.Content("~/Trades/GetTradeAccept")",
+                    data: { },
+                    async: true,
+                    colNames: ["TradeRef", "TradeType", "Quantity", "Price", "Amount", "Place order", "Status", "CreatedDate", "Deposit"],
+                    colModel: [
+                    { name: "TradeRef", index: "TradeRef", width: 160, align: "center", sortable: false },
+                    { name: "TradeType", index: "TradeType", width: 100, align: "center", sortable: false },
+                    { name: "Quantity", index: "Quantity", width: 100, align: "right", sortable: false },
+                    { name: "Price", index: "Price", width: 100, align: "right", sortable: false },
+                    { name: "Amount", index: "Amount", width: 100, align: "right", sortable: false },
+                    { name: "Leave", index: "Leave", width: 120, align: "center", sortable: false },
+                    { name: "Status", index: "Status", width: 120, align: "center", sortable: false },
+                    { name: "CreateDate", index: "CreateDate", width: 160, align: "center", sortable: false },
+                    { name: "UseDeposit", index: "UseDeposit", width: 140, align: "center", sortable: false }
+                    ],
+                    // Grid total width and height
+                    width: 1025,
+                    height: '100%',
+                    // Paging
+                    toppager: false,
+                    pager: $("#jqTablePagerAccept"),
+                    rowNum: 1000,     // disable page size dropdown
+                    pgbuttons: false,     // disable page control like next, back button
+                    pginput: false,
+                    pgtext: null,
+                    rowList: [],//[5, 10, 20],
+                    viewrecords: true, // Specify if "total number of records" is displayed
+
+                    // Default sorting
+                    sortname: "",
+                    sortorder: "desc",
+                    loadtext: "Loading...",
+                    caption: "",
+                    loadComplete: reLoad = function (data) {
+
+                        setTimeout(function () {
+                            grid.setGridParam({ sortorder: "desc" }).trigger("reloadGrid");
+
+                        }, 4000);
+                    },
+                    afterInsertRow: function (rowid, rowdata, rowelem) {
+                        //set class for color row
+                        if (rowdata.Status == 'Accept') {
+                            grid.jqGrid('setRowData', rowid, '', 'success'); //add class
+                        } else {
+                        }
+                    },
+
+                }).navGrid("#jqTablePagerAccept",
+                    { refresh: false, add: false, edit: false, del: false, search: false },
+                        {}, // settings for edit
+                        {}, // settings for add
+                        {}, // settings for delete
+                        { sopt: ["cn"] } // Search options. Some options can be set on column level
+                 );
+            };
+            LoadGridAccept();
+
+            //Reject
+            var LoadGridReject = function () {
+                var grid = $("#jqTableReject");
+                grid.jqGrid({
+                    url: "@Url.Content("~/Trades/GetTradeReject")",
+                    data: {},
+                    datatype: "json",
+                    mtype: "POST",
+                    colNames: ["TradeRef", "TradeType", "Quantity", "Price", "Amount", "Place order", "Status", "CreatedDate", "ฝากทอง"],
+                    colModel: [
+                    { name: "TradeRef", index: "TradeRef", width: 160, align: "center", sortable: false },
+                    { name: "TradeType", index: "TradeType", width: 100, align: "center", sortable: false },
+                    { name: "Quantity", index: "Quantity", width: 100, align: "right", sortable: false },
+                    { name: "Price", index: "Price", width: 100, align: "right", sortable: false },
+                    { name: "Amount", index: "Amount", width: 100, align: "right", sortable: false },
+                    { name: "Leave", index: "Leave", width: 120, align: "center", sortable: false },
+                    { name: "Status", index: "Status", width: 120, align: "center", sortable: false },
+                    { name: "CreateDate", index: "CreateDate", width: 160, align: "center", sortable: false },
+                    { name: "UseDeposit", index: "UseDeposit", width: 140, align: "center", sortable: false }
+                    ],
+                    // Grid total width and height
+                    width: 1025,
+                    height: '100%',
+                    // Paging
+                    toppager: false,
+                    pager: $("#jqTablePagerReject"),
+                    rowNum: 1000,     // disable page size dropdown
+                    pgbuttons: false,     // disable page control like next, back button
+                    pginput: false,
+                    pgtext: null,
+                    rowList: [],//[5, 10, 20],
+                    viewrecords: true, // Specify if "total number of records" is displayed
+
+                    // Default sorting
+                    sortname: "",
+                    sortorder: "desc",
+                    loadtext: "Loading...",
+                    caption: "",
+                    loadComplete: reLoad = function (data) {
+
+                        setTimeout(function () {
+                            grid.setGridParam({ sortorder: "desc" }).trigger("reloadGrid");
+
+                        }, 4000);
+                    },
+                    afterInsertRow: function (rowid, rowdata, rowelem) {
+                        //set class for color row
+                        if (rowdata.Status == 'Accept') {
+                            grid.jqGrid('setRowData', rowid, '', 'success'); //add class
+                        } else {
+                        }
+                    },
+
+                }).navGrid("#jqTablePagerReject",
+                    { refresh: false, add: false, edit: false, del: false, search: false },
+                        {}, // settings for edit
+                        {}, // settings for add
+                        {}, // settings for delete
+                        { sopt: ["cn"] } // Search options. Some options can be set on column level
+                 );
+            };
+            LoadGridReject();
+
+            var getPrice = function () {
+               
+                var memberId = '@HSH.Member.Helper.SessionHelper.CurrentUserInfo.MemberId.ToString()';
+                //alert();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Trades/GetMarketPriceMember")",
+                    dataType: "json",
+                    data: { MemberId: memberId },
+                    async: false,
+                    success: function (e) {
+                        $("#divBid").text(e.bid);
+                        $("#divAsk").text(e.ask);
+
+                        setTimeout(function () {
+                            getPrice();
+                        }, 2000);
+
+                    }
+                });
+            };
+            getPrice();
+        });
+
+        var rejectTrade = function (rowid) {
+            alert(rowid);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "@Url.Content("~/Trades/RejectTrade")",
+                data: { tradeRef: rowid },
+                async: false,
+                success: function (e) {
+                    alert('success');
+                }
+            });
+        };
+
+
+        $("#btnSearch").click(function () {
+            var btn = $(this);
+            btn.button('loading');
+            $.ajax({
+                type: "POST",
+                url: "@Url.Content("~/Trades/GetTradeOrderList")",
+                data: $("#frmTrade").serialize(),
+                success: function (e) {
+                    $("#divTable").html(e);
+                    btn.button('reset');
+                }
+            });
+        });
+
+        function showPrice() {
+            alert($("#divBid").text());
+        }
+
+
+        //Btn Order
+        var bsDialog = function (e) {
+            var type = "";
+            if (e.id == "btnBid") {
+                type = "Sell";
+            } else {
+                type = "Buy";
+            }
+
+            var isTiming = true;
+            var quan = type == "Sell" ? $("#ddlBidQuantity").val() : $("#ddlAskQuantity").val()
+            var price = type == "Sell" ? $("#divBid").text().replace(',', '') : $("#divAsk").text().replace(',', '')
+            var priceMsg = type == "Sell" ? $("#divBid").text() : $("#divAsk").text()
+            var amount = ((quan * price * 656) / 10).toFixed(0).split("").reverse().reduce(function (acc, num, i, orig) {
+                return num + (i && !(i % 3) ? "," : "") + acc;
+            }, "");
+            var useDeposit = $('input[name="rdo"]:checked').val() == "1" ? true : false;
+
+            var msg = "Do you want to <B>" + type + "</B> Gold 99.99% Quantity <B>" + quan + "</B> KG Price <B>" + priceMsg + "</B> Amount <B>" + amount + "</B> THB?";
+            var $textMsg = msg + "<div id='CountDownTimer' data-timer='10' style='width: 100%; height: 200px;text-align:center'></div>";
+            $('#' + e.id).button('loading');
+            var memberId = '@HSH.Member.Helper.SessionHelper.CurrentUserInfo.MemberId.ToString()';
+
+            if (memberId != "") {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "@Url.Content("~/Trades/CheckPortFolio")",
+                    data: { MemberId: memberId, TradeType: type, Quantity: quan },
+                    async: true,
+                    success: function (data) {
+                        if (data.TradeAble == false) {
+                            $('#' + e.id).button('reset');
+                            var dialogLimit = new BootstrapDialog({
+                                message: 'หลักประกันไม่พอในการซื้อขาย',
+                                buttons: [{
+                                    label: 'Close',
+                                    action: function (dialogLimit) {
+                                        dialogLimit.close();
+                                    }
+                                }]
+                            });
+                            dialogLimit.setType(BootstrapDialog.TYPE_WARNING);
+                            dialogLimit.open();
+                        }
+                        else {
+                            BootstrapDialog.show({
+                                title: 'Comfirmation',
+                                message: $textMsg,
+                                cssClass: 'comfirm-dialog',
+                                closable: false,
+                                buttons: [{
+                                    label: 'Cancel',
+                                    action: function (dialog) {
+                                        $("#CountDownTimer").TimeCircles().stop();//ทำให้เวลาไม่ค้าง,ควรใช้ closable: false ด้วย
+                                        $('#' + e.id).button('reset');
+                                        dialog.close();
+                                    }
+                                }, {
+                                    label: 'OK',
+                                    cssClass: 'btn btn-info',
+                                    autospin: true,
+                                    action: function (dialogRef) {
+                                        if (isTiming) {
+                                            //Accept
+                                            $.ajax({
+                                                type: "POST",
+                                                dataType: "json",
+                                                url: "@Url.Content("~/Trades/TradeOrder")",
+                                                data: { Quantity: quan, Price: price, TradeType: type, Leave: false, Deposit: useDeposit },
+                                                async: true,
+                                                success: function (data) {
+                                                    $("#CountDownTimer").TimeCircles().stop();
+                                                    dialogRef.enableButtons(false);
+                                                    dialogRef.setClosable(false);
+                                                    dialogRef.getModalBody().html("Loading...");
+                                                    setTimeout(function () {
+                                                        $('#' + e.id).button('reset');
+                                                        dialogRef.close();
+                                                        var dialogSuccess = new BootstrapDialog({
+                                                            message: data.status,
+                                                            buttons: [{
+                                                                label: 'OK',
+                                                                action: function (dialogOk) {
+                                                                    dialogOk.close();
+                                                                }
+                                                            }]
+                                                        }
+                                                            );
+                                                        dialogSuccess.open();
+                                                    }, 2000);
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            //Timeout
+                                            setTimeout(function () {
+                                                $('#' + e.id).button('reset');
+                                                dialogRef.close();
+                                                var dialogTimeout = new BootstrapDialog({
+                                                    message: 'Transaction time out',
+                                                    buttons: [{
+                                                        label: 'OK',
+                                                        action: function (dialogTimeout) {
+                                                            dialogTimeout.close();
+                                                        }
+                                                    }]
+                                                });
+                                                //dialogTimeout.setType(BootstrapDialog.TYPE_DANGER);
+                                                dialogTimeout.open();
+                                            }, 500);
+                                        }
+                                    }
+                                }]
+                            });
+                            //ต้องทำที่หลัง
+                            setTimeout(function () {
+                                var idle_timer = $('#CountDownTimer', window.parent.document);
+                                idle_timer.data('CountDownTimer', 10);
+                                idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { show: false, color: '#4D8DC1' }, Seconds: { color: '#4D8DC1' } } })
+                                .addListener(
+                                    function (unit, value, total) {
+                                        if (total == 3) {
+                                            idle_timer.data('CountDownTimer', 3);
+                                            idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { color: '#900' }, Seconds: { color: '#900' } } })
+                                        }
+                                        if (total == 0) {
+                                            $("#CountDownTimer").TimeCircles().stop();
+                                            isTiming = false;
+                                        }
+                                    }
+                                );
+                            }, 200);
+                        }
+                    }
+                });
+            }
+        }
+
+        //Btn Order
+        var bsDialogLeave = function (e) {
+
+            var type = "";
+            if (e.id == "btnBidLeave") {
+                type = "Sell";
+            } else {
+                type = "Buy";
+            }
+            var price = type == "Sell" ? $("#txtBidLeave").val() : $("#txtAskLeave").val()
+
+            //validate
+            if (price == "") {
+                $('#' + e.id).button('reset');
+                var dialogTimeout = new BootstrapDialog({
+                    message: 'Please Enter Price',
+                    buttons: [{
+                        label: 'OK',
+                        action: function (dialogTimeout) {
+                            dialogTimeout.close();
+                            if (type == "Sell") {
+                                $("#txtBidLeave").focus();
+                            } else {
+                                $("#txtAskLeave").focus();
+                            }
+                        }
+                    }]
+                });
+                dialogTimeout.setType(BootstrapDialog.TYPE_WARNING);
+                dialogTimeout.open();
+                return false;
+            }
+
+            var isTiming = true;
+            var quan = type == "Sell" ? $("#ddlBidQuantityLeave").val() : $("#ddlAskQuantityLeave").val()
+
+            var priceMsg = price.split("").reverse().reduce(function (acc, num, i, orig) {
+                return num + (i && !(i % 3) ? "," : "") + acc;
+            }, "");
+            var amount = ((quan * price * 656) / 10).toFixed(0).split("").reverse().reduce(function (acc, num, i, orig) {
+                return num + (i && !(i % 3) ? "," : "") + acc;
+            }, "");
+            var useDeposit = $('input[name="rdo"]:checked').val() == "1" ? true : false;
+
+            var msg = "Do you want to <B>" + type + "</B> Gold 99.99% Quantity <B>" + quan + "</B> KG Price <B>" + priceMsg + "</B> Amount <B>" + amount + "</B> THB?";
+            var $textMsg = msg + "<div id='CountDownTimer' data-timer='10' style='width: 100%; height: 200px;text-align:center'></div>";
+            $('#' + e.id).button('loading');
+            var memberId = '@HSH.Member.Helper.SessionHelper.CurrentUserInfo.MemberId.ToString()';
+
+            if (memberId != "") {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "@Url.Content("~/Trades/CheckPortFolio")",
+                    data: { MemberId: memberId, TradeType: type, Quantity: quan },
+                    async: true,
+                    success: function (data) {
+                        if (data.TradeAble == false) {
+                            $('#' + e.id).button('reset');
+                            var dialogLimit = new BootstrapDialog({
+                                message: 'หลักประกันไม่พอในการซื้อขาย',
+                                buttons: [{
+                                    label: 'Close',
+                                    action: function (dialogLimit) {
+                                        dialogLimit.close();
+                                    }
+                                }]
+                            });
+                            dialogLimit.setType(BootstrapDialog.TYPE_WARNING);
+                            dialogLimit.open();
+                        }
+                        else {
+                            BootstrapDialog.show({
+                                title: 'Comfirmation',
+                                message: $textMsg,
+                                cssClass: 'comfirm-dialog',
+                                closable: false,
+                                buttons: [{
+                                    label: 'Cancel',
+                                    action: function (dialog) {
+                                        $("#CountDownTimer").TimeCircles().stop();//ทำให้เวลาไม่ค้าง,ควรใช้ closable: false ด้วย
+                                        $('#' + e.id).button('reset');
+                                        dialog.close();
+                                    }
+                                }, {
+                                    label: 'OK',
+                                    cssClass: 'btn btn-info',
+                                    autospin: true,
+                                    action: function (dialogRef) {
+                                        if (isTiming) {
+                                            //Accept
+                                            $.ajax({
+                                                type: "POST",
+                                                dataType: "json",
+                                                url: "@Url.Content("~/Trades/TradeOrder")",
+                                                data: { Quantity: quan, Price: price, TradeType: type, Leave: false, Deposit: useDeposit },
+                                                async: true,
+                                                success: function (data) {
+                                                    $("#CountDownTimer").TimeCircles().stop();
+                                                    dialogRef.enableButtons(false);
+                                                    dialogRef.setClosable(false);
+                                                    dialogRef.getModalBody().html("Loading...");
+                                                    setTimeout(function () {
+                                                        $('#' + e.id).button('reset');
+                                                        dialogRef.close();
+                                                        var dialogSuccess = new BootstrapDialog({
+                                                            message: data.status,
+                                                            buttons: [{
+                                                                label: 'OK',
+                                                                action: function (dialogOk) {
+                                                                    dialogOk.close();
+                                                                }
+                                                            }]
+                                                        }
+                                                            );
+                                                        dialogSuccess.open();
+                                                    }, 2000);
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            //Timeout
+                                            setTimeout(function () {
+                                                $('#' + e.id).button('reset');
+                                                dialogRef.close();
+                                                var dialogTimeout = new BootstrapDialog({
+                                                    message: 'Transaction time out',
+                                                    buttons: [{
+                                                        label: 'OK',
+                                                        action: function (dialogTimeout) {
+                                                            dialogTimeout.close();
+                                                        }
+                                                    }]
+                                                });
+                                                //dialogTimeout.setType(BootstrapDialog.TYPE_DANGER);
+                                                dialogTimeout.open();
+                                            }, 500);
+                                        }
+                                    }
+                                }]
+                            });
+                            //ต้องทำที่หลัง
+                            setTimeout(function () {
+                                var idle_timer = $('#CountDownTimer', window.parent.document);
+                                idle_timer.data('CountDownTimer', 10);
+                                idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { show: false, color: '#4D8DC1' }, Seconds: { color: '#4D8DC1' } } })
+                                .addListener(
+                                    function (unit, value, total) {
+                                        if (total == 3) {
+                                            idle_timer.data('CountDownTimer', 3);
+                                            idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { color: '#900' }, Seconds: { color: '#900' } } })
+                                        }
+                                        if (total == 0) {
+                                            $("#CountDownTimer").TimeCircles().stop();
+                                            isTiming = false;
+                                        }
+                                    }
+                                );
+                            }, 200);
+                        }
+                    }
+                });
+            }
+        }
+
+
+        var confirmTradeMember = function (e) {
+            var type = "";
+            var Leave;
+            var price = "";
+            var quan = "";
+            var memberId = '@HSH.Member.Helper.SessionHelper.CurrentUserInfo.MemberId.ToString()';
+            if (e.id.indexOf("Bid") > -1) { type = "Sell"; } else { type = "Buy"; }
+            if (e.id.indexOf("Leave") > -1) { Leave = true; } else { Leave = false; }
+            $('#' + e.id).button('loading');
+            //debugger;
+            //validate
+            if (memberId == "") {
+                $('#' + e.id).button('reset');
+                var dialogWarning = new BootstrapDialog({
+                    message: 'โปรดเลือกรายชื่อสมาชิก',
+                    buttons: [{
+                        label: 'OK',
+                        action: function (dialogWarning) {
+                            dialogWarning.close();
+                            $("#ddlMember").focus();
+                        }
+                    }]
+                });
+                dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                dialogWarning.open();
+                return false;
+            }
+
+            if (Leave) {
+                //Leave order
+                price = type == "Sell" ? $("#txtBidLeave").val() : $("#txtAskLeave").val();
+                quan = type == "Sell" ? $("#ddlBidQuantityLeave").val() : $("#ddlAskQuantityLeave").val()
+                if (price == "") {
+                    $('#' + e.id).button('reset');
+                    var dialogWarning = new BootstrapDialog({
+                        message: 'โปรดใส่ราคาที่ต้องการ',
+                        buttons: [{
+                            label: 'OK',
+                            action: function (dialogWarning) {
+                                dialogWarning.close();
+                                if (type == "Sell") {
+                                    $("#txtBidLeave").focus();
+                                } else {
+                                    $("#txtAskLeave").focus();
+                                }
+                            }
+                        }]
+                    });
+                    dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                    dialogWarning.open();
+                    return false;
+                }
+            } else {
+                // Order
+                price = type == "Sell" ? $("#divBid").text().replace(',', '') : $("#divAsk").text().replace(',', '');
+                quan = type == "Sell" ? $("#ddlBidQuantity").val() : $("#ddlAskQuantity").val()
+            }
+
+            var isTiming = true;
+            var priceMsg = price.split("").reverse().reduce(function (acc, num, i, orig) {
+                return num + (i && !(i % 3) ? "," : "") + acc;
+            }, "");
+            var amount = ((quan * price * 656) / 10).toFixed(0).split("").reverse().reduce(function (acc, num, i, orig) {
+                return num + (i && !(i % 3) ? "," : "") + acc;
+            }, "");
+            var useDeposit = $('input[name="rdo"]:checked').val() == "1" ? true : false;
+
+            var msg = "Do you want to <B>" + type + "</B> Gold 99.99% Quantity <B>" + quan + "</B> KG Price <B>" + priceMsg + "</B> Amount <B>" + amount + "</B> THB?";
+            var $textMsg = msg + "<div id='CountDownTimer' data-timer='10' style='width: 100%; height: 200px;text-align:center'></div>";
+
+            if (memberId != "") {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "@Url.Content("~/Trades/CheckPortFolio")",
+                    data: { MemberId: memberId, TradeType: type, Quantity: quan, UseDeposit: useDeposit },
+                    async: true,
+                    success: function (data) {
+                        if (data.TradeAble == false) {
+                            $('#' + e.id).button('reset');
+                            var dialogLimit = new BootstrapDialog({
+                                message: data.WarningMsg,
+                                buttons: [{
+                                    label: 'Close',
+                                    action: function (dialogLimit) {
+                                        dialogLimit.close();
+                                    }
+                                }]
+                            });
+                            dialogLimit.setType(BootstrapDialog.TYPE_WARNING);
+                            dialogLimit.open();
+                        }
+                        else {
+                            BootstrapDialog.show({
+                                title: 'Comfirmation',
+                                message: $textMsg,
+                                cssClass: 'comfirm-dialog',
+                                closable: false,
+                                buttons: [{
+                                    label: 'Cancel',
+                                    action: function (dialog) {
+                                        $("#CountDownTimer").TimeCircles().stop();//ทำให้เวลาไม่ค้าง,ควรใช้ closable: false ด้วย
+                                        $('#' + e.id).button('reset');
+                                        dialog.close();
+                                    }
+                                }, {
+                                    label: 'OK',
+                                    cssClass: 'btn btn-info',
+                                    autospin: true,
+                                    action: function (dialogRef) {
+                                        if (isTiming) {
+                                            $.ajax({
+                                                type: "POST",
+                                                dataType: "json",
+                                                url: "@Url.Content("~/Trades/TradeOrder")",
+                                                data: { Quantity: quan, Price: price, TradeType: type, Leave: Leave, Deposit: useDeposit },
+                                                async: true,
+                                                success: function (data) {
+                                                    $("#CountDownTimer").TimeCircles().stop();
+                                                    dialogRef.enableButtons(false);
+                                                    dialogRef.setClosable(false);
+                                                    dialogRef.getModalBody().html("Loading...");
+                                                    setTimeout(function () {
+                                                        $('#' + e.id).button('reset');
+                                                        dialogRef.close();
+                                                        var dialogSuccess = new BootstrapDialog({
+                                                            message: data.status,
+                                                            buttons: [{
+                                                                label: 'OK',
+                                                                action: function (dialogOk) {
+                                                                    dialogOk.close();
+                                                                }
+                                                            }]
+                                                        }
+                                                            );
+                                                        dialogSuccess.open();
+                                                    }, 2000);
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            //Timeout
+                                            setTimeout(function () {
+                                                $('#' + e.id).button('reset');
+                                                dialogRef.close();
+                                                var dialogTimeout = new BootstrapDialog({
+                                                    message: 'Transaction time out',
+                                                    buttons: [{
+                                                        label: 'OK',
+                                                        action: function (dialogTimeout) {
+                                                            dialogTimeout.close();
+                                                        }
+                                                    }]
+                                                });
+                                                //dialogTimeout.setType(BootstrapDialog.TYPE_DANGER);
+                                                dialogTimeout.open();
+                                            }, 300);
+                                        }
+                                    }
+                                }]
+                            });
+                            //ต้องทำที่หลัง
+                            setTimeout(function () {
+                                var idle_timer = $('#CountDownTimer', window.parent.document);
+                                idle_timer.data('CountDownTimer', 10);
+                                idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { show: false, color: '#4D8DC1' }, Seconds: { color: '#4D8DC1' } } })
+                                .addListener(
+                                    function (unit, value, total) {
+                                        if (total == 3) {
+                                            idle_timer.data('CountDownTimer', 3);
+                                            idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { color: '#900' }, Seconds: { color: '#900' } } })
+                                        }
+                                        if (total == 0) {
+                                            $("#CountDownTimer").TimeCircles().stop();
+                                            isTiming = false;
+                                        }
+                                    }
+                                );
+                            }, 200);
+                        }
+                    }
+                });
+            }
+            //ต้องทำที่หลัง
+            setTimeout(function () {
+                var idle_timer = $('#CountDownTimer', window.parent.document);
+                idle_timer.data('CountDownTimer', 10);
+                idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { show: false, color: '#4D8DC1' }, Seconds: { color: '#4D8DC1' } } })
+                .addListener(
+                    function (unit, value, total) {
+                        if (total == 3) {
+                            idle_timer.data('CountDownTimer', 3);
+                            idle_timer.TimeCircles({ time: { Days: { show: false }, Hours: { show: false }, Minutes: { color: '#900' }, Seconds: { color: '#900' } } })
+                        }
+                        if (total == 0) {
+                            $("#CountDownTimer").TimeCircles().stop();
+                            isTiming = false;
+                        }
+                    }
+                );
+            }, 200);
+        }
+
+
+        $(function () {
+            $('[rel="tooltip"],[data-toggle="tooltip"]').tooltip({ "placement": "bottom", delay: { show: 400, hide: 200 } });
+
+            $("#txtBidLeave").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#txtAskLeave").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+        });
+
+    </script>
+}

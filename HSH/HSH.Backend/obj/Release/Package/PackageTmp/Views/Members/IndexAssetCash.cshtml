@@ -1,0 +1,111 @@
+﻿@model HSH.Data.Models.MemberAssetCashViewModels
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ฝาก/ถอน เงินหลักประกัน";
+    if (HSH.Backend.Helper.SessionHelper.CurrentUserInfo != null)
+    {
+        ViewBag.Title = HSH.Backend.Helper.SessionHelper.CurrentUserInfo.UserPageRole + " " + ViewBag.Title;
+    }
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("IndexAssetCash", "Members", FormMethod.Post, new { @class = "form-horizontal", id = "frmAssetCash" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("PortFolio", Model.MemberPortFolio)
+
+    @Html.HiddenFor(model => model.MemberId)
+    <div class="form-group">
+        <div class="col-md-2">
+        </div>
+
+        @Html.Label("", "วันที่สร้าง", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            <div class="form-inline">
+                <div class="input-group date" id="divDateFrom" data-date-format="MM/DD/YYYY">
+                    @Html.TextBox("DateFrom", @HSH.Data.Helper.StringHelper.ToFormatStringDate(DateTime.Now), new { @class = "form-control", @readonly = "readonly" })
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        @Html.Label("", "ถึง", htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-2">
+            <div class="input-group date" id="divDateTo" data-date-format="MM/DD/YYYY">
+                @Html.TextBox("DateTo", @HSH.Data.Helper.StringHelper.ToFormatStringDate(DateTime.Now), new { @class = "form-control", @readonly = "readonly" })
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            @Html.DropDownList("ddlDirection", (SelectList)ViewBag.DirectionList, new { @class = "form-control" })
+        </div>
+        <div class="col-md-1">
+            <button type="button" id="btnSearch" name="btnSearch" data-loading-text="Loading..." class="btn btn-primary" style="">Search</button>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "IndexColCash", "Members", new { pt = HSH.Backend.Helper.SessionHelper.CurrentUserInfo.UserPageRole }, null) | 
+    @Html.ActionLink("ฝากถอนเงินหลักประกัน", "AddAssetCash", new { id = Model.MemberId })
+</div>
+<br />
+<div class="table-responsive" id="divTable">
+    @Html.Partial("FindAssetCash", Model.MemberAssetList)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $('#divDateFrom').datetimepicker({
+                useStrict: false,
+                pickTime: false
+            });
+            $('#divDateTo').datetimepicker({
+                useStrict: false,
+                pickTime: false
+            });
+
+            $("#btnSearch").click(function () {
+                var btn = $(this);
+                btn.button('loading');
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Members/IndexAssetCash")",
+                    data: $("#frmAssetCash").serialize(),
+                    success: function (e) {
+                        //stringPartialViewKey For Session Expire
+                        if (e.toString().indexOf("@HSH.Data.Helper.StringHelper.stringPartialViewKey") > -1) {
+                            $("#divTable").html(e);
+                            btn.button('reset');
+                        } else {
+                            top.window.location.href = "@HSH.Data.Helper.StringHelper.stringLocationHrefLogin";
+                        }
+                    }
+
+                });
+            });
+
+            $("#btnSearch").click();
+        });
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

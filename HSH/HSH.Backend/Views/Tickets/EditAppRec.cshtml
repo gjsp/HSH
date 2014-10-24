@@ -1,0 +1,45 @@
+﻿@model HCS.Models.TicketReceiveAppViewModels
+@{
+    ViewBag.Title = "Approve Ticket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Finance Approve Partial</h3>
+<hr />
+
+@using (Html.BeginForm("EditAppRec", "Tickets", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditAppRec" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("ViewTicketReceive", Model.TicketDetail)
+
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.TicketId)
+        @Html.HiddenFor(model => model.ReceiveId)
+
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-10">
+                <input type="submit" value="Approve" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to Main", "EditApp", new { id = Model.TicketId })
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+    </script>
+
+
+}
+
+
+

@@ -1,0 +1,407 @@
+﻿@{
+    ViewBag.Title = "Settle Trade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+@using (Html.BeginForm("Index", "Settles", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmSettle" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-6">
+                <table class="table-responsive table-condensed">
+                    @*<<tr>
+                            <td>
+                                <h3 class="col-sm-2"><span id="spBidBg" class="label label-danger"></span></h3>
+                            </td>
+                            <td>
+                                <h3 class="col-sm-2"><span id="spAskBg" class="label label-primary"></span></h3>
+                            </td>
+                        </tr>
+                        tr>
+                            <td>
+                                <h3 class="col-sm-2"><span id="spBidSpot" class="label label-danger"></span></h3>
+                            </td>
+                            <td>
+                                <h3 class="col-sm-2"><span id="spAskSpot" class="label label-primary"></span></h3>
+                            </td>
+                        </tr>*@
+                    <tr>
+                        <td class="col-md-2">
+                            <button id="bnBidBg" type="button" class="btn btn-danger" style="width:150px;cursor:default" onclick="return false;">
+                                <span id="spBidBg" style="font-size:x-large;font-weight:bold"></span>
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+                            <button id="bnAskBg" type="button" class="btn btn-primary" style="width:150px;cursor:default" onclick="return false;">
+                                <span id="spAskBg" style="font-size:x-large;font-weight:bold"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-2">
+                            <button id="bnBidSpot" type="button" class="btn btn-danger" style="width:150px;cursor:default" onclick="return false;">
+                                <span id="spBidSpot" style="font-size:x-large;font-weight:bold"></span>
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+                            <button id="bnAskSpot" type="button" class="btn btn-primary" style="width:150px;cursor:default" onclick="return false;">
+                                <span id="spAskSpot" style="font-size:x-large;font-weight:bold"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <button id="bnBidFx" type="button" class="btn btn-primary" style="width:150px;cursor:default" onclick="return false;">
+                                <span id="spFx" style="font-size:x-large;font-weight:bold"></span>
+                            </button>
+                        </td>
+                        @*<td class="col-md-3">
+                            <button id="bnBidFx" type="button" class="btn btn-primary" style="width:150px;cursor:default" onclick="return false;">
+                                <span id="spAskFx" style="font-size:x-large;font-weight:bold"></span>
+                            </button>
+                        </td>*@
+                    </tr>
+                </table>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="badge"><span id="spMemBuy"></span></span>
+                            Member Buy
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge"><span id="spMemSell"></span></span>
+                            Member Sell
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge"><span id="spComBuy"></span></span>
+                            HSH Buy Spot
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge"><span id="spComSell"></span></span>
+                            HSH Sell Spot
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge"><span id="spNet" class="size-normal"></span></span>
+                            NET
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="panel panel-default">
+
+                <div class="panel-heading col-lg-6 text-center">
+                    <h3 class="panel-title">Member Buy</h3>
+                </div>
+                <div class="panel-heading col-lg-6 text-center">
+                    <h3 class="panel-title">Member Sell</h3>
+                </div>
+                <div class="panel-body">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-5 text-center">
+                            <button id="btnBuySettle" onclick="getValueUsingParentTag()" type="button" class="btn btn-info" style="width:120px">Net Settle Trade</button>
+                            <button id="btnBuySpot" type="button" class="btn btn-info" style="width:120px">Spot Trade</button>
+                            <input type="text" id="txtBuyKgs" style="width:50px;height:38px;margin-left:10px;text-align:right;padding:4px 4px 4px 4px;font-size:large" placeholder="KGs" maxlength="4" />
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <button id="btnEdit" type="button" class="btn btn-info" title="Click to edit" style="width:120px">Edit / View</button>
+                        </div>
+                        <div class="col-md-5 text-center">
+
+                            <button id="btnSellSettle" onclick="getValueUsingParentTag();" type="button" class="btn btn-info" style="width:120px">Net Settle Trade</button>
+                            @*<button id="btnSellSpot" onclick="getValueUsingClass()" type="button" class="btn btn-info">Spot Trade</button>*@
+                            <button id="btnSellSpot" type="button" class="btn btn-info" style="width:120px">Spot Trade</button>
+                            <input type="text" id="txtSellKgs" style="width:50px;height:38px;margin-left:10px;text-align:right;padding:4px 4px 4px 4px;font-size:large" placeholder="KGs" maxlength="4" />
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-4">
+                            <div id="divBuy" style="min-height:150px"></div>
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-4">
+                            <div id="divSell" style="min-height:150px"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <input type="hidden" id="hiddenRealtime" value="1" />
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            var getPrice = function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Settles/GetInfoSettleTrade")",
+                    dataType: "json",
+                    data: {},
+                    async: false,
+                    success: function (e) {
+                        $("#spBidBg").text(e.bidBg);
+                        $("#spAskBg").text(e.askBg);
+                        $("#spBidSpot").text(e.bidSpot);
+                        $("#spAskSpot").text(e.askSpot);
+                        $("#spFx").text(e.fx);
+                        $("#spMemBuy").text(e.memBuy);
+                        $("#spMemSell").text(e.memSell);
+                        $("#spComBuy").text(e.comBuy);
+                        $("#spComSell").text(e.comSell);
+                        $("#spNet").text(e.net);
+
+                        setTimeout(function () {
+                            getPrice();
+                        }, 2500);
+                    }
+                });
+            };
+            getPrice();
+        });
+
+        $(function () {
+            var getSettleTicket = function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Settles/GetSettleTicket")",
+                    dataType: "json",
+                    async: false,
+                    success: function (e) {
+                        if ($("#hiddenRealtime").val() == "1") {
+                            $("#divSell").html(e.listSell);
+                            $("#divBuy").html(e.listBuy);
+                        }
+                        setTimeout(function () {
+                            getSettleTicket();
+                        }, 3000);
+                    }
+                });
+            };
+            getSettleTicket();
+        });
+
+        $("#btnEdit").click(function () {
+            $("#btnEdit").button('loading');
+
+            var hd = $("#hiddenRealtime");
+            if (hd.val() == "0") {
+                hd.val("1");//View
+                $('#btnEdit').attr('title', 'Click to edit');
+                $("#listBuy input").each(function () {
+                    $(this).attr('checked', false);
+                    $(this).attr("disabled", true);
+                });
+                $("#listSell input").each(function () {
+                    $(this).attr('checked', false);
+                    $(this).attr("disabled", true);
+                });
+
+            } else {
+                hd.val("0");//Edit
+                $('#btnEdit').attr('title', 'Click to view');
+                $("#listBuy input").each(function () {
+                    $(this).removeAttr("disabled");
+                });
+                $("#listSell input").each(function () {
+                    $(this).removeAttr("disabled");
+                });
+            }
+            setTimeout(function () {
+                $("#btnEdit").button('reset');
+            }, 500);
+        });
+
+        $("#btnSellSettle").click(function () {
+            $("#btnSellSettle").button('loading');
+
+            var hd = $("#hiddenRealtime");
+            if (hd.val() == "0") {
+                hd.val("1")
+            }
+            setTimeout(function () {
+                $("#btnSellSettle").button('reset');
+            }, 500);
+        });
+
+        $("#btnBuySettle").click(function () {
+            $("#btnBuySettle").button('loading');
+
+            var hd = $("#hiddenRealtime");
+            if (hd.val() == "0") {
+                hd.val("1")
+            }
+            setTimeout(function () {
+                $("#btnBuySettle").button('reset');
+            }, 500);
+        });
+
+
+        $("#btnSellSpot").click(function () {
+            $("#btnSellSpot").button('loading');
+            if ($('#txtSellKgs').val() == "") {
+                $('#txtSellKgs').focus();
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Content("~/Settles/AddSpot")",
+                dataType: "json",
+                async: false,
+                data: { spot: $('#txtSellKgs').val(), type: "Sell" },
+                success: function (e) { }
+            });
+            setTimeout(function () {
+                $("#btnSellSpot").button('reset');
+            }, 500);
+        });
+
+        $("#btnBuySpot").click(function () {
+            $("#btnBuySpot").button('loading');
+            if ($('#txtBuyKgs').val() == "") {
+                $('#txtBuyKgs').focus();
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Content("~/Settles/AddSpot")",
+                dataType: "json",
+                async: false,
+                data: { spot: $('#txtBuyKgs').val(), type: "Buy" },
+                success: function (e) { }
+            });
+            setTimeout(function () {
+                $("#btnBuySpot").button('reset');
+            }, 500);
+        });
+
+        //$(document).ready(function () {
+        //    /* Get the checkboxes values based on the class attached to each check box */
+        //    $("#buttonClass").click(function () {
+        //        getValueUsingClass();
+        //    });
+
+        //    /* Get the checkboxes values based on the parent div id */
+        //    $("#buttonParent").click(function () {
+        //        getValueUsingParentTag();
+        //    });
+        //});
+
+        function getValueUsingClass() {
+            /* declare an checkbox array */
+            var chkArray = [];
+
+            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+            $(".chk:checked").each(function () {
+                chkArray.push($(this).val());
+            });
+
+            /* we join the array separated by the comma */
+            var selected;
+            selected = chkArray.join(',') + ",";
+
+            /* check if there is selected checkboxes, by default the length is 1 as it contains one single comma */
+            if (selected.length > 1) {
+                alert("You have selected " + selected);
+            } else {
+                alert("Please at least one of the checkbox");
+            }
+        }
+
+        function getValueUsingParentTag() {
+            var chkArray = [];
+
+            /* look for all checkboes that have a parent id called 'checkboxlist' attached to it and check if it was checked */
+            $("#listBuy input:checked").each(function () {
+                chkArray.push($(this).val());
+            });
+            $("#listSell input:checked").each(function () {
+                chkArray.push($(this).val());
+            });
+            /* we join the array separated by the comma */
+            var selected;
+            selected = chkArray.join(',') + ",";
+
+            /* check if there is selected checkboxes, by default the length is 1 as it contains one single comma */
+            if (selected.length > 1) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Settles/AddSettle")",
+                    dataType: "json",
+                    async: false,
+                    data: { arrData: selected },
+                    success: function (e) { }
+                });
+
+            } else {
+                //alert("Please at least one of the checkbox");
+            }
+        }
+
+
+        $(function () {
+            $('[rel="tooltip"],[data-toggle="tooltip"]').tooltip({ "placement": "bottom", delay: { show: 400, hide: 200 } });
+
+            $("#txtBuyKgs").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                //109 = "-",
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190, 109]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#txtSellKgs").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190, 109]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+        });
+
+    </script>
+}

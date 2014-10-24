@@ -1,0 +1,229 @@
+﻿@model HSH.Data.Models.TicketPaySplitViewModels
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Split";
+    if (HSH.Backend.Helper.SessionHelper.CurrentUserInfo != null)
+    {
+        ViewBag.Title = HSH.Backend.Helper.SessionHelper.CurrentUserInfo.UserPageRole + " " + ViewBag.Title;
+    }
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("EditPaySplit", "Tickets", FormMethod.Post, new { @class = "form-horizontal", id = "frmEditPaySplit" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("ViewTicketPay", Model.TicketDetail)
+
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.TicketId)
+        @Html.HiddenFor(model => model.Price)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.QtyUnpaid, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.QtyUnpaid, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.QtyUnpaid, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.AmountUnPaid, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.AmountUnPaid, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.AmountUnPaid, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2", @for = "Quantity" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+            @*@Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                </div>*@
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Status, (SelectList)ViewBag.Status, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Submit" onclick="bsDialog(this);" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "IndexPay") | @Html.ActionLink("Payment", "EditPayPart", new { id = Model.TicketId })
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered table-responsive">
+        <tr class="info">
+            <th class="text-center">วันที่</th>
+            <th class="text-center">โดย</th>
+            <th class="text-center">รหัส</th>
+            <th class="text-center">สถานะ</th>
+            <th class="text-center">จำนวนทอง</th>
+        </tr>
+        @foreach (var item in Model.PayList)
+        {
+            <tr>
+                <td class="text-center">
+                    @HSH.Data.Helper.StringHelper.ToStringDateTimeFormat(item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserCreated.UserName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.PayRef)
+                </td>
+                <td class="text-center">
+                    @if (item.Status == HSH.Data.Helper.EnumHelper.TicketSellStatus.Cut.ToString())
+                    {
+                        <span class="label label-primary">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketSellStatus.Cut)</span>
+                    }
+                    else if (item.Status == HSH.Data.Helper.EnumHelper.TicketSellStatus.Send.ToString())
+                    {
+                        <span class="label label-default">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketSellStatus.Send)</span>
+                    }
+                    else if (item.Status == HSH.Data.Helper.EnumHelper.TicketSellStatus.WaitCash.ToString())
+                    {
+                        <span class="label label-default">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketSellStatus.WaitCash)</span>
+                    }
+                </td>
+                <td class="text-right">
+                    @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Quantity.ToString())
+                </td>
+            </tr>
+        }
+        @if (Model.PayList.Count() == 0)
+        {
+            <tr>
+                <td colspan="5" class="text-center text-danger"> @HSH.Data.Helper.StringHelper.stringNotFound.ToString() </td>
+            </tr>
+        }
+        else
+        {
+            <tr class="active">
+                <th colspan="4" class="text-center">Total</th>
+                <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.PayList.Where(t => t.Active == true).Sum(t => t.Quantity).Value.ToString())</th>
+            </tr>
+        }
+    </table>
+</div>
+@section Scripts {@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    $(function () {
+
+        $("#Quantity").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            // 110 = .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+        $("#Quantity").blur(function (e) {
+            //calAmount();
+        });
+
+        function calAmount() {
+
+            var q = $("#Quantity").val();
+            var p = '@Model.Price';
+            var a = ((q * p) * 656) / 10;
+            a = a.toString().split("").reverse().reduce(function (acc, num, i, orig) {
+                return num + (i && !(i % 3) ? "," : "") + acc;
+            }, "");
+            $("#Amount").val(a);
+        }
+
+    });
+
+    var bsDialog = function (e) {
+        //var type = $("input:radio[name=PayType]:checked").val();
+        var quantity = $("#Quantity").val();
+        var qtyUnpaid = '@Model.QtyUnpaid';
+        var status = $("#Status").val();
+     
+
+        if (quantity == "" || parseInt(quantity) < 1) {
+            $("#frmEditPaySplit").submit();
+            return;
+        }
+       
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "@Url.Content("~/Tickets/checkPaySplitAble")",
+            data: { Id: '@Model.TicketId', qty: quantity, Status: status },
+            async: true,
+            success: function (data) {
+                if (data.Message != "") {
+                    $('#' + e.id).button('reset');
+                    var dialogWarning = new BootstrapDialog({
+                        message: data.Message,
+                        buttons: [{
+                            label: 'Close',
+                            action: function (dialogWarning) {
+                                dialogWarning.close();
+                                $("#Quantity").focus();
+                            }
+                        }]
+                    });
+                    dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                    dialogWarning.open();
+                    return;
+                } else {
+                    var msg = "คุณต้องการที่จะตัดทองจำนวน <B>" + quantity + "</B> Kg ?";
+                    BootstrapDialog.show({
+                        title: 'Comfirmation',
+                        message: msg,
+                        cssClass: 'comfirm-dialog',
+                        buttons: [{
+                            label: 'Cancel',
+                            action: function (dialog) {
+                                dialog.close();
+                            }
+                        }, {
+                            label: 'OK',
+                            cssClass: 'btn-primary',
+                            action: function (dialog) {
+                                $("#frmEditPaySplit").submit();
+                            }
+                        }]
+                    });
+                }
+            }
+        });
+
+    }
+</script>
+
+
+}
+
+
+

@@ -30,9 +30,24 @@ namespace HSH.Data.Models
         public string Branch { get; set; }
         public string ApproveId { get; set; }
         public Nullable<System.DateTime> ApproveDate { get; set; }
+        public string Status { get; set; }
+        public string WithdrawStatus { get; set; }
+        public Nullable<System.Guid> WithdrawId { get; set; }
+        public string PayChequeNo { get; set; }
+        public string PayBankName { get; set; }
+        public string PayAccountNo { get; set; }
+        public string PayAccountName { get; set; }
+        public string PayAccountType { get; set; }
+        public string PayBankBranch { get; set; }
+        public string PayTime { get; set; }
+        public Nullable<System.DateTime> PayDuedate { get; set; }
+        public Nullable<System.DateTime> PayDate { get; set; }
+        public Nullable<int> CompanyBankId { get; set; }
+        public string PayTransRef { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
+        public virtual AspNetUsers UserApproved { get; set; }
+        public virtual AspNetUsers UserCreated { get; set; }
+        public virtual CompanyBank CompanyBank { get; set; }
         public virtual Member Member { get; set; }
     }
 }

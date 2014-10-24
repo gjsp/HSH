@@ -1,0 +1,99 @@
+﻿@model HSH.Data.Models.UserOnline
+@{
+    Layout = null;
+}
+
+    <title>Hua Seng Heng COMMODITAS Login</title>
+    <link href="~/Content/Login/Style/style.css" rel="stylesheet" />
+    <style>
+        .user-login{
+           background-image:url("../../Content/Login/Image/bg_login.png");
+           margin:0px 0px 0px 0px;
+           padding:0px 0px 0px 0px;
+        }
+        .btn-login{
+            background-image:url("../../Content/Login/Image/login.png");
+            width:140px;
+            height:40px;
+        }
+        
+.btn-info {
+  color: #ffffff;
+  background-color: #1A4062;
+  border-color: #1A4062;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  color: #ffffff;
+  background-color: #0e86ef;
+  border-color: #0d7bdc;
+}
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  background-image: none;
+}
+.text-danger
+{
+    color:red;
+}
+
+
+    </style>
+
+@*<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" style="background-repeat:no-repeat;background-position:right;background-image:url('../../Content/Login/Image/bg_login2.png')" background="~/Content/Login/Image/bg_login.png">*@
+
+@using (Html.BeginForm("UserLogin", "Home", FormMethod.Post, new { @class = "user-login", role = "form", id = "loginForm" }))
+{
+    @Html.AntiForgeryToken()
+        <table width="1133" height="790" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td height="60">&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="730" background="~/Content/Login/Image/bg_login2.png" valign="top">
+                    <table width="400" border="0" align="center" cellpadding="0" cellspacing="28">
+                        <tr>
+                            <td colspan="2" height="285">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="85"><img src="~/Content/Login/Image/username_login.png" width="85" height="17" /></td>
+                            <td width="272">
+                                @*<input type="text" name="textfield" id="textfield" class="inputlogin" />*@
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "inputlogin" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="~/Content/Login/Image/password.png" width="79" height="19" class="" /></td>
+                            <td>
+                                @*<input type="text" name="textfield2" id="textfield2" class="inputlogin" />*@
+                                @Html.PasswordFor(m => m.Password, new { @class = "inputlogin" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        @*<tr>
+                                <td colspan="2" align="center"><img src="~/Content/Login/Image/forgot.png" width="142" height="31" /></td>
+                            </tr>*@
+                        <tr>
+                            <td colspan="2" align="center">
+                                <button type="submit" class="btn btn-info" style="width:100px;height:40px;font-size:large">LOGIN</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    
+}
+    

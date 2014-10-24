@@ -1,0 +1,83 @@
+﻿
+@model HSH.Data.Models.Ticket
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">รายละเอียดออเดอร์</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 text-right">เลขที่บัญชีซื้อขายทองคำ :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.Member.MemberRef)</div>
+            <div class="col-md-3 text-right">ชื่อสมาชิก :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.Member.FirstName)</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">รหัสออเดอร์  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.TicketRef)</div>
+            <div class="col-md-3 text-right">รหัสใบเทรด :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.TradeRef)</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">ประเภท  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.TicketType)</div>
+            <div class="col-md-3 text-right">ราคา :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.Price.ToString())</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">จำนวนทอง :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.Quantity.ToString())</div>
+            <div class="col-md-3 text-right">จำนวนเงิน :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.Amount.ToString())</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">สถานะส่งทอง :</div>
+            <div class="col-md-3">
+                
+                @if (Model.UseDeposit != null)
+                {
+                    if (Model.UseDeposit.Value == false)
+                    {
+                        <span class="label label-info">ส่งมอบทอง</span>
+                    }
+                    else
+                    {
+                        <span class="label label-default">ขายทองฝาก</span>
+                    }
+                }
+                
+            </div>
+            <div class="col-md-3 text-right">สถานะ :</div>
+            <div class="col-md-3">
+                @if (Model.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Cut.ToString())
+                {
+                    <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Cut)</span>
+                }
+                else if (Model.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Send.ToString())
+                {
+                    <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Send)</span>
+                }
+                else if (Model.Status == HSH.Data.Helper.EnumHelper.TicketStatus.WaitCash.ToString())
+                {
+                    <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.WaitCash)</span>
+                }
+                else if (Model.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Deposit.ToString())
+                {
+                    <span class="label label-info">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Deposit)</span>
+                }
+                else if (Model.Status == HSH.Data.Helper.EnumHelper.TicketStatus.WaitGold.ToString())
+                {
+                    <span class="label label-info">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.WaitGold)</span>
+                }
+                else if (Model.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Pending.ToString())
+                {
+                    <span class="label label-default">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Pending)</span>
+                }
+                else if (Model.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Complete.ToString())
+                {
+                    <span class="label label-success">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Complete)</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model HSH.Data.Models.CompanyAssetViewModels
+
+@if (Model.CompanyAssetList != null)
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered table-responsive">
+            <tr class="info">
+                <th class="text-center">RefNo</th>
+                <th class="text-center">Created Date</th>
+                <th class="text-center">Created By</th>
+                <th class="text-center">Type</th>
+                <th class="text-center">Quantity(Kg)</th>
+            </tr>
+
+            @foreach (var item in Model.CompanyAssetList)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.AssetRef)
+                    </td>
+                    <td class="text-center">
+                        @HSH.Data.Helper.StringHelper.ToStringDateTimeFormat(item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserCreated.UserName)
+                    </td>
+                    <td class="text-center">
+                        @if (item.Direction == HSH.Data.Helper.EnumHelper.CompanyAssetType.Import.ToString())
+                        {
+                            <span class="label label-primary">@HSH.Data.Helper.EnumHelper.CompanyAssetType.Import</span>
+                        }
+                        else
+                        {
+                            <span class="label label-warning">@HSH.Data.Helper.EnumHelper.CompanyAssetType.Export</span>
+                        }
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Quantity.ToString())
+                    </td>
+                </tr>
+            }
+            @if (Model.CompanyAssetList.Count() == 0)
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-danger"> @HSH.Data.Helper.StringHelper.stringNotFound.ToString() </td>
+                </tr>
+            }
+            else
+            {
+                <tr class="active">
+                    <th colspan="4" class="text-center">Summary Deposit</th>
+                    <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.CompanyAssetList.Where(a => a.Direction == HSH.Data.Helper.EnumHelper.CompanyAssetType.Import.ToString()).Sum(a => a.Quantity).Value.ToString())</th>
+                </tr>
+                <tr class="active">
+                    <th colspan="4" class="text-center">Summary Withdraw</th>
+                    <th class="text-right">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.CompanyAssetList.Where(a => a.Direction == HSH.Data.Helper.EnumHelper.CompanyAssetType.Export.ToString()).Sum(a => a.Quantity).Value.ToString())</th>
+                </tr>
+            }
+        </table>
+    </div>
+}

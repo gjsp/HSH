@@ -1,0 +1,42 @@
+﻿
+@model HSH.Data.Models.CompanyViewModels
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Stock Balance</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CompanyGold)  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.CompanyGold)</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CompanyCash)  :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.CompanyCash.ToString())</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CollateralGold)  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.CollateralGold)</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CollateralCash)  :</div>
+            <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.CollateralCash.ToString())</div>
+        </div>
+        @*<div class="row">
+            <div class="col-md-3 text-right">OrderStatus :</div>
+            <div class="col-md-3">
+                
+                @if (Model.UseDeposit != null)
+                {
+                    if (Model.UseDeposit.Value == false)
+                    {
+                        <span class="label label-info">ส่งมอบทอง</span>
+                    }
+                    else
+                    {
+                        <span class="label label-default">ขายทองฝาก</span>
+                    }
+                }
+                
+            </div>
+            <div class="col-md-3 text-right"></div>
+            <div class="col-md-3"></div>
+        </div>*@
+    </div>
+</div>

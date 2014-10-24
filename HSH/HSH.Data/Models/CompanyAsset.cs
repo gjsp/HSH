@@ -28,7 +28,7 @@ namespace HSH.Data.Models
         public Nullable<System.DateTime> ApproveDate { get; set; }
         public Nullable<bool> Active { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
+        public virtual AspNetUsers UserApproved { get; set; }
+        public virtual AspNetUsers UserCreated { get; set; }
     }
 }

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<HSH.Data.Models.Member>
+
+@{
+    ViewBag.Title = "รายชื่อสมาชิก";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("Index", "Members", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmMember", name = "frmMember" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+       
+        @Html.Label("", "วันที่สร้าง", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            <div class="form-inline">
+                <div class="input-group date" id="divDateFrom" data-date-format="MM/DD/YYYY">
+                    @Html.TextBox("DateFrom", @HSH.Data.Helper.StringHelper.ToFormatStringDate(DateTime.Now), new { @class = "form-control", @readonly = "readonly" })
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        @Html.Label("", "ถึง", htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-2">
+            <div class="input-group date" id="divDateTo" data-date-format="MM/DD/YYYY">
+                @Html.TextBox("DateTo",  @HSH.Data.Helper.StringHelper.ToFormatStringDate(DateTime.Now), new { @class = "form-control", @readonly = "readonly" })
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            @Html.DropDownList("ddlMemberType", (SelectList)ViewBag.MemberTypeList, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            @Html.TextBox("Keyword", "", new { @class = "form-control", placeholder = "ค้นหาชื่อหรือรหัส" })
+
+        </div>
+        <div class="col-md-1">
+            <button type="button" id="btnSearch" name="btnSearch" data-loading-text="Loading..." class="btn btn-primary" style="">Search</button>
+        </div>
+    </div>
+}
+@*<p>
+    @Html.ActionLink("Create New", "CreateMemberIndi")
+</p>*@
+
+<div id="divTable">
+    @Html.Partial("Find", Model)
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $('#divDateFrom').datetimepicker({
+                useStrict: false,
+                pickTime: false
+            });
+            $('#divDateTo').datetimepicker({
+                useStrict: false,
+                pickTime: false
+            });
+
+            $("#Keyword").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    $("#btnSearch").click();
+                }
+            });
+
+            $("#btnSearch").click(function () {
+                var btn = $(this);
+
+                btn.button('loading');
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Members/Index")", 
+                    data: $("#frmMember").serialize(),
+                    success: function (e) {
+                        //stringPartialViewKey For Session Expire
+                        if (e.toString().indexOf("@HSH.Data.Helper.StringHelper.stringPartialViewKey") > -1) {
+                            $("#divTable").html(e);
+                            btn.button('reset');
+                        } else {
+                            top.window.location.href = "@HSH.Data.Helper.StringHelper.stringLocationHrefLogin";
+                        }
+                    }
+
+                });
+            });
+
+            $("#btnSearch").click();
+        });
+
+
+    </script>
+}
+

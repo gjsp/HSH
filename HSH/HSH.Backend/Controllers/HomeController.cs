@@ -13,6 +13,14 @@ namespace HSH.Backend.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            ViewBag.Message = "Log out Page";
+            HttpContext.Session.Abandon();
+            return RedirectToAction("Login", "Account");
+            //return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

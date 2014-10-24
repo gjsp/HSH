@@ -16,10 +16,10 @@ namespace HSH.Data.Models
     {
         public Member()
         {
-            this.MemberAsset = new HashSet<MemberAsset>();
             this.Ticket = new HashSet<Ticket>();
             this.Trade = new HashSet<Trade>();
             this.Transfer = new HashSet<Transfer>();
+            this.MemberAsset = new HashSet<MemberAsset>();
         }
     
         public System.Guid MemberId { get; set; }
@@ -146,11 +146,11 @@ namespace HSH.Data.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string CreateBy { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
-        public virtual ICollection<MemberAsset> MemberAsset { get; set; }
         public virtual ICollection<Ticket> Ticket { get; set; }
         public virtual ICollection<Trade> Trade { get; set; }
         public virtual ICollection<Transfer> Transfer { get; set; }
+        public virtual AspNetUsers UserApproveRegister { get; set; }
+        public virtual AspNetUsers UserCreated { get; set; }
+        public virtual ICollection<MemberAsset> MemberAsset { get; set; }
     }
 }

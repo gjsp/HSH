@@ -1,0 +1,86 @@
+﻿
+@model IEnumerable<HSH.Data.Models.TicketReceiveApproveViewModels>
+
+@{
+    ViewBag.Title = "Stock รายการอนุมัติการรับชำระเงิน";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("IndexCom", "TicketReceive", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmTicketCom" }))
+{
+    @Html.AntiForgeryToken()
+        
+    <div class="form-group">
+        <div class="col-sm-1">
+        </div>
+        @Html.Label("", "Create Date From", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-sm-2">
+            <div class="form-inline">
+                <div class="input-group date" id="divDateFrom" data-date-format="DD/MM/YYYY">
+                    @Html.TextBox("DateFrom", @HSH.Data.Helper.StringHelper.ToFormatStringDate(DateTime.Now), new { @class = "form-control", placeholder = "Create Date From " })
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        @Html.Label("", "To", htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-sm-2">
+            <div class="input-group date" id="divDateTo" data-date-format="DD/MM/YYYY">
+                @Html.TextBox("DateTo", @HSH.Data.Helper.StringHelper.ToFormatStringDate(DateTime.Now), new { @class = "form-control", placeholder = "Create Date To" })
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            @Html.TextBox("Keyword", "", new { @class = "form-control", placeholder = "Search Member Name" })
+        </div>
+        <div class="col-sm-1">
+            <button type="button" id="btnSearch" name="btnSearch" data-loading-text="Loading..." class="btn btn-primary" style="width:100px">Search</button>
+        </div>
+    </div>
+}
+
+<div id="divTable">
+    @Html.Partial("FindCom", Model)
+
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script language="javascript" type="text/javascript">
+
+        $(function () {
+            $('#divDateFrom').datetimepicker({
+                useStrict: false,
+                pickTime: false
+            });
+            $('#divDateTo').datetimepicker({
+                useStrict: false,
+                pickTime: false
+            });
+        });
+
+        $(function () {
+            $("#btnSearch").click(function () {
+                var btn = $(this);
+                btn.button('loading');
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/TicketReceive/IndexCom")",
+                    data: $("#frmTicketCom").serialize(),
+                    success: function (e) {
+                        $("#divTable").html(e);
+                        btn.button('reset');
+                    }
+                });
+            });
+
+            $("#btnSearch").click();
+        });
+
+
+    </script>
+}

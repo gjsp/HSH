@@ -41,11 +41,11 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -157,27 +157,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AspNetRoles.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaims.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogins.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Business\BusinessService.cs" />
+    <Compile Include="Helper\EnumHelper.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Collaterals.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CollateralViewModels.cs" />
     <Compile Include="Models\CompanyAsset.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
+    <Compile Include="Models\CompanyBank.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyViewModels.cs" />
     <Compile Include="Models\dbModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -193,33 +190,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DrugAllergies.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Drugs.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MedicalHistories.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MedicalHistoryDetails.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\MarketPriceViewModels.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemberApproveRegisterViewModels.cs" />
     <Compile Include="Models\MemberAsset.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemberAssetViewModels.cs" />
+    <Compile Include="Models\MemberViewModels.cs" />
     <Compile Include="Models\Pay.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Paytype.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Profiles.cs">
-      <DependentUpon>dbModels.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\PortFolioViewModels.cs" />
     <Compile Include="Models\Risk.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
@@ -229,15 +216,17 @@
     <Compile Include="Models\StockOnline.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\StockSettingViewModels.cs" />
+    <Compile Include="Models\Ticket.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ticket.cs">
+    <Compile Include="Models\TicketPay.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TicketReceive.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TicketReceiveApproveViewModels.cs" />
     <Compile Include="Models\TicketSettle.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
@@ -247,18 +236,21 @@
     <Compile Include="Models\TicketStatus.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TicketViewModels.cs" />
     <Compile Include="Models\Trade.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TradeLot.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TradeLotViewModels.cs" />
     <Compile Include="Models\Trans.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transfer.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TransferViewModels.cs" />
     <Compile Include="Models\UserBackend.cs">
       <DependentUpon>dbModels.tt</DependentUpon>
     </Compile>
@@ -285,7 +277,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EntityDeploy Include="Models\dbModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -310,6 +301,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

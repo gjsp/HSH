@@ -1,0 +1,111 @@
+﻿@model IEnumerable<HSH.Data.Models.TicketIndexApproveViewModels>
+
+@if (Model != null)
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered table-responsive">
+            <tr class="info">
+                <th class="text-center">เลขที่บัญชีซื้อขายทองคำ</th>
+                <th class="text-center">ชื่อสมาชิก</th>
+                <th class="text-center">รหัสใบเทรด</th>
+                <th class="text-center">รหัสออเดอร์</th>
+                <th class="text-center">วันที่</th>
+                <th class="text-center">ประเภท</th>
+                <th class="text-center">จำนวนทอง</th>
+                <th class="text-center">ราคา</th>
+                <th class="text-center">จำนวนเงิน</th>
+                <th class="text-center">จำนวนทองที่ยังไม่ได้จ่าย</th>
+                <th class="text-center">จำนวนเงินที่ยังไม่ได้จ่าย</th>
+                <th class="text-center">สถานะ</th>
+                <th class="text-center">สถานะการส่ง</th>
+                <th class="text-center"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center" style="width:80px">
+                        @Html.DisplayFor(modelItem => item.MemberRef)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MemberName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TradeRef)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TicketRef)
+                    </td>
+                    <td class="text-center">
+                        @*@item.CreateDate.ToString(HSH.Data.Helper.StringHelper.formatdate)*@
+                        @HSH.Data.Helper.StringHelper.ToStringDateTimeFormat(item.CreateDate)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TicketType)
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Quantity.ToString())
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Price.ToString())
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.Amount.ToString())
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.QtyUnpaid.ToString())
+                    </td>
+                    <td class="text-right">
+                        @HSH.Data.Helper.StringHelper.ToStringCurrency(item.AmtUnpaid.ToString())
+                    </td>
+                    <td class="text-center">
+                        @if (item.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Cut.ToString())
+                        {
+                            <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Cut)</span>
+                        }
+                        else if (item.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Send.ToString())
+                        {
+                            <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Send)</span>
+                        }
+                        else if (item.Status == HSH.Data.Helper.EnumHelper.TicketStatus.WaitCash.ToString())
+                        {
+                            <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.WaitCash)</span>
+                        }
+                        else if (item.Status == HSH.Data.Helper.EnumHelper.TicketStatus.Deposit.ToString())
+                        {
+                            <span class="label label-info">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.Deposit)</span>
+                        }
+                        else if (item.Status == HSH.Data.Helper.EnumHelper.TicketStatus.WaitGold.ToString())
+                        {
+                            <span class="label label-info">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.TicketStatus.WaitGold)</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if (item.UseDeposit != null)
+                        {
+                            if (item.UseDeposit.Value == false)
+                            {
+                                <span class="label label-info">ส่งมอบทอง</span>
+                            }
+                            else
+                            {
+                                <span class="label label-default">ขายทองฝาก</span>
+                            }
+                        }
+                    </td>
+                    <td class="text-center" style="width:80px">
+                        @Html.ActionLink("Approve", "EditCom", new { id = item.TicketId })
+                    </td>
+                </tr>
+            }
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="14" class="text-center text-danger"> @HSH.Data.Helper.StringHelper.stringNotFound.ToString() </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+
+

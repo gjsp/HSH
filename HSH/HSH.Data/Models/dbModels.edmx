@@ -4,51 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HSHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClaimType" Type="nvarchar(max)" />
-          <Property Name="ClaimValue" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="HSHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -69,6 +25,9 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserDetail" Type="nvarchar(max)" />
+          <Property Name="UserPageIndex" Type="varchar" MaxLength="50" />
+          <Property Name="UserPageRole" Type="varchar" MaxLength="50" />
+          <Property Name="UserTypeRole" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Collaterals">
           <Key>
@@ -97,48 +56,18 @@
           <Property Name="ApproveDate" Type="datetime" />
           <Property Name="Active" Type="bit" />
         </EntityType>
-        <EntityType Name="DrugAllergies">
+        <EntityType Name="CompanyBank">
           <Key>
-            <PropertyRef Name="DrugAllergyId" />
+            <PropertyRef Name="BankId" />
           </Key>
-          <Property Name="DrugAllergyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DrugName" Type="nvarchar" MaxLength="150" />
-          <Property Name="Treatment" Type="nvarchar" MaxLength="550" />
-          <Property Name="DrugInformation" Type="nvarchar" MaxLength="550" />
-        </EntityType>
-        <EntityType Name="Drugs">
-          <Key>
-            <PropertyRef Name="DrugId" />
-          </Key>
-          <Property Name="DrugId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DrugName" Type="nvarchar" MaxLength="150" />
-        </EntityType>
-        <EntityType Name="MedicalHistories">
-          <Key>
-            <PropertyRef Name="DiseaseId" />
-          </Key>
-          <Property Name="DiseaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DiseaseName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Date" Type="datetime" />
-          <Property Name="DiseaseDetails" Type="nvarchar" MaxLength="550" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
-        <EntityType Name="MedicalHistoryDetails">
-          <Key>
-            <PropertyRef Name="DiseaseDtlId" />
-          </Key>
-          <Property Name="DiseaseDtlId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DiseaseId" Type="int" />
-          <Property Name="Date" Type="datetime" />
-          <Property Name="DoctorName" Type="nvarchar" MaxLength="50" />
-          <Property Name="HospitalName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Pressure" Type="float" />
-          <Property Name="Weight" Type="float" />
-          <Property Name="Height" Type="float" />
-          <Property Name="Temperature" Type="float" />
-          <Property Name="TreatmentDetails" Type="nvarchar" MaxLength="550" />
+          <Property Name="BankId" Type="int" Nullable="false" />
+          <Property Name="BankRef" Type="varchar" MaxLength="50" />
+          <Property Name="BankName" Type="varchar" MaxLength="50" />
+          <Property Name="BankBranch" Type="varchar" MaxLength="50" />
+          <Property Name="AccountNo" Type="varchar" MaxLength="50" />
+          <Property Name="AccountType" Type="varchar" MaxLength="50" />
+          <Property Name="AccountName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -288,6 +217,20 @@
           <Property Name="Branch" Type="varchar" MaxLength="50" />
           <Property Name="ApproveId" Type="nvarchar" MaxLength="128" />
           <Property Name="ApproveDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="WithdrawStatus" Type="varchar" MaxLength="50" />
+          <Property Name="WithdrawId" Type="uniqueidentifier" />
+          <Property Name="PayChequeNo" Type="varchar" MaxLength="50" />
+          <Property Name="PayBankName" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountNo" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountName" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountType" Type="varchar" MaxLength="50" />
+          <Property Name="PayBankBranch" Type="varchar" MaxLength="50" />
+          <Property Name="PayTransRef" Type="varchar" MaxLength="50" />
+          <Property Name="PayTime" Type="varchar" MaxLength="50" />
+          <Property Name="PayDuedate" Type="datetime" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="CompanyBankId" Type="int" />
         </EntityType>
         <EntityType Name="Pay">
           <Key>
@@ -318,38 +261,6 @@
           </Key>
           <Property Name="PaytypeId" Type="int" Nullable="false" />
           <Property Name="PaytypeName" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Profiles">
-          <Key>
-            <PropertyRef Name="UserName" />
-          </Key>
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IDCard" Type="nvarchar" MaxLength="50" />
-          <Property Name="Passport" Type="nvarchar" MaxLength="50" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar" MaxLength="500" />
-          <Property Name="City" Type="nvarchar" MaxLength="50" />
-          <Property Name="Country" Type="nvarchar" MaxLength="50" />
-          <Property Name="PostCode" Type="nvarchar" MaxLength="10" />
-          <Property Name="PhoneHome" Type="nvarchar" MaxLength="50" />
-          <Property Name="PhoneWork" Type="nvarchar" MaxLength="50" />
-          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sex" Type="nvarchar" MaxLength="10" />
-          <Property Name="Age" Type="int" />
-          <Property Name="BirthDate" Type="datetime" />
-          <Property Name="Weight" Type="float" />
-          <Property Name="Height" Type="float" />
-          <Property Name="Blood" Type="nvarchar" MaxLength="2" />
-          <Property Name="Rh" Type="nvarchar" MaxLength="1" />
-          <Property Name="ContactFirstName" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactLastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactIDCard" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactRelation" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactEmail" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Risk">
           <Key>
@@ -409,16 +320,6 @@
           <Property Name="AskThbSelf" Type="decimal" Precision="18" Scale="3" />
           <Property Name="SpotCalculate" Type="varchar" MaxLength="3" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="TicketId" />
@@ -447,6 +348,39 @@
           <Property Name="ApproveId" Type="nvarchar" MaxLength="128" />
           <Property Name="ApproveDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="TicketPay">
+          <Key>
+            <PropertyRef Name="PayId" />
+          </Key>
+          <Property Name="PayId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PayRef" Type="varchar" MaxLength="50" />
+          <Property Name="TicketId" Type="uniqueidentifier" />
+          <Property Name="PayType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ApprovePayId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApprovePayDate" Type="datetime" />
+          <Property Name="ApproveId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApproveDate" Type="datetime" />
+          <Property Name="PayChequeNo" Type="varchar" MaxLength="50" />
+          <Property Name="PayBankName" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountNo" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountName" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountType" Type="varchar" MaxLength="50" />
+          <Property Name="PayBankBranch" Type="varchar" MaxLength="50" />
+          <Property Name="PayTransRef" Type="varchar" MaxLength="50" />
+          <Property Name="PayTime" Type="varchar" MaxLength="50" />
+          <Property Name="PayDuedate" Type="datetime" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="CompanyBankId" Type="int" />
+        </EntityType>
         <EntityType Name="TicketReceive">
           <Key>
             <PropertyRef Name="ReceiveId" />
@@ -468,6 +402,17 @@
           <Property Name="ApprovePayDate" Type="datetime" />
           <Property Name="ApproveId" Type="nvarchar" MaxLength="128" />
           <Property Name="ApproveDate" Type="datetime" />
+          <Property Name="PayChequeNo" Type="varchar" MaxLength="50" />
+          <Property Name="PayBankName" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountNo" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountName" Type="varchar" MaxLength="50" />
+          <Property Name="PayAccountType" Type="varchar" MaxLength="50" />
+          <Property Name="PayBankBranch" Type="varchar" MaxLength="50" />
+          <Property Name="PayTransRef" Type="varchar" MaxLength="50" />
+          <Property Name="PayTime" Type="varchar" MaxLength="50" />
+          <Property Name="PayDuedate" Type="datetime" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="CompanyBankId" Type="int" />
         </EntityType>
         <EntityType Name="TicketSettle">
           <Key>
@@ -575,6 +520,8 @@
           <Property Name="Password" Type="nvarchar" MaxLength="128" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="LastLogin" Type="datetime" />
+          <Property Name="UserPageRole" Type="varchar" MaxLength="50" />
+          <Property Name="UserPageIndex" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserOnline">
           <Key>
@@ -672,62 +619,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Member_ApproveRegister">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="Member" Type="Self.Member" Multiplicity="*" />
@@ -752,6 +643,18 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MemberAsset_CompanyBank">
+          <End Role="CompanyBank" Type="Self.CompanyBank" Multiplicity="0..1" />
+          <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyBank">
+              <PropertyRef Name="BankId" />
+            </Principal>
+            <Dependent Role="MemberAsset">
+              <PropertyRef Name="CompanyBankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MemberAsset_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
           <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
@@ -764,7 +667,7 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MemberAsset_UserApprove">
+        <Association Name="FK_MemberAsset_UserApproved">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
           <ReferentialConstraint>
@@ -872,6 +775,54 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TicketPay_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketPay" Type="Self.TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPay_UserApproved">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="TicketPay" Type="Self.TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="ApproveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPay_UserApprovePay">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="TicketPay" Type="Self.TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="ApprovePayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPay_UserCreated">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="TicketPay" Type="Self.TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TicketUserCreated">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -957,28 +908,19 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HSHModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Collaterals" EntityType="Self.Collaterals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyAsset" EntityType="Self.CompanyAsset" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DrugAllergies" EntityType="Self.DrugAllergies" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MedicalHistories" EntityType="Self.MedicalHistories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MedicalHistoryDetails" EntityType="Self.MedicalHistoryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyBank" EntityType="Self.CompanyBank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberAsset" EntityType="Self.MemberAsset" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pay" EntityType="Self.Pay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paytype" EntityType="Self.Paytype" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Risk" EntityType="Self.Risk" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpotPrice" EntityType="Self.SpotPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOnline" EntityType="Self.StockOnline" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketPay" EntityType="Self.TicketPay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketReceive" EntityType="Self.TicketReceive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketSettle" EntityType="Self.TicketSettle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketSettleSummary" EntityType="Self.TicketSettleSummary" Schema="dbo" store:Type="Tables" />
@@ -1031,22 +973,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="CompanyAsset" EntitySet="CompanyAsset" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Member_ApproveRegister" Association="Self.FK_Member_ApproveRegister">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Member" EntitySet="Member" />
@@ -1055,11 +981,15 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Member" EntitySet="Member" />
           </AssociationSet>
+          <AssociationSet Name="FK_MemberAsset_CompanyBank" Association="Self.FK_MemberAsset_CompanyBank">
+            <End Role="CompanyBank" EntitySet="CompanyBank" />
+            <End Role="MemberAsset" EntitySet="MemberAsset" />
+          </AssociationSet>
           <AssociationSet Name="FK_MemberAsset_Member" Association="Self.FK_MemberAsset_Member">
             <End Role="Member" EntitySet="Member" />
             <End Role="MemberAsset" EntitySet="MemberAsset" />
           </AssociationSet>
-          <AssociationSet Name="FK_MemberAsset_UserApprove" Association="Self.FK_MemberAsset_UserApprove">
+          <AssociationSet Name="FK_MemberAsset_UserApproved" Association="Self.FK_MemberAsset_UserApproved">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="MemberAsset" EntitySet="MemberAsset" />
           </AssociationSet>
@@ -1095,6 +1025,22 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             <End Role="Member" EntitySet="Member" />
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
+          <AssociationSet Name="FK_TicketPay_Ticket" Association="Self.FK_TicketPay_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPay_UserApproved" Association="Self.FK_TicketPay_UserApproved">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPay_UserApprovePay" Association="Self.FK_TicketPay_UserApprovePay">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPay_UserCreated" Association="Self.FK_TicketPay_UserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
           <AssociationSet Name="FK_TicketUserCreated" Association="Self.FK_TicketUserCreated">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Ticket" EntitySet="Ticket" />
@@ -1124,88 +1070,10 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             <End Role="Transfer" EntitySet="Transfer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HSHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="CompanyAsset" Relationship="Self.FK_CompanyAsset_UserApproved" FromRole="AspNetUsers" ToRole="CompanyAsset" />
-          <NavigationProperty Name="CompanyAsset1" Relationship="Self.FK_CompanyAsset_UserCreated" FromRole="AspNetUsers" ToRole="CompanyAsset" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_Member_ApproveRegister" FromRole="AspNetUsers" ToRole="Member" />
-          <NavigationProperty Name="Member1" Relationship="Self.FK_Member_UserCreated" FromRole="AspNetUsers" ToRole="Member" />
-          <NavigationProperty Name="MemberAsset" Relationship="Self.FK_MemberAsset_UserApprove" FromRole="AspNetUsers" ToRole="MemberAsset" />
-          <NavigationProperty Name="MemberAsset1" Relationship="Self.FK_MemberAsset_UserCreated" FromRole="AspNetUsers" ToRole="MemberAsset" />
-          <NavigationProperty Name="TicketReceive" Relationship="Self.FK_Receive_UserApproved" FromRole="AspNetUsers" ToRole="TicketReceive" />
-          <NavigationProperty Name="TicketReceive1" Relationship="Self.FK_Receive_UserApprovePay" FromRole="AspNetUsers" ToRole="TicketReceive" />
-          <NavigationProperty Name="TicketReceive2" Relationship="Self.FK_Receive_UserCreated" FromRole="AspNetUsers" ToRole="TicketReceive" />
-          <NavigationProperty Name="Ticket" Relationship="Self.FK_Ticket_UserApprovePay" FromRole="AspNetUsers" ToRole="Ticket" />
-          <NavigationProperty Name="Ticket1" Relationship="Self.FK_Ticket_UserApproveTicket" FromRole="AspNetUsers" ToRole="Ticket" />
-          <NavigationProperty Name="Ticket2" Relationship="Self.FK_TicketUserCreated" FromRole="AspNetUsers" ToRole="Ticket" />
-          <NavigationProperty Name="Transfer" Relationship="Self.FK_Transfer_UserApproved" FromRole="AspNetUsers" ToRole="Transfer" />
-          <NavigationProperty Name="Transfer1" Relationship="Self.FK_Transfer_UserCreated" FromRole="AspNetUsers" ToRole="Transfer" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
         <EntityType Name="Collaterals">
           <Key>
             <PropertyRef Name="Id" />
@@ -1232,52 +1100,9 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="ApproveBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ApproveDate" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_CompanyAsset_UserApproved" FromRole="CompanyAsset" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_CompanyAsset_UserCreated" FromRole="CompanyAsset" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="DrugAllergies">
-          <Key>
-            <PropertyRef Name="DrugAllergyId" />
-          </Key>
-          <Property Name="DrugAllergyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DrugName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Treatment" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-          <Property Name="DrugInformation" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Drugs">
-          <Key>
-            <PropertyRef Name="DrugId" />
-          </Key>
-          <Property Name="DrugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DrugName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="MedicalHistories">
-          <Key>
-            <PropertyRef Name="DiseaseId" />
-          </Key>
-          <Property Name="DiseaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DiseaseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="DiseaseDetails" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="MedicalHistoryDetails">
-          <Key>
-            <PropertyRef Name="DiseaseDtlId" />
-          </Key>
-          <Property Name="DiseaseDtlId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DiseaseId" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="DoctorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HospitalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Pressure" Type="Double" />
-          <Property Name="Weight" Type="Double" />
-          <Property Name="Height" Type="Double" />
-          <Property Name="Temperature" Type="Double" />
-          <Property Name="TreatmentDetails" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-        </EntityType>
+          <NavigationProperty Name="UserApproved" Relationship="HSHModel.FK_CompanyAsset_UserApproved" FromRole="CompanyAsset" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserCreated" Relationship="HSHModel.FK_CompanyAsset_UserCreated" FromRole="CompanyAsset" ToRole="AspNetUsers" />
+          </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="MemberId" />
@@ -1405,36 +1230,12 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="Active" Type="Boolean" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Member_ApproveRegister" FromRole="Member" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Member_UserCreated" FromRole="Member" ToRole="AspNetUsers" />
-          <NavigationProperty Name="MemberAsset" Relationship="Self.FK_MemberAsset_Member" FromRole="Member" ToRole="MemberAsset" />
           <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketMember" FromRole="Member" ToRole="Ticket" />
           <NavigationProperty Name="Trade" Relationship="Self.FK_Trade_Member" FromRole="Member" ToRole="Trade" />
           <NavigationProperty Name="Transfer" Relationship="Self.FK_Transfer_Member" FromRole="Member" ToRole="Transfer" />
-        </EntityType>
-        <EntityType Name="MemberAsset">
-          <Key>
-            <PropertyRef Name="AssetId" />
-          </Key>
-          <Property Name="AssetId" Type="Guid" Nullable="false" />
-          <Property Name="MemberId" Type="Guid" />
-          <Property Name="AssetType" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="AssetCash" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="AssetGold" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Direction" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PayTypeDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="GoldBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GoldSerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ApproveDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_MemberAsset_UserApprove" FromRole="MemberAsset" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_MemberAsset_UserCreated" FromRole="MemberAsset" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_MemberAsset_Member" FromRole="MemberAsset" ToRole="Member" />
+          <NavigationProperty Name="UserApproveRegister" Relationship="HSHModel.FK_Member_ApproveRegister" FromRole="Member" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserCreated" Relationship="HSHModel.FK_Member_UserCreated" FromRole="Member" ToRole="AspNetUsers" />
+          <NavigationProperty Name="MemberAsset" Relationship="HSHModel.FK_MemberAsset_Member" FromRole="Member" ToRole="MemberAsset" />
         </EntityType>
         <EntityType Name="Pay">
           <Key>
@@ -1465,38 +1266,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           </Key>
           <Property Name="PaytypeId" Type="Int32" Nullable="false" />
           <Property Name="PaytypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Profiles">
-          <Key>
-            <PropertyRef Name="UserName" />
-          </Key>
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IDCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PostCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneHome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneWork" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="BirthDate" Type="DateTime" Precision="3" />
-          <Property Name="Weight" Type="Double" />
-          <Property Name="Height" Type="Double" />
-          <Property Name="Blood" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="Rh" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="ContactFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactIDCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Risk">
           <Key>
@@ -1556,16 +1325,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="AskThbSelf" Type="Decimal" Precision="18" Scale="3" />
           <Property Name="SpotCalculate" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="TicketId" />
@@ -1593,11 +1352,12 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="ApprovePayDate" Type="DateTime" Precision="3" />
           <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ApproveDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Ticket_UserApprovePay" FromRole="Ticket" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Ticket_UserApproveTicket" FromRole="Ticket" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers2" Relationship="Self.FK_TicketUserCreated" FromRole="Ticket" ToRole="AspNetUsers" />
           <NavigationProperty Name="Member" Relationship="Self.FK_TicketMember" FromRole="Ticket" ToRole="Member" />
           <NavigationProperty Name="TicketReceive" Relationship="Self.FK_Receive_Ticket" FromRole="Ticket" ToRole="TicketReceive" />
+          <NavigationProperty Name="UserApprovePay" Relationship="HSHModel.FK_Ticket_UserApprovePay" FromRole="Ticket" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserApprove" Relationship="HSHModel.FK_Ticket_UserApproveTicket" FromRole="Ticket" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserCreated" Relationship="HSHModel.FK_TicketUserCreated" FromRole="Ticket" ToRole="AspNetUsers" />
+          <NavigationProperty Name="TicketPay" Relationship="HSHModel.FK_TicketPay_Ticket" FromRole="Ticket" ToRole="TicketPay" />
         </EntityType>
         <EntityType Name="TicketReceive">
           <Key>
@@ -1620,10 +1380,21 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="ApprovePayDate" Type="DateTime" Precision="3" />
           <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ApproveDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Receive_UserApproved" FromRole="TicketReceive" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Receive_UserApprovePay" FromRole="TicketReceive" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers2" Relationship="Self.FK_Receive_UserCreated" FromRole="TicketReceive" ToRole="AspNetUsers" />
           <NavigationProperty Name="Ticket" Relationship="Self.FK_Receive_Ticket" FromRole="TicketReceive" ToRole="Ticket" />
+          <NavigationProperty Name="UserApprove" Relationship="HSHModel.FK_Receive_UserApproved" FromRole="TicketReceive" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserApprovePay" Relationship="HSHModel.FK_Receive_UserApprovePay" FromRole="TicketReceive" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserCreated" Relationship="HSHModel.FK_Receive_UserCreated" FromRole="TicketReceive" ToRole="AspNetUsers" />
+          <Property Name="PayChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayBankBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayTransRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayDuedate" Type="DateTime" Precision="3" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="CompanyBankId" Type="Int32" />
         </EntityType>
         <EntityType Name="TicketSettle">
           <Key>
@@ -1723,9 +1494,9 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="ApproveBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ApproveDate" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Transfer_UserApproved" FromRole="Transfer" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Transfer_UserCreated" FromRole="Transfer" ToRole="AspNetUsers" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Transfer_Member" FromRole="Transfer" ToRole="Member" />
+          <NavigationProperty Name="UserApproved" Relationship="HSHModel.FK_Transfer_UserApproved" FromRole="Transfer" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserCreated" Relationship="HSHModel.FK_Transfer_UserCreated" FromRole="Transfer" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="UserBackend">
           <Key>
@@ -1737,6 +1508,8 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="UserPageRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPageIndex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UserOnline">
           <Key>
@@ -1806,214 +1579,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <Property Name="MemberId" Type="Guid" />
           <Property Name="Quantity" Type="Double" />
         </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompanyAsset_UserApproved">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="CompanyAsset" Type="Self.CompanyAsset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CompanyAsset">
-              <PropertyRef Name="ApproveBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompanyAsset_UserCreated">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="CompanyAsset" Type="Self.CompanyAsset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CompanyAsset">
-              <PropertyRef Name="CreateBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Member_ApproveRegister">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Member" Type="Self.Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="ApproveRegisterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Member_UserCreated">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Member" Type="Self.Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="CreateBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MemberAsset_UserApprove">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MemberAsset">
-              <PropertyRef Name="ApproveId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MemberAsset_UserCreated">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MemberAsset">
-              <PropertyRef Name="CreateBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Receive_UserApproved">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TicketReceive">
-              <PropertyRef Name="ApproveId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Receive_UserApprovePay">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TicketReceive">
-              <PropertyRef Name="ApprovePayId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Receive_UserCreated">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="TicketReceive" Type="Self.TicketReceive" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TicketReceive">
-              <PropertyRef Name="CreateBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ticket_UserApprovePay">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Ticket">
-              <PropertyRef Name="ApprovePayId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ticket_UserApproveTicket">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Ticket">
-              <PropertyRef Name="ApproveId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketUserCreated">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Ticket">
-              <PropertyRef Name="CreateBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transfer_UserApproved">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transfer">
-              <PropertyRef Name="ApproveBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transfer_UserCreated">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transfer">
-              <PropertyRef Name="CreateBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MemberAsset_Member">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="MemberAsset" Type="Self.MemberAsset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="MemberAsset">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TicketMember">
           <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -2086,31 +1651,15 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="HSHEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="Collaterals" EntityType="Self.Collaterals" />
           <EntitySet Name="CompanyAsset" EntityType="Self.CompanyAsset" />
-          <EntitySet Name="DrugAllergies" EntityType="Self.DrugAllergies" />
-          <EntitySet Name="Drugs" EntityType="Self.Drugs" />
-          <EntitySet Name="MedicalHistories" EntityType="Self.MedicalHistories" />
-          <EntitySet Name="MedicalHistoryDetails" EntityType="Self.MedicalHistoryDetails" />
           <EntitySet Name="Member" EntityType="Self.Member" />
-          <EntitySet Name="MemberAsset" EntityType="Self.MemberAsset" />
           <EntitySet Name="Pay" EntityType="Self.Pay" />
           <EntitySet Name="Paytype" EntityType="Self.Paytype" />
-          <EntitySet Name="Profiles" EntityType="Self.Profiles" />
           <EntitySet Name="Risk" EntityType="Self.Risk" />
           <EntitySet Name="SpotPrice" EntityType="Self.SpotPrice" />
           <EntitySet Name="StockOnline" EntityType="Self.StockOnline" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" />
           <EntitySet Name="TicketReceive" EntityType="Self.TicketReceive" />
           <EntitySet Name="TicketSettle" EntityType="Self.TicketSettle" />
@@ -2125,74 +1674,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <EntitySet Name="ViewOfCreditLine" EntityType="Self.ViewOfCreditLine" />
           <EntitySet Name="ViewOfSumaryTicketReceive" EntityType="Self.ViewOfSumaryTicketReceive" />
           <EntitySet Name="ViewOfSummaryTransfer" EntityType="Self.ViewOfSummaryTransfer" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompanyAsset_UserApproved" Association="Self.FK_CompanyAsset_UserApproved">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CompanyAsset" EntitySet="CompanyAsset" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompanyAsset_UserCreated" Association="Self.FK_CompanyAsset_UserCreated">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CompanyAsset" EntitySet="CompanyAsset" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Member_ApproveRegister" Association="Self.FK_Member_ApproveRegister">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Member" EntitySet="Member" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Member_UserCreated" Association="Self.FK_Member_UserCreated">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Member" EntitySet="Member" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberAsset_UserApprove" Association="Self.FK_MemberAsset_UserApprove">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="MemberAsset" EntitySet="MemberAsset" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberAsset_UserCreated" Association="Self.FK_MemberAsset_UserCreated">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="MemberAsset" EntitySet="MemberAsset" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Receive_UserApproved" Association="Self.FK_Receive_UserApproved">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="TicketReceive" EntitySet="TicketReceive" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Receive_UserApprovePay" Association="Self.FK_Receive_UserApprovePay">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="TicketReceive" EntitySet="TicketReceive" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Receive_UserCreated" Association="Self.FK_Receive_UserCreated">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="TicketReceive" EntitySet="TicketReceive" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ticket_UserApprovePay" Association="Self.FK_Ticket_UserApprovePay">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Ticket" EntitySet="Ticket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ticket_UserApproveTicket" Association="Self.FK_Ticket_UserApproveTicket">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Ticket" EntitySet="Ticket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketUserCreated" Association="Self.FK_TicketUserCreated">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Ticket" EntitySet="Ticket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transfer_UserApproved" Association="Self.FK_Transfer_UserApproved">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Transfer" EntitySet="Transfer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transfer_UserCreated" Association="Self.FK_Transfer_UserCreated">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Transfer" EntitySet="Transfer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberAsset_Member" Association="Self.FK_MemberAsset_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="MemberAsset" EntitySet="MemberAsset" />
-          </AssociationSet>
           <AssociationSet Name="FK_TicketMember" Association="Self.FK_TicketMember">
             <End Role="Member" EntitySet="Member" />
             <End Role="Ticket" EntitySet="Ticket" />
@@ -2217,76 +1698,468 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
             <End Role="UserOnline" EntitySet="UserOnline" />
             <End Role="TradeLot" EntitySet="TradeLot" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="HSHModel.AspNetUsers" />
+          <AssociationSet Name="FK_CompanyAsset_UserApproved" Association="HSHModel.FK_CompanyAsset_UserApproved">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CompanyAsset" EntitySet="CompanyAsset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyAsset_UserCreated" Association="HSHModel.FK_CompanyAsset_UserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CompanyAsset" EntitySet="CompanyAsset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_ApproveRegister" Association="HSHModel.FK_Member_ApproveRegister">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_UserCreated" Association="HSHModel.FK_Member_UserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receive_UserApproved" Association="HSHModel.FK_Receive_UserApproved">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketReceive" EntitySet="TicketReceive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receive_UserApprovePay" Association="HSHModel.FK_Receive_UserApprovePay">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketReceive" EntitySet="TicketReceive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receive_UserCreated" Association="HSHModel.FK_Receive_UserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketReceive" EntitySet="TicketReceive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_UserApprovePay" Association="HSHModel.FK_Ticket_UserApprovePay">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_UserApproveTicket" Association="HSHModel.FK_Ticket_UserApproveTicket">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketUserCreated" Association="HSHModel.FK_TicketUserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_UserApproved" Association="HSHModel.FK_Transfer_UserApproved">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Transfer" EntitySet="Transfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_UserCreated" Association="HSHModel.FK_Transfer_UserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Transfer" EntitySet="Transfer" />
+          </AssociationSet>
+          <EntitySet Name="TicketPay" EntityType="HSHModel.TicketPay" />
+          <AssociationSet Name="FK_TicketPay_UserApproved" Association="HSHModel.FK_TicketPay_UserApproved">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPay_UserApprovePay" Association="HSHModel.FK_TicketPay_UserApprovePay">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPay_UserCreated" Association="HSHModel.FK_TicketPay_UserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPay_Ticket" Association="HSHModel.FK_TicketPay_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="TicketPay" EntitySet="TicketPay" />
+          </AssociationSet>
+          <EntitySet Name="CompanyBank" EntityType="HSHModel.CompanyBank" />
+          <EntitySet Name="MemberAsset" EntityType="HSHModel.MemberAsset" />
+          <AssociationSet Name="FK_MemberAsset_UserApproved" Association="HSHModel.FK_MemberAsset_UserApproved">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MemberAsset" EntitySet="MemberAsset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberAsset_UserCreated" Association="HSHModel.FK_MemberAsset_UserCreated">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MemberAsset" EntitySet="MemberAsset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberAsset_CompanyBank" Association="HSHModel.FK_MemberAsset_CompanyBank">
+            <End Role="CompanyBank" EntitySet="CompanyBank" />
+            <End Role="MemberAsset" EntitySet="MemberAsset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberAsset_Member" Association="HSHModel.FK_MemberAsset_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberAsset" EntitySet="MemberAsset" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserPageRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPageIndex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CompanyAsset" Relationship="HSHModel.FK_CompanyAsset_UserApproved" FromRole="AspNetUsers" ToRole="CompanyAsset" />
+          <NavigationProperty Name="CompanyAsset1" Relationship="HSHModel.FK_CompanyAsset_UserCreated" FromRole="AspNetUsers" ToRole="CompanyAsset" />
+          <NavigationProperty Name="Member" Relationship="HSHModel.FK_Member_ApproveRegister" FromRole="AspNetUsers" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="HSHModel.FK_Member_UserCreated" FromRole="AspNetUsers" ToRole="Member" />
+          <NavigationProperty Name="TicketReceive" Relationship="HSHModel.FK_Receive_UserApproved" FromRole="AspNetUsers" ToRole="TicketReceive" />
+          <NavigationProperty Name="TicketReceive1" Relationship="HSHModel.FK_Receive_UserApprovePay" FromRole="AspNetUsers" ToRole="TicketReceive" />
+          <NavigationProperty Name="TicketReceive2" Relationship="HSHModel.FK_Receive_UserCreated" FromRole="AspNetUsers" ToRole="TicketReceive" />
+          <NavigationProperty Name="Ticket" Relationship="HSHModel.FK_Ticket_UserApprovePay" FromRole="AspNetUsers" ToRole="Ticket" />
+          <NavigationProperty Name="Ticket1" Relationship="HSHModel.FK_Ticket_UserApproveTicket" FromRole="AspNetUsers" ToRole="Ticket" />
+          <NavigationProperty Name="Ticket2" Relationship="HSHModel.FK_TicketUserCreated" FromRole="AspNetUsers" ToRole="Ticket" />
+          <NavigationProperty Name="Transfer" Relationship="HSHModel.FK_Transfer_UserApproved" FromRole="AspNetUsers" ToRole="Transfer" />
+          <NavigationProperty Name="Transfer1" Relationship="HSHModel.FK_Transfer_UserCreated" FromRole="AspNetUsers" ToRole="Transfer" />
+          <Property Name="UserTypeRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TicketPay" Relationship="HSHModel.FK_TicketPay_UserApproved" FromRole="AspNetUsers" ToRole="TicketPay" />
+          <NavigationProperty Name="TicketPay1" Relationship="HSHModel.FK_TicketPay_UserApprovePay" FromRole="AspNetUsers" ToRole="TicketPay" />
+          <NavigationProperty Name="TicketPay2" Relationship="HSHModel.FK_TicketPay_UserCreated" FromRole="AspNetUsers" ToRole="TicketPay" />
+          <NavigationProperty Name="MemberAsset" Relationship="HSHModel.FK_MemberAsset_UserApproved" FromRole="AspNetUsers" ToRole="MemberAsset" />
+          <NavigationProperty Name="MemberAsset1" Relationship="HSHModel.FK_MemberAsset_UserCreated" FromRole="AspNetUsers" ToRole="MemberAsset" />
+          </EntityType>
+        <Association Name="FK_CompanyAsset_UserApproved">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.CompanyAsset" Role="CompanyAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyAsset">
+              <PropertyRef Name="ApproveBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyAsset_UserCreated">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.CompanyAsset" Role="CompanyAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyAsset">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_ApproveRegister">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="ApproveRegisterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_UserCreated">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receive_UserApproved">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.TicketReceive" Role="TicketReceive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketReceive">
+              <PropertyRef Name="ApproveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receive_UserApprovePay">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.TicketReceive" Role="TicketReceive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketReceive">
+              <PropertyRef Name="ApprovePayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receive_UserCreated">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.TicketReceive" Role="TicketReceive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketReceive">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_UserApprovePay">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ApprovePayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_UserApproveTicket">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ApproveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketUserCreated">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_UserApproved">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="ApproveBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_UserCreated">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TicketPay">
+          <Key>
+            <PropertyRef Name="PayId" />
+          </Key>
+          <Property Name="PayId" Type="Guid" Nullable="false" />
+          <Property Name="PayRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TicketId" Type="Guid" />
+          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="PayChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovePayId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovePayDate" Type="DateTime" Precision="3" />
+          <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserApprove" Relationship="HSHModel.FK_TicketPay_UserApproved" FromRole="TicketPay" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserApprovePay" Relationship="HSHModel.FK_TicketPay_UserApprovePay" FromRole="TicketPay" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserCreated" Relationship="HSHModel.FK_TicketPay_UserCreated" FromRole="TicketPay" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Ticket" Relationship="HSHModel.FK_TicketPay_Ticket" FromRole="TicketPay" ToRole="Ticket" />
+          <Property Name="PayBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayBankBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayTransRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayDuedate" Type="DateTime" Precision="3" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="CompanyBankId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_TicketPay_UserApproved">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.TicketPay" Role="TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="ApproveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPay_UserApprovePay">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.TicketPay" Role="TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="ApprovePayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPay_UserCreated">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.TicketPay" Role="TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPay_Ticket">
+          <End Type="HSHModel.Ticket" Role="Ticket" Multiplicity="0..1" />
+          <End Type="HSHModel.TicketPay" Role="TicketPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="TicketId" />
+            </Principal>
+            <Dependent Role="TicketPay">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CompanyBank">
+          <Key>
+            <PropertyRef Name="BankId" />
+          </Key>
+          <Property Name="BankId" Type="Int32" Nullable="false" />
+          <Property Name="BankRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="MemberAsset" Relationship="HSHModel.FK_MemberAsset_CompanyBank" FromRole="CompanyBank" ToRole="MemberAsset" />
+        </EntityType>
+        <EntityType Name="MemberAsset">
+          <Key>
+            <PropertyRef Name="AssetId" />
+          </Key>
+          <Property Name="AssetId" Type="Guid" Nullable="false" />
+          <Property Name="MemberId" Type="Guid" />
+          <Property Name="AssetType" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="AssetCash" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AssetGold" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayTypeDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="GoldBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GoldSerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApproveId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WithdrawStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WithdrawId" Type="Guid" />
+          <Property Name="PayChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayAccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayBankBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayDuedate" Type="DateTime" Precision="3" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="CompanyBankId" Type="Int32" />
+          <NavigationProperty Name="UserApproved" Relationship="HSHModel.FK_MemberAsset_UserApproved" FromRole="MemberAsset" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserCreated" Relationship="HSHModel.FK_MemberAsset_UserCreated" FromRole="MemberAsset" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CompanyBank" Relationship="HSHModel.FK_MemberAsset_CompanyBank" FromRole="MemberAsset" ToRole="CompanyBank" />
+          <NavigationProperty Name="Member" Relationship="HSHModel.FK_MemberAsset_Member" FromRole="MemberAsset" ToRole="Member" />
+          <Property Name="PayTransRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_MemberAsset_UserApproved">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.MemberAsset" Role="MemberAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberAsset">
+              <PropertyRef Name="ApproveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberAsset_UserCreated">
+          <End Type="HSHModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="HSHModel.MemberAsset" Role="MemberAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberAsset">
+              <PropertyRef Name="CreateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberAsset_CompanyBank">
+          <End Type="HSHModel.CompanyBank" Role="CompanyBank" Multiplicity="0..1" />
+          <End Type="HSHModel.MemberAsset" Role="MemberAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyBank">
+              <PropertyRef Name="BankId" />
+            </Principal>
+            <Dependent Role="MemberAsset">
+              <PropertyRef Name="CompanyBankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberAsset_Member">
+          <End Type="HSHModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="HSHModel.MemberAsset" Role="MemberAsset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MemberAsset">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HSHModelStoreContainer" CdmEntityContainer="HSHEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="HSHModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="HSHModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="HSHModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="HSHModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="HSHModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserDetail" ColumnName="UserDetail" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Collaterals">
             <EntityTypeMapping TypeName="HSHModel.Collaterals">
               <MappingFragment StoreEntitySet="Collaterals">
@@ -2313,53 +2186,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
                 <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
                 <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DrugAllergies">
-            <EntityTypeMapping TypeName="HSHModel.DrugAllergies">
-              <MappingFragment StoreEntitySet="DrugAllergies">
-                <ScalarProperty Name="DrugAllergyId" ColumnName="DrugAllergyId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
-                <ScalarProperty Name="Treatment" ColumnName="Treatment" />
-                <ScalarProperty Name="DrugInformation" ColumnName="DrugInformation" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Drugs">
-            <EntityTypeMapping TypeName="HSHModel.Drugs">
-              <MappingFragment StoreEntitySet="Drugs">
-                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
-                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MedicalHistories">
-            <EntityTypeMapping TypeName="HSHModel.MedicalHistories">
-              <MappingFragment StoreEntitySet="MedicalHistories">
-                <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="DiseaseName" ColumnName="DiseaseName" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="DiseaseDetails" ColumnName="DiseaseDetails" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MedicalHistoryDetails">
-            <EntityTypeMapping TypeName="HSHModel.MedicalHistoryDetails">
-              <MappingFragment StoreEntitySet="MedicalHistoryDetails">
-                <ScalarProperty Name="DiseaseDtlId" ColumnName="DiseaseDtlId" />
-                <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
-                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
-                <ScalarProperty Name="Pressure" ColumnName="Pressure" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
-                <ScalarProperty Name="TreatmentDetails" ColumnName="TreatmentDetails" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2492,28 +2318,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MemberAsset">
-            <EntityTypeMapping TypeName="HSHModel.MemberAsset">
-              <MappingFragment StoreEntitySet="MemberAsset">
-                <ScalarProperty Name="AssetId" ColumnName="AssetId" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="AssetType" ColumnName="AssetType" />
-                <ScalarProperty Name="AssetCash" ColumnName="AssetCash" />
-                <ScalarProperty Name="AssetGold" ColumnName="AssetGold" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Direction" ColumnName="Direction" />
-                <ScalarProperty Name="PayType" ColumnName="PayType" />
-                <ScalarProperty Name="PayTypeDetail" ColumnName="PayTypeDetail" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="GoldBrand" ColumnName="GoldBrand" />
-                <ScalarProperty Name="GoldSerialNo" ColumnName="GoldSerialNo" />
-                <ScalarProperty Name="Branch" ColumnName="Branch" />
-                <ScalarProperty Name="ApproveId" ColumnName="ApproveId" />
-                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Pay">
             <EntityTypeMapping TypeName="HSHModel.Pay">
               <MappingFragment StoreEntitySet="Pay">
@@ -2543,39 +2347,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
               <MappingFragment StoreEntitySet="Paytype">
                 <ScalarProperty Name="PaytypeId" ColumnName="PaytypeId" />
                 <ScalarProperty Name="PaytypeName" ColumnName="PaytypeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Profiles">
-            <EntityTypeMapping TypeName="HSHModel.Profiles">
-              <MappingFragment StoreEntitySet="Profiles">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="IDCard" ColumnName="IDCard" />
-                <ScalarProperty Name="Passport" ColumnName="Passport" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-                <ScalarProperty Name="PhoneHome" ColumnName="PhoneHome" />
-                <ScalarProperty Name="PhoneWork" ColumnName="PhoneWork" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Blood" ColumnName="Blood" />
-                <ScalarProperty Name="Rh" ColumnName="Rh" />
-                <ScalarProperty Name="ContactFirstName" ColumnName="ContactFirstName" />
-                <ScalarProperty Name="ContactLastName" ColumnName="ContactLastName" />
-                <ScalarProperty Name="ContactIDCard" ColumnName="ContactIDCard" />
-                <ScalarProperty Name="ContactRelation" ColumnName="ContactRelation" />
-                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
-                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2640,17 +2411,6 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="HSHModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Ticket">
             <EntityTypeMapping TypeName="HSHModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
@@ -2683,6 +2443,17 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <EntitySetMapping Name="TicketReceive">
             <EntityTypeMapping TypeName="HSHModel.TicketReceive">
               <MappingFragment StoreEntitySet="TicketReceive">
+                <ScalarProperty Name="CompanyBankId" ColumnName="CompanyBankId" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="PayDuedate" ColumnName="PayDuedate" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="PayTransRef" ColumnName="PayTransRef" />
+                <ScalarProperty Name="PayBankBranch" ColumnName="PayBankBranch" />
+                <ScalarProperty Name="PayAccountType" ColumnName="PayAccountType" />
+                <ScalarProperty Name="PayAccountName" ColumnName="PayAccountName" />
+                <ScalarProperty Name="PayAccountNo" ColumnName="PayAccountNo" />
+                <ScalarProperty Name="PayBankName" ColumnName="PayBankName" />
+                <ScalarProperty Name="PayChequeNo" ColumnName="PayChequeNo" />
                 <ScalarProperty Name="ReceiveId" ColumnName="ReceiveId" />
                 <ScalarProperty Name="ReceiveRef" ColumnName="ReceiveRef" />
                 <ScalarProperty Name="TicketId" ColumnName="TicketId" />
@@ -2809,6 +2580,8 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
           <EntitySetMapping Name="UserBackend">
             <EntityTypeMapping TypeName="HSHModel.UserBackend">
               <MappingFragment StoreEntitySet="UserBackend">
+                <ScalarProperty Name="UserPageIndex" ColumnName="UserPageIndex" />
+                <ScalarProperty Name="UserPageRole" ColumnName="UserPageRole" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
@@ -2880,14 +2653,115 @@ warning 6002: The table/view 'HSH.dbo.ViewOfSummaryTransfer' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="HSHModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="HSHModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserTypeRole" ColumnName="UserTypeRole" />
+                <ScalarProperty Name="UserPageIndex" ColumnName="UserPageIndex" />
+                <ScalarProperty Name="UserPageRole" ColumnName="UserPageRole" />
+                <ScalarProperty Name="UserDetail" ColumnName="UserDetail" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketPay">
+            <EntityTypeMapping TypeName="HSHModel.TicketPay">
+              <MappingFragment StoreEntitySet="TicketPay">
+                <ScalarProperty Name="CompanyBankId" ColumnName="CompanyBankId" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="PayDuedate" ColumnName="PayDuedate" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="PayTransRef" ColumnName="PayTransRef" />
+                <ScalarProperty Name="PayBankBranch" ColumnName="PayBankBranch" />
+                <ScalarProperty Name="PayAccountType" ColumnName="PayAccountType" />
+                <ScalarProperty Name="PayAccountName" ColumnName="PayAccountName" />
+                <ScalarProperty Name="PayAccountNo" ColumnName="PayAccountNo" />
+                <ScalarProperty Name="PayBankName" ColumnName="PayBankName" />
+                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+                <ScalarProperty Name="ApproveId" ColumnName="ApproveId" />
+                <ScalarProperty Name="ApprovePayDate" ColumnName="ApprovePayDate" />
+                <ScalarProperty Name="ApprovePayId" ColumnName="ApprovePayId" />
+                <ScalarProperty Name="PayChequeNo" ColumnName="PayChequeNo" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+                <ScalarProperty Name="PayRef" ColumnName="PayRef" />
+                <ScalarProperty Name="PayId" ColumnName="PayId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyBank">
+            <EntityTypeMapping TypeName="HSHModel.CompanyBank">
+              <MappingFragment StoreEntitySet="CompanyBank">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankRef" ColumnName="BankRef" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberAsset">
+            <EntityTypeMapping TypeName="HSHModel.MemberAsset">
+              <MappingFragment StoreEntitySet="MemberAsset">
+                <ScalarProperty Name="PayTransRef" ColumnName="PayTransRef" />
+                <ScalarProperty Name="CompanyBankId" ColumnName="CompanyBankId" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="PayDuedate" ColumnName="PayDuedate" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="PayBankBranch" ColumnName="PayBankBranch" />
+                <ScalarProperty Name="PayAccountType" ColumnName="PayAccountType" />
+                <ScalarProperty Name="PayAccountName" ColumnName="PayAccountName" />
+                <ScalarProperty Name="PayAccountNo" ColumnName="PayAccountNo" />
+                <ScalarProperty Name="PayBankName" ColumnName="PayBankName" />
+                <ScalarProperty Name="PayChequeNo" ColumnName="PayChequeNo" />
+                <ScalarProperty Name="WithdrawId" ColumnName="WithdrawId" />
+                <ScalarProperty Name="WithdrawStatus" ColumnName="WithdrawStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+                <ScalarProperty Name="ApproveId" ColumnName="ApproveId" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="GoldSerialNo" ColumnName="GoldSerialNo" />
+                <ScalarProperty Name="GoldBrand" ColumnName="GoldBrand" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PayTypeDetail" ColumnName="PayTypeDetail" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="AssetGold" ColumnName="AssetGold" />
+                <ScalarProperty Name="AssetCash" ColumnName="AssetCash" />
+                <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

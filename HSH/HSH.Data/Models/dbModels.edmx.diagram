@@ -4,27 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6bd52341fed84176870690b2d57cbb01" Name="Diagram1">
-        <EntityTypeShape EntityType="HSHModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.AspNetUsers" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+      <Diagram DiagramId="6bd52341fed84176870690b2d57cbb01" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="HSHModel.Collaterals" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.CompanyAsset" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.DrugAllergies" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.Drugs" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.MedicalHistories" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.MedicalHistoryDetails" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HSHModel.CompanyAsset" Width="1.5" PointX="7.625" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.Member" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.MemberAsset" Width="1.5" PointX="7.5" PointY="23.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.Pay" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.Paytype" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.Profiles" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.Risk" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.SpotPrice" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.StockOnline" Width="1.5" PointX="11.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HSHModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.Ticket" Width="1.5" PointX="10.5" PointY="20.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.TicketReceive" Width="1.5" PointX="12.75" PointY="19.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.TicketSettle" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
@@ -39,31 +27,37 @@
         <EntityTypeShape EntityType="HSHModel.ViewOfCreditLine" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.ViewOfSumaryTicketReceive" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HSHModel.ViewOfSummaryTransfer" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="HSHModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_CompanyAsset_UserApproved" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_CompanyAsset_UserCreated" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Member_ApproveRegister" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Member_UserCreated" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_MemberAsset_UserApprove" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_MemberAsset_UserCreated" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Receive_UserApproved" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Receive_UserApprovePay" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Receive_UserCreated" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Ticket_UserApprovePay" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Ticket_UserApproveTicket" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_TicketUserCreated" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Transfer_UserApproved" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_Transfer_UserCreated" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.FK_MemberAsset_Member" ManuallyRouted="false" />
         <AssociationConnector Association="HSHModel.FK_TicketMember" ManuallyRouted="false" />
         <AssociationConnector Association="HSHModel.FK_Trade_Member" ManuallyRouted="false" />
         <AssociationConnector Association="HSHModel.FK_Transfer_Member" ManuallyRouted="false" />
         <AssociationConnector Association="HSHModel.FK_Receive_Ticket" ManuallyRouted="false" />
         <AssociationConnector Association="HSHModel.FK_Trade_Sale" ManuallyRouted="false" />
         <AssociationConnector Association="HSHModel.FK_TradeLot_UserOnline" ManuallyRouted="false" />
-        <AssociationConnector Association="HSHModel.AspNetUserRoles" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="HSHModel.AspNetUsers" Width="1.5" PointX="3" PointY="19.5" />
+        <AssociationConnector Association="HSHModel.FK_CompanyAsset_UserApproved" />
+        <AssociationConnector Association="HSHModel.FK_CompanyAsset_UserCreated" />
+        <AssociationConnector Association="HSHModel.FK_Member_ApproveRegister" />
+        <AssociationConnector Association="HSHModel.FK_Member_UserCreated" />
+        <AssociationConnector Association="HSHModel.FK_Receive_UserApproved" />
+        <AssociationConnector Association="HSHModel.FK_Receive_UserApprovePay" />
+        <AssociationConnector Association="HSHModel.FK_Receive_UserCreated" />
+        <AssociationConnector Association="HSHModel.FK_Ticket_UserApprovePay" />
+        <AssociationConnector Association="HSHModel.FK_Ticket_UserApproveTicket" />
+        <AssociationConnector Association="HSHModel.FK_TicketUserCreated" />
+        <AssociationConnector Association="HSHModel.FK_Transfer_UserApproved" />
+        <AssociationConnector Association="HSHModel.FK_Transfer_UserCreated" />
+        <EntityTypeShape EntityType="HSHModel.TicketPay" Width="1.5" PointX="15.75" PointY="20.625" />
+        <AssociationConnector Association="HSHModel.FK_TicketPay_UserApproved" />
+        <AssociationConnector Association="HSHModel.FK_TicketPay_UserApprovePay" />
+        <AssociationConnector Association="HSHModel.FK_TicketPay_UserCreated" />
+        <AssociationConnector Association="HSHModel.FK_TicketPay_Ticket" />
+        <EntityTypeShape EntityType="HSHModel.CompanyBank" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HSHModel.MemberAsset" Width="1.5" PointX="17.5" PointY="11.75" />
+        <AssociationConnector Association="HSHModel.FK_MemberAsset_UserApproved" />
+        <AssociationConnector Association="HSHModel.FK_MemberAsset_UserCreated" />
+        <AssociationConnector Association="HSHModel.FK_MemberAsset_CompanyBank" />
+        <AssociationConnector Association="HSHModel.FK_MemberAsset_Member" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

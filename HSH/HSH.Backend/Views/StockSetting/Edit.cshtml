@@ -1,0 +1,466 @@
+﻿@model HSH.Data.Models.StockSettingViewModels
+
+@{
+    ViewBag.Title = "กำหนดค่าการเทรด";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+@using (Html.BeginForm("Edit", "StockSetting", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmStockSetting" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+     
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.MaxKg1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MaxKg1, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.MaxKg1, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Duedate1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Duedate1, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.Duedate1, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.CreditLimit1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.CreditLimit1, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.CreditLimit1, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.MarginType1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MarginType1, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.MarginType1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.MaxKg2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MaxKg2, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.MaxKg2, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Duedate2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Duedate2, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.Duedate2, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.CreditLimit2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.CreditLimit2, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.CreditLimit2, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.MarginType2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MarginType2, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.MarginType2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxKg3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MaxKg3, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.MaxKg3, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Duedate3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Duedate3, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.Duedate3, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.CreditLimit3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.CreditLimit3, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.CreditLimit3, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.MarginType3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MarginType3, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.MarginType3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxKg4, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MaxKg4, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.MaxKg4, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Duedate4, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Duedate4, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.Duedate4, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.CreditLimit4, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.CreditLimit4, new { htmlAttributes = new { @class = "form-control", maxlength = 3 } })
+                @Html.ValidationMessageFor(model => model.CreditLimit4, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.MarginType4, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.MarginType4, new { htmlAttributes = new { @class = "form-control", maxlength = 1 } })
+                @Html.ValidationMessageFor(model => model.MarginType4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-9">
+                <input type="button" onclick="bsDialog(this);" value="Save" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-10">
+
+                <div>
+                    <b>Max</b>&nbsp;&nbsp;	 ลูกค้าซื้อ/ขายสูงสุดต่อครั้ง
+                </div>
+                <div>
+                    <b>Duedate</b>&nbsp;&nbsp;	 ระยะเวลาชำระราคา(วัน)
+                </div>
+                <div>
+                    <b>Credit Limit</b>&nbsp;&nbsp;	ปริมาณซื้อขายสูงสุด(Kg)
+                </div>
+                <div>
+                    <b>Margin</b>&nbsp;&nbsp;เงื่อนไขการวางหลักประกัน
+                    <div style="margin-left:1cm">
+                        <b>0</b> = ไม่ต้องวางหลัประกัน<br />
+                        <b>1</b> = วางหลักประกัน1 แสน ซื้อ/ขายได้1 ก.ก.<br />
+                        <b>5</b> = วางหลักประกัน1 แสน ซื้อ/ขายได้5 ก.ก.<br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript" type="text/javascript">
+
+        @*$(document).ready(function () {
+            var getPrice = function () {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Content("~/StockSetting/GetMarketPrice")",
+                    dataType: "json",
+                data: {},
+                async: false,
+                success: function (e) {
+                    $("#Ask1").val(e.askBg1);
+                    $("#Ask2").val(e.askBg2);
+                    $("#Ask3").val(e.askBg3);
+                    $("#Ask4").val(e.askBg4);
+                    $("#Bid1").val(e.bidBg1);
+                    $("#Bid2").val(e.bidBg2);
+                    $("#Bid3").val(e.bidBg3);
+                    $("#Bid4").val(e.bidBg4);
+                    setTimeout(function () {
+                        getPrice();
+                    }, 2500);
+                }
+            });
+        };
+        getPrice();
+        });*@
+
+        $(function () {
+
+            $("#MarginType1").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#MarginType2").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#MarginType3").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#MarginType4").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#MaxKg1").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#MaxKg2").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#MaxKg3").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#MaxKg4").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#Duedate1").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#Duedate2").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#Duedate3").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#Duedate4").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#CreditLimit1").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#CreditLimit2").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#CreditLimit3").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#CreditLimit4").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+        });
+        var bsDialog = function (e) {
+            $(e).button('loading');
+            //var Spread1 = $("#Spread1").val().split("").reverse().reduce(function (acc, num, i, orig) {
+            //    return num + (i && !(i % 3) ? "," : "") + acc;
+            //debugger;
+            //var spread1 = $("#Spread1").val().trim(); var spread2 = $("#Spread2").val().trim(); var spread3 = $("#Spread3").val().trim(); var spread4 = $("#Spread4").val().trim();
+            var max1 = $("#MaxKg1").val().trim(); var max2 = $("#MaxKg2").val().trim(); var max3 = $("#MaxKg3").val().trim(); var max4 = $("#MaxKg4").val().trim();
+            var due1 = $("#Duedate1").val().trim(); var due2 = $("#Duedate2").val().trim(); var due3 = $("#Duedate3").val().trim(); var due4 = $("#Duedate4").val().trim();
+            var msg = "Do you want to Save?";
+
+            //validate
+            if (max1 == "" || max2 == "" || max3 == "" || max4 == "" || due1 == "" || due2 == "" || due3 == "" || due4 == "") {
+                $("#frmStockSetting").submit();
+            } else {
+                BootstrapDialog.show({
+                    title: 'Comfirmation',
+                    message: msg,
+                    cssClass: 'comfirm-dialog',
+                    buttons: [{
+                        label: 'Cancel',
+                        action: function (dialog) {
+                            dialog.close();
+                        }
+                    }, {
+                        label: 'OK',
+                        cssClass: 'btn-primary',
+                        action: function (dialog) {
+                            $("#frmStockSetting").submit();
+                        }
+                    }]
+                });
+            }
+            $(e).button('reset');
+        }
+
+    </script>
+}

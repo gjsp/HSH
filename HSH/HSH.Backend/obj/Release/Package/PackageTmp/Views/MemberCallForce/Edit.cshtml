@@ -1,0 +1,41 @@
+﻿@model HSH.Data.Models.MemberCallForcePauseViewModels
+@{
+    //ViewBag.Title = "Pause Member";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+
+@using (Html.BeginForm("Edit", "MemberCallForce", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    @Html.Partial("PortFolio", Model.PortFolio)
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(model => model.MemberId)
+        @Html.HiddenFor(model => model.PauseType)
+        @Html.HiddenFor(model => model.Paused)
+
+
+        <div class="form-group">
+            <div class="text-center">
+                @if (Model.Paused)
+                {
+                    <input type="submit" value="Pause" class="btn btn-default" style="width:120px" />
+                }
+                else
+                {
+                    <input type="submit" value="Un-Pause" class="btn btn-default" style="width:120px" />
+                }
+
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

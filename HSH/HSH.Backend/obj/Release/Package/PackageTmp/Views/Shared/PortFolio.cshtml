@@ -1,0 +1,130 @@
+﻿@model HSH.Data.Models.PortFolioViewModels
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        @*<h3 class="panel-title">PortFolio</h3>*@
+        <h3 class="panel-title"><span id="spProfileDetail" onclick="slideToggleProfile();" ><a href="#" style="text-decoration:none">PortFolio</a></span></h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MemberRef)  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.MemberRef)</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MemberType) :</div>
+            <div class="col-md-3">
+                @if (Model.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Company.ToString())
+                {
+                <span class="label label-primary">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Company) </span>
+                }
+                else if (Model.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Foreign.ToString())
+                {
+                <span class="label label-warning">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Foreign) </span>
+                }
+                else if (Model.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Normal.ToString())
+                {
+                <span class="label label-default">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Normal) </span>
+                }
+                else if (Model.MemberType == HSH.Data.Helper.EnumHelper.MemberType.VIP.ToString())
+                {
+                <span class="label label-success">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.VIP) </span>
+                }
+                else if (Model.MemberType == HSH.Data.Helper.EnumHelper.MemberType.Walkin.ToString())
+                {
+                <span class="label label-danger">@HSH.Data.Helper.EnumHelper.GetDescription(HSH.Data.Helper.EnumHelper.MemberType.Walkin) </span>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.FirstName)  :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.FirstName)</div>
+            <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.LastName) :</div>
+            <div class="col-md-3">@Html.DisplayFor(model => model.LastName)</div>
+        </div>
+        <div id='divProfileDetail'>
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MemberLevel)  :</div>
+                <div class="col-md-3">@Html.DisplayFor(model => model.MemberLevel)</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MemberGroup) :</div>
+                <div class="col-md-3">@Html.DisplayFor(model => model.MemberGroup)</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.PauseBuy) :</div>
+                <div class="col-md-3">
+                    @if (Model.PauseBuy)
+                {
+                <span class="label label-danger">@HSH.Data.Helper.EnumHelper.PauseStatus.Pause.ToString()</span>
+                }
+                else
+                {
+                <span class="label label-default">@HSH.Data.Helper.EnumHelper.PauseStatus.UnPause.ToString()</span>
+                }
+                </div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.PauseSell) :</div>
+                <div class="col-md-3">
+                    @if (Model.PauseSell)
+                {
+                <span class="label label-danger">@HSH.Data.Helper.EnumHelper.PauseStatus.Pause.ToString()</span>
+                }
+                else
+                {
+                <span class="label label-default">@HSH.Data.Helper.EnumHelper.PauseStatus.UnPause.ToString()</span>
+                }
+                </div>
+            </div>
+            @*Limit Trade*@
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MaxKg)  :</div>
+                <div class="col-md-3">@Html.DisplayFor(model => model.MaxKg)</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CreditLimit) :</div>
+                <div class="col-md-3">@Html.DisplayFor(model => model.CreditLimit)</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.MarginStatus)  :</div>
+                <div class="col-md-3">@Html.DisplayFor(model => model.MarginStatus)</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.DuedateValue) :</div>
+                <div class="col-md-3">@Html.DisplayFor(model => model.DuedateValue)</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.AssetCash) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.AssetCash.ToString())</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.AssetGold) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.AssetGold.ToString())</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CreditLine) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.CreditLine.ToString())</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.DepositGold) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.DepositGold.ToString())</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CreditBuyBalance) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.CreditBuyBalance.ToString())</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.CreditSellBalance) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.CreditSellBalance.ToString())</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.SumBuyPlaceOrder) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.SumBuyPlaceOrder.ToString())</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.SumSellPlaceOrder) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.SumSellPlaceOrder.ToString())</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.SumBuy) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.SumBuy.ToString())</div>
+                <div class="col-md-3 text-right">@Html.DisplayNameFor(model => model.SumSell) :</div>
+                <div class="col-md-3">@HSH.Data.Helper.StringHelper.ToStringCurrency(Model.SumSell.ToString())</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+        var slideToggleProfile = function() {
+            $("#divProfileDetail").slideToggle("slow");
+            $(this).toggleClass("active");
+            return false;
+        }
+</script>

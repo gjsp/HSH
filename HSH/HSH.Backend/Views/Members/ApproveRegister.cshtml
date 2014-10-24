@@ -1,0 +1,78 @@
+﻿@model HSH.Data.Models.MemberApproveRegisterViewModels
+
+@{
+    ViewBag.Title = "ยืนยันอนุมัติการสมัคร";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("ApproveRegister", "Members", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+     
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MemberId)
+        @Html.HiddenFor(model => model.MemberRef)
+        @Html.HiddenFor(model => model.MemberName)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MemberRef, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                
+                @Html.EditorFor(model => model.MemberRef, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.MemberRef, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MemberName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MemberName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.MemberName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MemberLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var value in Enum.GetValues(typeof(HSH.Data.Helper.EnumHelper.MemberLevel)))
+                {
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(model => model.MemberLevel, value)
+                        @*@Html.Label(value.ToString())****@
+                        @HSH.Data.Helper.EnumHelper.GetDescription(value)
+                    </label>
+                }
+                @*@Html.DropDownListFor(model => model.MemberLevel,int.Parse( (SelectList)ViewBag.MemberLevel), new { @class = "form-control" })*@  
+                <div> 
+                     @Html.ValidationMessageFor(model => model.MemberLevel, "", new { @class = "text-danger" })
+                </div>             
+            </div>           
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Approve" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "IndexApproveRegister")
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $('#PayBankApprove').datetimepicker({
+                useStrict: false,
+                pickTime: false
+            });
+        });
+    </script>
+}

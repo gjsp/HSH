@@ -25,26 +25,14 @@ namespace HSH.Data.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Collaterals> Collaterals { get; set; }
         public virtual DbSet<CompanyAsset> CompanyAsset { get; set; }
-        public virtual DbSet<DrugAllergies> DrugAllergies { get; set; }
-        public virtual DbSet<Drugs> Drugs { get; set; }
-        public virtual DbSet<MedicalHistories> MedicalHistories { get; set; }
-        public virtual DbSet<MedicalHistoryDetails> MedicalHistoryDetails { get; set; }
         public virtual DbSet<Member> Member { get; set; }
-        public virtual DbSet<MemberAsset> MemberAsset { get; set; }
         public virtual DbSet<Pay> Pay { get; set; }
         public virtual DbSet<Paytype> Paytype { get; set; }
-        public virtual DbSet<Profiles> Profiles { get; set; }
         public virtual DbSet<Risk> Risk { get; set; }
         public virtual DbSet<SpotPrice> SpotPrice { get; set; }
         public virtual DbSet<StockOnline> StockOnline { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TicketReceive> TicketReceive { get; set; }
         public virtual DbSet<TicketSettle> TicketSettle { get; set; }
@@ -59,5 +47,9 @@ namespace HSH.Data.Models
         public virtual DbSet<ViewOfCreditLine> ViewOfCreditLine { get; set; }
         public virtual DbSet<ViewOfSumaryTicketReceive> ViewOfSumaryTicketReceive { get; set; }
         public virtual DbSet<ViewOfSummaryTransfer> ViewOfSummaryTransfer { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<TicketPay> TicketPay { get; set; }
+        public virtual DbSet<CompanyBank> CompanyBank { get; set; }
+        public virtual DbSet<MemberAsset> MemberAsset { get; set; }
     }
 }

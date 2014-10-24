@@ -1,0 +1,380 @@
+﻿@model HSH.Data.Models.MemberAssetCashViewModels
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ฝาก/ถอน เงินหลักประกัน";
+    if (HSH.Backend.Helper.SessionHelper.CurrentUserInfo != null)
+    {
+        ViewBag.Title = HSH.Backend.Helper.SessionHelper.CurrentUserInfo.UserPageRole + " " + ViewBag.Title;
+    }
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("AddAssetCash", "Members", FormMethod.Post, new { @class = "form-horizontal", id = "frmAssetCash" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("PortFolio", Model.MemberPortFolio)
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.MemberId)
+
+        <div class="form-group" id="divPay">
+            @Html.LabelFor(model => model.PayType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3" id="divPayType">
+                @Html.DropDownListFor(model => model.PayType, (SelectList)ViewBag.PayTypeList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PayType, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.PayTypeDetail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3" id="divPayTypeDetail">
+                @Html.DropDownListFor(model => model.PayTypeDetail, (SelectList)ViewBag.PayTypeDetailList, new { @class = "form-control", @id = "PayTypeDetail" })
+                @Html.ValidationMessageFor(model => model.PayTypeDetail, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Direction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @*@Html.DropDownListFor(model => model.Direction, (SelectList)ViewBag.DirectionList, new { @class = "form-control" })*@
+                @foreach (var value in Enum.GetValues(typeof(HSH.Data.Helper.EnumHelper.TransactionType)))
+                {
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(model => model.Direction, value)
+                        @*@Html.Label(value.ToString())*@
+                        @HSH.Data.Helper.EnumHelper.GetDescription(value)
+                    </label>
+                }
+                <div>
+                    @Html.ValidationMessageFor(model => model.Direction, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @Html.LabelFor(model => model.AssetCash, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.AssetCash, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.AssetCash, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divBank">
+            @Html.LabelFor(model => model.PayDetail.CompanyBankId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.PayDetail.CompanyBankId, (SelectList)ViewBag.BankList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PayDetail.CompanyBankId, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div id="divFinance">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PayDetail.PayBankName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayDetail.PayBankName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayDetail.PayBankName, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.PayDetail.PayAccountNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayDetail.PayAccountNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayDetail.PayAccountNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PayDetail.PayAccountName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayDetail.PayAccountName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayDetail.PayAccountName, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.PayDetail.PayAccountType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayDetail.PayAccountType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayDetail.PayAccountType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PayDetail.PayBankBranch, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayDetail.PayBankBranch, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayDetail.PayBankBranch, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.PayDetail.PayTransRef, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayDetail.PayTransRef, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayDetail.PayTransRef, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.PayDetail.PayDate, htmlAttributes: new { @class = "control-label col-md-2", @for = "PayDate" })
+                <div class="col-md-3">
+                    <div class="input-group date" id="PayDate" data-date-format="MM/DD/YYYY">
+                        @Html.TextBoxFor(model => model.PayDetail.PayDate, new { @class = "form-control", @readonly = "readonly" })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                @Html.LabelFor(model => model.PayDetail.PayTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.PayDetail.PayTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PayDetail.PayTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="divPayCheque">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PayDetail.PayChequeNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.PayDetail.PayChequeNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PayDetail.PayChequeNo, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.PayDetail.PayDuedate, htmlAttributes: new { @class = "control-label col-md-2", @for = "PayDuedate" })
+                    <div class="col-md-3">
+                        <div class="input-group date" id="PayDuedate" data-date-format="MM/DD/YYYY">
+                            @Html.TextBoxFor(model => model.PayDetail.PayDuedate, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="bsDialog();" value="Create" class="btn btn-default" style="width:100px" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "IndexAssetCash", new { id = Model.MemberId }) @*| @Html.ActionLink("Gold Collateral", "AddAssetGold", new { id = Model.MemberId })*@
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript" type="text/javascript">
+
+        $(function () {
+
+            if ('@HSH.Backend.Helper.SessionHelper.CurrentUserInfo.UserPageRole' == "Cashier") {
+                $("#divPay").hide();
+                $("#divFinance").hide();
+                $("#divBank").hide();
+            } else {
+
+            }
+            $("#divPayCheque").hide();
+            $('#PayType').change(function () {
+                $('#PayTypeDetail').children().remove().end()
+                if (this.value == "Cashier") {
+                    var myOptions = {
+                        '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Cash.ToString()': '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Cash.ToString()'
+                    };
+                    $.each(myOptions, function (val, text) {
+                        $('#PayTypeDetail').append(new Option(text, val));
+                    });
+
+                } else if (this.value == "Bank") {
+                    var myOptions = {
+                        '': 'Please select',
+                        '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Transfer.ToString()': '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Transfer.ToString()',
+                        '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.ATS.ToString()': '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.ATS.ToString()',
+                        '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.DirectDebit.ToString()': '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.DirectDebit.ToString()',
+                        '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Card.ToString()': '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Card.ToString()',
+                        '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Cheque.ToString()': '@HSH.Data.Helper.EnumHelper.MemberAssetPayTypeDetail.Cheque.ToString()'
+                    };
+                    $.each(myOptions, function (val, text) {
+                        $('#PayTypeDetail').append(new Option(text, val));
+                    });
+                }
+            });
+
+            $('#PayTypeDetail').change(function () {
+                if (this.value == "Cheque") {
+                    $("#PayChequeNo").text("");
+                    //$("#PayChequeBank").attr('selectedIndex', 0);
+                    $("#divPayCheque").show();
+                } else {
+                    $("#divPayCheque").hide();
+                }
+            });
+            //$('#PayType').change(function () {
+            //    $("#PayType").slideToggle("slow");
+            //    $("#PayTypeDetail").slideToggle("slow");
+            //});
+            $("#AssetCash").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            $("#PayDetail_PayAccountNo").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+        });
+
+        $("#AssetCash").keyup(function (e) {
+            var num = setFormatCurrency(this.value);
+            this.value = num;
+        });
+
+        $('#PayDate').datetimepicker({
+            useStrict: false,
+            pickTime: false
+        });
+
+        $('#PayDuedate').datetimepicker({
+            useStrict: false,
+            pickTime: false
+        });
+
+
+
+
+        function setFormatCurrency(num) {
+            if (num.length > 3) {
+                num = num.replace(/[^\d\.\-\ ]/g, '');
+                var numVal = parseInt(num);
+                num = numVal.toString().split("").reverse().reduce(function (acc, num, i, orig) {
+                    return num + (i && !(i % 3) ? "," : "") + acc;
+                }, "");
+            }
+            return num;
+        }
+
+        var bsDialog = function () {
+            var assetValue = $("#AssetCash").val().replace(/[^\d\.\-\ ]/g, '');
+            var assetBalance = '@(ViewBag.AssetValue)';
+            var withDrawAble = '@(ViewBag.WithdrawAble)';
+            var direction = $("input:radio[name=Direction]:checked").val();
+            var payTypeDetail = $("#PayTypeDetail").val();
+            var memberId = $("#MemberId").val();
+            var msgWarning = "";
+
+            if (assetValue == "" || payTypeDetail == "" || direction == undefined || parseFloat(assetValue) > 999999999) {
+                $("#frmAssetCash").submit();
+            } else {
+                //check limit withdraw
+                if (parseFloat(assetValue) < 1) {
+                    var dialogWarning = new BootstrapDialog({
+                        message: "โปรดใส่ราคามากกว่าศูนย์",
+                        buttons: [{
+                            label: 'OK',
+                            action: function (dialogWarning) {
+                                dialogWarning.close();
+                            }
+                        }]
+                    });
+                    dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                    dialogWarning.open();
+                    return;
+                }
+
+                //debugger;
+                if (direction == "Out") {
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Content("~/Members/CheckAssetCashWithdrawAble")",
+                        dataType: "json",
+                        async: false,
+                        data: { Amount: assetValue, MemberId: memberId },
+                        success: function (e) {
+                            if (e.Message != "") {
+                                msgWarning = e.Message;
+                            }
+                        }
+                    });
+
+                    if (msgWarning != "") {
+                        var dialogWarning = new BootstrapDialog({
+                            message: msgWarning,
+                            buttons: [{
+                                label: 'OK',
+                                action: function (dialogWarning) {
+                                    dialogWarning.close();
+                                }
+                            }]
+                        });
+                        dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                        dialogWarning.open();
+                        return false
+                    }
+                }
+                if (direction == "In" && parseFloat(assetValue) < 1000) {
+                    msgWarning = "ขั้นต่ำในการฝากเงิน 1,000 บาท";
+                    if (msgWarning != "") {
+                        var dialogWarning = new BootstrapDialog({
+                            message: msgWarning,
+                            buttons: [{
+                                label: 'OK',
+                                action: function (dialogWarning) {
+                                    dialogWarning.close();
+                                }
+                            }]
+                        });
+                        dialogWarning.setType(BootstrapDialog.TYPE_WARNING);
+                        dialogWarning.open();
+                        return false
+                    }
+                }
+
+                //Submit Able
+                var directionMsg = direction == "Out" ? "ถอน" : "ฝาก";
+
+                var cash = $("#AssetCash").val();
+                var payType = $("#PayType").val();
+                var msg = "คุณต้องการที่จะ <b>" + directionMsg + "เงิน</b> จำนวน <b>" + cash + "</b> บาท <br>" + "ประเภทการจ่ายเงิน <b>" + payType + "</b> รายละเอียดการจ่ายเงิน <b>" + payTypeDetail + "</b> ?";
+                BootstrapDialog.show({
+                    title: 'Comfirmation',
+                    message: msg,
+                    cssClass: 'comfirm-dialog',
+                    buttons: [{
+                        label: 'Cancel',
+                        action: function (dialog) {
+                            dialog.close();
+                        }
+                    }, {
+                        label: 'OK',
+                        cssClass: 'btn-primary',
+                        action: function (dialog) {
+                            $("#frmAssetCash").submit();
+                        }
+                    }]
+                });
+            }
+        }
+
+
+    </script>
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HSH.Data.Models.TransferMemberViewModels>
+@{
+    ViewBag.Title = "รายการฝากถอนทองซื้อขาย";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm("Index", "Transfers", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmIndex" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-3">
+            @Html.TextBox("Keyword", "", new { @class = "form-control", placeholder = "Search Name" })
+
+        </div>
+        <div class="col-md-1">
+            <button type="button" id="btnSearch" name="btnSearch" data-loading-text="Loading..." class="btn btn-primary">Search</button>
+        </div>
+    </div>
+}
+
+
+<div id="divTable">
+    @Html.Partial("Find", Model)
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script language="javascript" type="text/javascript">
+       
+        $(function () {
+            $("#Keyword").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    $("#btnSearch").click();
+                }
+            });
+
+            $("#btnSearch").click(function () {
+                var btn = $(this);
+                btn.button('loading');
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Content("~/Transfers/Index")",
+                    data: $("#frmIndex").serialize(),
+                    success: function (e) {
+                        $("#divTable").html(e);
+                        btn.button('reset');
+                    }
+                });
+            });
+            $("#btnSearch").click();
+        });
+
+
+    </script>
+}
+
+
+
